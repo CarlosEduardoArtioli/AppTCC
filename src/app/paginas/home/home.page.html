@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Dispositivos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let device of Devices">
+        <ion-button expand="block" color="{{ device.status }}" (click)="mudaStatus()">
+          <ion-thumbnail slot="start">
+            <ion-img src="assets/img/{{ device.icon }}"></ion-img>
+          </ion-thumbnail>
+          {{device.name}}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
