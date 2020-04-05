@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditarPageRoutingModule } from './editar-routing.module';
 
 import { EditarPage } from './editar.page';
+import { ModalIconPage } from '../modal-icon/modal-icon.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { EditarPage } from './editar.page';
     EditarPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditarPage]
+  declarations: [EditarPage, ModalIconPage],
+  entryComponents: [ModalIconPage]
 })
 export class EditarPageModule {}

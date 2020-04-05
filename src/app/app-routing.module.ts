@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'escolha-editar',
     loadChildren: () => import('./paginas/escolha-editar/escolha-editar.module').then( m => m.EscolhaEditarPageModule)
   },
+  {
+    path: 'modal-icon',
+    loadChildren: () => import('./paginas/modal-icon/modal-icon.module').then( m => m.ModalIconPageModule)
+  },
 ];
 
 @NgModule({

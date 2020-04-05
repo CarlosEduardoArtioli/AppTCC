@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { AdicionarPageRoutingModule } from './adicionar-routing.module';
 
 import { AdicionarPage } from './adicionar.page';
-import { ModalComponent } from '../modal/modal.component';
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { ModalComponent } from '../modal/modal.component';
     AdicionarPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AdicionarPage, ModalComponent],
-  entryComponents: [ModalComponent]
+  declarations: [AdicionarPage]
 })
 export class AdicionarPageModule {}

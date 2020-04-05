@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AppointmentService } from '../../shared/appointment.service';
-import { ModalController } from '@ionic/angular';
-import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-adicionar',
@@ -17,15 +15,15 @@ export class AdicionarPage implements OnInit {
     private aptService: AppointmentService,
     private router: Router,
     public fb: FormBuilder,
-    private modalCtrl: ModalController,
-  ) { }
+    public actRoute: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
     this.deviceForm = this.fb.group({
       name: [''],
       status: [''],
       mac: [''],
-      icon: ['icon.png']
+      icon: ['']
     })
   }
 
@@ -40,13 +38,5 @@ export class AdicionarPage implements OnInit {
       })
         .catch(error => console.log(error));
     }
-  }
-
-  async showModal(){
-    const modal = await this.modalCtrl.create({
-      component: ModalComponent
-    });
-
-    modal.present();
   }
 }

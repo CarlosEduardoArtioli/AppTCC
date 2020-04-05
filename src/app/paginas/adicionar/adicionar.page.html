@@ -2,8 +2,8 @@
   <ion-toolbar class="ios hydrated">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    <ion-title class="ios title-ios hydrated">Criar</ion-title>
+    </ion-buttons>
+    <ion-title class="ios title-ios hydrated">Adicionar</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,7 +28,8 @@
       </ion-item>
 
       <ion-item>
-       <ion-button expand="block" (click)="showModal()">Selecionar Imagem</ion-button>
+        <ion-icon slot="start" src="/assets/svg/Lâmpada.svg"></ion-icon>
+        <ion-input formControlName="icon"></ion-input>
       </ion-item>
 
       <ion-row>

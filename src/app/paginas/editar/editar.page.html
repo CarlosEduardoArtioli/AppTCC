@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-      </ion-buttons>
+    </ion-buttons>
     <ion-title>
       Editar
     </ion-title>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full"> 
+  <ion-list lines="full">
     <form [formGroup]="updateDeviceForm" (ngSubmit)="updateForm()">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
@@ -30,8 +30,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-button expand="block" (click)="showModal">Selecionar Imagem</ion-button>
-       </ion-item>
+        <ion-icon slot="start" src="/assets/svg/{{ icon }}.svg"></ion-icon>
+        <ion-input formControlName="icon"></ion-input>
+        <ion-button expand="block" (click)="showModal()" slot="end">Selecionar Imagem</ion-button>
+      </ion-item>
 
       <ion-row>
         <ion-col>
