@@ -9,6 +9,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 export class AppointmentService {
   deviceListRef: AngularFireList<any>;
   deviceRef: AngularFireObject<any>;
+  status = "";
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -48,5 +49,21 @@ export class AppointmentService {
   deleteDevice(id: string) {
     this.deviceRef = this.db.object('/dispositivos/' + id);
     this.deviceRef.remove();
+  }
+
+  // Função para mudar o status do dispositivo, com a função é passado o parametro id, fornecido pela função
+  mudaStatus(id){
+    // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
+    this.db.database.ref('/dispositivos/' + id + '/status').once('value').then(snapshot =>{
+      // Verifica se o valor do nó é igual a 'on'
+      if ((snapshot.val()) == 'on'){
+        // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
+        this.db.database.ref('/dispositivos/' + id + '/status').set('off');
+      }
+      else{
+        // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
+        this.db.database.ref('/dispositivos/' + id + '/status').set('on');
+      }
+    })
   }
 }

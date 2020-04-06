@@ -34,7 +34,9 @@ export class HomePage implements OnInit {
     })
   }
 
-  mudaStatus(){
-    
+  // Função para mudar o status do dispositivo
+  mudaStatus(id){
+    // Chama a função mudaStatus no AppointmentService
+     this.aptService.mudaStatus(id);
   }
 }
