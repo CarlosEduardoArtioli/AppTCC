@@ -9,16 +9,24 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/adicionar/adicionar.module').then( m => m.AdicionarPageModule)
   },
   {
-    path: 'editar/:id',
-    loadChildren: () => import('./paginas/editar/editar.module').then( m => m.EditarPageModule)
+    path: 'register',
+    loadChildren: () => import('./paginas/auth/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'escolha-editar',
-    loadChildren: () => import('./paginas/escolha-editar/escolha-editar.module').then( m => m.EscolhaEditarPageModule)
+    path: 'login',
+    loadChildren: () => import('./paginas/auth/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'modal-icon',
-    loadChildren: () => import('./paginas/modal-icon/modal-icon.module').then( m => m.ModalIconPageModule)
+    path: 'edit-device-list',
+    loadChildren: () => import('./paginas/edit/edit-device-list/edit-device-list.module').then( m => m.EditDeviceListPageModule)
+  },
+  {
+    path: 'edit-device-page/:id',
+    loadChildren: () => import('./paginas/edit/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule)
+  },
+  {
+    path: 'modal-icon-device',
+    loadChildren: () => import('./paginas/edit/modal-icon-device/modal-icon-device.module').then( m => m.ModalIconDevicePageModule)
   },
 ];
 

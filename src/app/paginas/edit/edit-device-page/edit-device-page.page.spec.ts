@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalIconPage } from './modal-icon.page';
+import { EditDevicePagePage } from './edit-device-page.page';
 
-describe('ModalIconPage', () => {
-  let component: ModalIconPage;
-  let fixture: ComponentFixture<ModalIconPage>;
+describe('EditDevicePagePage', () => {
+  let component: EditDevicePagePage;
+  let fixture: ComponentFixture<EditDevicePagePage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalIconPage ],
+      declarations: [ EditDevicePagePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalIconPage);
+    fixture = TestBed.createComponent(EditDevicePagePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from '../../shared/appointment.service';
+import { AppointmentService } from 'src/app/shared/appointment.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { ModalIconPage } from '../modal-icon/modal-icon.page';
+import { ModalIconDevicePage } from '../modal-icon-device/modal-icon-device.page';
 
 @Component({
-  selector: 'app-editar',
-  templateUrl: './editar.page.html',
-  styleUrls: ['./editar.page.scss'],
+  selector: 'app-edit-device-page',
+  templateUrl: './edit-device-page.page.html',
+  styleUrls: ['./edit-device-page.page.scss'],
 })
-export class EditarPage implements OnInit {
+export class EditDevicePagePage implements OnInit {
   updateDeviceForm: FormGroup;
   id: any;
   imagem: string = "";
@@ -52,9 +52,10 @@ export class EditarPage implements OnInit {
 
   async showModal() {
     const modal = await this.modalCtrl.create({
-      component: ModalIconPage
+      component: ModalIconDevicePage
     });
 
     modal.present();
   }
+
 }

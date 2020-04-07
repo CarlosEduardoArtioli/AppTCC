@@ -37,7 +37,7 @@ export class AppComponent {
         },
         {
           title: "Editar",
-          url: "escolha-editar",
+          url: "edit-device-list",
           icon: "create"
         },
         {

@@ -3,11 +3,12 @@ import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-modal-icon',
-  templateUrl: './modal-icon.page.html',
-  styleUrls: ['./modal-icon.page.scss'],
+  selector: 'app-modal-icon-device',
+  templateUrl: './modal-icon-device.page.html',
+  styleUrls: ['./modal-icon-device.page.scss'],
 })
-export class ModalIconPage implements OnInit {
+export class ModalIconDevicePage implements OnInit {
+
   public Imagens: Array<Object> = [
     { nome: "Televisão", local: "assets/svg/Televisão.svg", isChecked: "false" },
     { nome: "Lâmpada", local: "assets/svg/Lâmpada.svg", isChecked: "false" },
@@ -15,9 +16,10 @@ export class ModalIconPage implements OnInit {
 
   public imagemselecionada: String = "Nenhuma";
 
-  constructor( 
+  constructor(
     private modalCtrl: ModalController,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -25,15 +27,15 @@ export class ModalIconPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  checkBox(imagem){
-    if (this.imagemselecionada != imagem.nome){
+  checkBox(imagem) {
+    if (this.imagemselecionada != imagem.nome) {
       this.imagemselecionada = imagem.nome;
       console.log(this.imagemselecionada);
     }
   }
 
   selecionarImagem() {
-    this.router.navigate(['editar/'],{queryParams: {imagem: this.imagemselecionada}});
+    this.router.navigate(['edit-device-page/:id'], { queryParams: { imagem: this.imagemselecionada } });
     this.fecharModal();
   }
 

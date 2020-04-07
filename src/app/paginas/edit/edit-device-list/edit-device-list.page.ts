@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Dispositivos } from '../../shared/Appointment';
-import { AppointmentService } from '../../shared/appointment.service';
+import { Dispositivos } from '../../../shared/Appointment';
+import { AppointmentService } from '../../../shared/appointment.service';
 
 @Component({
-  selector: 'app-escolha-editar',
-  templateUrl: './escolha-editar.page.html',
-  styleUrls: ['./escolha-editar.page.scss'],
+  selector: 'app-edit-device-list',
+  templateUrl: './edit-device-list.page.html',
+  styleUrls: ['./edit-device-list.page.scss'],
 })
-
-export class EscolhaEditarPage implements OnInit {
+export class EditDeviceListPage implements OnInit {
   Devices = [];
 
   constructor(
@@ -40,4 +39,5 @@ export class EscolhaEditarPage implements OnInit {
       this.aptService.deleteDevice(id)
     }
   }
+
 }
