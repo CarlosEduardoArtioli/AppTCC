@@ -17,6 +17,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // environment
 import { environment } from '../environments/environment';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     StatusBar,
+    Keyboard,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
