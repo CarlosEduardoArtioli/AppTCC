@@ -38,3 +38,14 @@ ion-slides {
         }
     }
 }
+
+ion-content {
+    --background: url('../../../../assets/img/fundo-login.png') no-repeat 100% 100%;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
