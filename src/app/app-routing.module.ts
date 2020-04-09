@@ -29,10 +29,6 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/auth/signup/signup.module').then( m => m.SignupPageModule)
   },
-  {
-    path: 'side-menu',
-    loadChildren: () => import('./pages/side-menu/side-menu.module').then( m => m.SideMenuPageModule)
-  },
 ];
 
 @NgModule({
