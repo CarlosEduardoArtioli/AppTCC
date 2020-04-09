@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from '../../services/device/device.service';
+import { AppointmentService } from '../../services/device.service';
 
 @Component({
   selector: 'app-adicionar',

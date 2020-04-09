@@ -1,24 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
-import { AuthService } from '../services/auth/auth.service';
+import { Injectable } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+    constructor(
+        private navCtrl: NavController,
+    ) {
 
-  canActivate(): Promise<boolean> {
-    return new Promise(resolve => {
-      this.authService.getAuth().onAuthStateChanged(user => {
-        if (!user) this.router.navigate(['login']);
+    }
 
-        resolve(user ? true : false);
-      });
-    });
-  }
+    canActivate() {
+        const user = localStorage.getItem('baltagram.user');
+        if (!user) {
+            this.navCtrl.navigateRoot('login');
+            return false;
+        }
+
+        return true;
+    }
 }

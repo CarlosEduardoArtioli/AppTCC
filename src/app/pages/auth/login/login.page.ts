@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { User } from 'src/app/interfaces/user';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -10,59 +11,63 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  @ViewChild(IonSlides, {static: false}) slides: IonSlides
-  public userLogin: User = {};
-  public userRegister: User = {};
-  private loading: any;
+  public form: FormGroup;
 
   constructor(
-    private authService: AuthService,
+    private fb: FormBuilder,
     private loadingCtrl: LoadingController,
+    private navCtrl: NavController,
     private toastCtrl: ToastController,
-    public keyboard: Keyboard
-  ) { }
-
-  ngOnInit() { }
-
-  segmentChanged(event: any) {
-    if (event.detail.value === 'login') {
-      this.slides.slidePrev();
-    } else {
-      this.slides.slideNext();
-    }
+    private fbAuth: AngularFireAuth,
+  ) {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    })
   }
 
-  async login() {
-    await this.presentLoading();
+  ngOnInit() {
 
-    try {
-      await this.authService.login(this.userLogin);
-    } catch (error) {
-      this.presentToast(error.message);
-    } finally {
-      this.loading.dismiss();
-    }
   }
 
-  async register() {
-    await this.presentLoading();
+  async submit() {
+    const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+    loading.present();
 
-    try {
-      await this.authService.register(this.userRegister);
-    } catch (error) {
-      this.presentToast(error.message);
-    } finally {
-      this.loading.dismiss();
-    }
+    this.fbAuth.auth.signInWithEmailAndPassword(this.form.controls['email'].value, this.form.controls['password'].value)
+      .then((data) => {
+        loading.dismiss();
+        // TODO salvar nome e imagem e depois ler
+        localStorage.setItem('baltagram.user', JSON.stringify(new User('', data.user.email, '')));
+        this.navCtrl.navigateRoot('home');
+      })
+      .catch((err) => {
+        console.log(err);
+        loading.dismiss();
+        this.showMessage("Usuário ou senha inválidos");
+      });
+    // console.log(res);
   }
 
-  async presentLoading() {
-    this.loading = await this.loadingCtrl.create({ message: 'Aguarde...' });
-    return this.loading.present();
+  async signInWithGoogle() {
+    this.fbAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem('baltagram.user', JSON.stringify(new User(data.user.displayName, data.user.email, data.user.photoURL)));
+        this.navCtrl.navigateRoot('home');
+      })
+      .catch((err) => {
+        console.log(err);
+        this.showMessage("Usuário ou senha inválidos");
+      });
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 2000 });
-    toast.present();
+  async showMessage(message: string) {
+    const toast = await this.toastCtrl.create({ message: message, duration: 3000});
+    toast.present;
+  }
+
+  async goToSignup() {
+    this.navCtrl.navigateForward('signup');
   }
 }

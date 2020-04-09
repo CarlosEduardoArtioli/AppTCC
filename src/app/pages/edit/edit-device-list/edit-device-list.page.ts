@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Dispositivos } from '../../../interfaces/device';
-import { AppointmentService } from '../../../services/device/device.service';
+import { Dispositivos } from '../../../models/device';
+import { AppointmentService } from '../../../services/device.service';
 
 @Component({
   selector: 'app-edit-device-list',

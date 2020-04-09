@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +16,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 // environment
 import { environment } from '../environments/environment';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { AuthGuard } from './guards/auth.guard';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { ModalIconDevicePageModule } from './pages/edit/modal-icon-device/modal-icon-device.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,12 +30,13 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ModalIconDevicePageModule
   ],
   providers: [
-    StatusBar,
     Keyboard,
-    SplashScreen,
+    AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -18,7 +18,7 @@ import { ModalIconDevicePage } from '../modal-icon-device/modal-icon-device.page
     EditDevicePagePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditDevicePagePage, ModalIconDevicePage],
+  declarations: [EditDevicePagePage],
   entryComponents: [ModalIconDevicePage]
 })
 export class EditDevicePagePageModule {}

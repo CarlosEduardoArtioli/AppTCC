@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
+import { Platform, ActionSheetController, NavController } from '@ionic/angular';
+import { User } from './models/user.model';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +10,20 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
   navigate: { title: string; url: string; icon: string; }[];
+  public user: User = new User('', '', 'https://placehold.it/80');
+  
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private navCtrl: NavController,
+    private actionSheetCtrl: ActionSheetController,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.sideMenu();
+      this.user = JSON.parse(localStorage.getItem('baltagram.user'));
     });
   }
 
@@ -46,5 +46,25 @@ export class AppComponent {
           icon: "add-circle"
         },
       ]
+  }
+
+  async showOptions() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Opções',
+      buttons: [{
+        text: 'Logout',
+        role: 'destructive',
+        icon: 'power',
+        handler: () => {
+          localStorage.removeItem('baltagra.user');
+          this.navCtrl.navigateRoot("/login");
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+      }]
+    });
+    await actionSheet.present();
   }
 }
