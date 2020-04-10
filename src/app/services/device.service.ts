@@ -84,13 +84,13 @@ export class AppointmentService {
     // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
     this.db.database.ref('/dispositivos/' + id + '/status').once('value').then(snapshot =>{
       // Verifica se o valor do nó é igual a 'on'
-      if ((snapshot.val()) == 'on'){
+      if ((snapshot.val()) == 'ligado'){
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
-        this.db.database.ref('/dispositivos/' + id + '/status').set('off');
+        this.db.database.ref('/dispositivos/' + id + '/status').set('desligado');
       }
       else{
         // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
-        this.db.database.ref('/dispositivos/' + id + '/status').set('on');
+        this.db.database.ref('/dispositivos/' + id + '/status').set('ligado');
       }
     })
   }
