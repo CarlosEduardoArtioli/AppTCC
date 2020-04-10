@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../../services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-device-page',
@@ -18,15 +19,12 @@ export class EditDevicePagePage implements OnInit {
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder,
+    public actionSheetController: ActionSheetController
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getDevice(this.id).valueChanges().subscribe(res => {
       this.updateDeviceForm.setValue(res);
     });
-
-    this.actRoute.queryParams.subscribe((data) => {
-      this.imagem = data['imagem'];
-    })
   }
 
   ngOnInit() {
@@ -47,8 +45,36 @@ export class EditDevicePagePage implements OnInit {
       .catch(error => console.log(error));
   }
 
-  async showModal() {
-
+  async escolherImagem() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Imagens',
+      buttons: [
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel',
+        },
+        {
+        text: 'Lâmpada',
+        icon: 'trash',
+        handler: () => {
+          this.imagem = "Lâmpada"
+        }
+      }, {
+        text: 'Televisão',
+        icon: 'share',
+        handler: () => {
+          this.imagem = "Televisão"
+        }
+      }, {
+        text: 'Ventilador',
+        icon: 'arrow-dropright-circle',
+        handler: () => {
+          this.imagem = "Ventilador"
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
 }
