@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../../services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { ModalIconDevicePage } from '../modal-icon-device/modal-icon-device.page';
 
 @Component({
   selector: 'app-edit-device-page',
@@ -20,7 +18,6 @@ export class EditDevicePagePage implements OnInit {
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder,
-    private modalCtrl: ModalController,
   ) {
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getDevice(this.id).valueChanges().subscribe(res => {
@@ -51,11 +48,7 @@ export class EditDevicePagePage implements OnInit {
   }
 
   async showModal() {
-    const modal = await this.modalCtrl.create({
-      component: ModalIconDevicePage
-    });
 
-    modal.present();
   }
 
 }

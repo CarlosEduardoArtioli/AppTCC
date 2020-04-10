@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
       .then((data) => {
         loading.dismiss();
         // TODO salvar nome e imagem e depois ler
-        localStorage.setItem('baltagram.user', JSON.stringify(new User('', data.user.email, '')));
+        localStorage.setItem('app.user', JSON.stringify(new User('', data.user.email, '')));
         this.navCtrl.navigateRoot('home');
       })
       .catch((err) => {
@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
     this.fbAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
       .then((data) => {
         console.log(data);
-        localStorage.setItem('baltagram.user', JSON.stringify(new User(data.user.displayName, data.user.email, data.user.photoURL)));
+        localStorage.setItem('app.user', JSON.stringify(new User(data.user.displayName, data.user.email, data.user.photoURL)));
         this.navCtrl.navigateRoot('home');
       })
       .catch((err) => {

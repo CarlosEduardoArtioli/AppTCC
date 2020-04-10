@@ -1,3 +1,6 @@
+// Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app 
+// Mas não são todas
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,10 +18,11 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 // environment
 import { environment } from '../environments/environment';
+
+
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { AuthGuard } from './guards/auth.guard';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { ModalIconDevicePageModule } from './pages/edit/modal-icon-device/modal-icon-device.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +35,7 @@ import { ModalIconDevicePageModule } from './pages/edit/modal-icon-device/modal-
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    ModalIconDevicePageModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     Keyboard,

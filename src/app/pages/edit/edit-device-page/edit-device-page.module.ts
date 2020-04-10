@@ -8,7 +8,6 @@ import { EditDevicePagePageRoutingModule } from './edit-device-page-routing.modu
 
 import { EditDevicePagePage } from './edit-device-page.page';
 
-import { ModalIconDevicePage } from '../modal-icon-device/modal-icon-device.page';
  
 @NgModule({
   imports: [
@@ -19,6 +18,6 @@ import { ModalIconDevicePage } from '../modal-icon-device/modal-icon-device.page
     ReactiveFormsModule
   ],
   declarations: [EditDevicePagePage],
-  entryComponents: [ModalIconDevicePage]
+  entryComponents: []
 })
 export class EditDevicePagePageModule {}

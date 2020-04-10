@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Platform, ActionSheetController, NavController } from '@ionic/angular';
+
+// Importação do Model do usuário
 import { User } from './models/user.model';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,8 +12,15 @@ import { Router, NavigationStart } from '@angular/router';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  navigate: { title: string; url: string; icon: string; }[];
+  // Declaração das variáveis
+
+  // Variável pages que fornece o titulo, url e icone das páginas
+  pages: { title: string; url: string; icon: string; }[];
+
+  // Variável user
   public user: User = new User('', '', 'https://placehold.it/80');
+
+  // Variável showComponent
   showComponent: boolean;
   
   constructor(
@@ -38,13 +47,15 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // Chama a função sideMenu()
       this.sideMenu();
-      this.user = JSON.parse(localStorage.getItem('baltagram.user'));
+      // Atribui a variável user o usuário logado no app
+      this.user = JSON.parse(localStorage.getItem('app.user'));
     });
   }
 
   sideMenu() {
-    this.navigate =
+    this.pages =
       [
         {
           title: "Dispositivos",
@@ -64,23 +75,31 @@ export class AppComponent {
       ]
   }
 
+
+  // Função para aparecer opções ao clicar no usuário
   async showOptions() {
+    // Cria um actionSheet
     const actionSheet = await this.actionSheetCtrl.create({
+      // Header com nome 'Opções'
       header: 'Opções',
+      // Gera botões
       buttons: [{
         text: 'Logout',
-        role: 'destructive',
         icon: 'power',
+        role: 'destructive',
+        // Quando o Logout é acionado ele remove o usuário do local storage e redireciona para a página de login
         handler: () => {
-          localStorage.removeItem('baltagra.user');
+          localStorage.removeItem('app.user');
           this.navCtrl.navigateRoot("/login");
         }
       }, {
+        // Botão para cancelar
         text: 'Cancelar',
         icon: 'close',
         role: 'cancel',
       }]
     });
+    // Aguarda o actionSheet carregar antes de mostrar
     await actionSheet.present();
   }
 }

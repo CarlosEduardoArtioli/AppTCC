@@ -1,5 +1,11 @@
+// Services são os "serviços" que podem ser reutilizados por todo o app
+// Geralmente são funções
+// Service para funções relacionadas ao Dispositivo
+
 import { Injectable } from '@angular/core';
-import { Dispositivos } from '../models/device';
+// Importação do Model do dispositivo
+import { Dispositivos } from '../models/device.model';
+// Importação das bibliotecas do AngularFire
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
 @Injectable({
@@ -7,15 +13,27 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 })
 
 export class AppointmentService {
+  // Declaração das variáveis
+
+  // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados 
   deviceListRef: AngularFireList<any>;
+  // Interface da biblioteca do AngularFire que "devolve" na função o dado pedido
   deviceRef: AngularFireObject<any>;
+  // Declaração da variável status
   status = "";
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(
+    // AngularFireDatabase é uma classe para refernciar o banco
+    // Recebeu o apelido de db
+    private db: AngularFireDatabase
+    ) { }
 
-  // Create
+  // Função que cria os dados do dispositivo
+  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
   createDevice(apt: Dispositivos) {
+    // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
     return this.deviceListRef.push({
+      // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: apt.name,
       status: apt.status,
       mac: apt.mac,
@@ -23,20 +41,27 @@ export class AppointmentService {
     })
   }
 
-  // Get Single
+  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
   getDevice(id: string) {
+    // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
+    // /dispositivos/id (sendo o id passado junto a função)
     this.deviceRef = this.db.object('/dispositivos/' + id);
+    // Retorna o deviceRef para a função
     return this.deviceRef;
   }
 
-  // Get List
+  // Função que "Pega" a lista de todos objetos com seus respectivos valores
   getDeviceList() {
+    // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
     this.deviceListRef = this.db.list('/dispositivos');
+    // Retorna o deviceListRef para a função
     return this.deviceListRef;
   }
 
-  // Update
+  // Função que atualiza os dados do objeto
+  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
   updateDevice(id, apt: Dispositivos) {
+    // Retorna para a função a atualização dos dados
     return this.deviceRef.update({
       name: apt.name,
       status: apt.status,
@@ -45,9 +70,12 @@ export class AppointmentService {
     })
   }
 
-  // Delete
+  // Função que exclui os dados do objeto com o id passado
   deleteDevice(id: string) {
+    // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
+    // /dispositivos/id (sendo o id passado junto a função)
     this.deviceRef = this.db.object('/dispositivos/' + id);
+    // Remove o objeto que foi atribuido ao deviceRef
     this.deviceRef.remove();
   }
 
