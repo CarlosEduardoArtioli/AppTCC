@@ -34,12 +34,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/edit/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule), 
     canActivate: [AuthGuard] 
   },
-  // Rota 'modal-icon-device'
-  {
-    path: 'modal-icon-device',
-    loadChildren: () => import('./pages/edit/modal-icon-device/modal-icon-device.module').then( m => m.ModalIconDevicePageModule), 
-    canActivate: [AuthGuard] 
-  },
   // Rota 'login'
   // Essa rota não recebe o canActive para que mesmo sem login ela seja acessivel
   {
