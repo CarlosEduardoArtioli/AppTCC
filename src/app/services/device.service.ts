@@ -21,12 +21,18 @@ export class AppointmentService {
   deviceRef: AngularFireObject<any>;
   // Declaração da variável status
   status = "";
+  // Declaração da variável user
+  user: any;
+
 
   constructor(
     // AngularFireDatabase é uma classe para refernciar o banco
     // Recebeu o apelido de db
     private db: AngularFireDatabase
-    ) { }
+    ) { 
+      this.user = JSON.parse(localStorage.getItem('app.user'));
+      this.user.email = this.user.email.replace(/[.]+/g, '');
+    }
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
@@ -45,7 +51,7 @@ export class AppointmentService {
   getDevice(id: string) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object('/dispositivos/' + id);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${id}`);
     // Retorna o deviceRef para a função
     return this.deviceRef;
   }
@@ -53,7 +59,7 @@ export class AppointmentService {
   // Função que "Pega" a lista de todos objetos com seus respectivos valores
   getDeviceList() {
     // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
-    this.deviceListRef = this.db.list('/dispositivos');
+    this.deviceListRef = this.db.list(`/users/${this.user.email}/dispositivos`);
     // Retorna o deviceListRef para a função
     return this.deviceListRef;
   }
@@ -74,7 +80,7 @@ export class AppointmentService {
   deleteDevice(id: string) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object('/dispositivos/' + id);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${id}`);
     // Remove o objeto que foi atribuido ao deviceRef
     this.deviceRef.remove();
   }
@@ -82,15 +88,15 @@ export class AppointmentService {
   // Função para mudar o status do dispositivo, com a função é passado o parametro id, fornecido pela função
   mudaStatus(id){
     // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
-    this.db.database.ref('/dispositivos/' + id + '/status').once('value').then(snapshot =>{
+    this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).once('value').then(snapshot =>{
       // Verifica se o valor do nó é igual a 'on'
       if ((snapshot.val()) == 'ligado'){
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
-        this.db.database.ref('/dispositivos/' + id + '/status').set('desligado');
+        this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).set('desligado');
       }
       else{
         // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
-        this.db.database.ref('/dispositivos/' + id + '/status').set('ligado');
+        this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).set('ligado');
       }
     })
   }

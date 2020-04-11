@@ -51,6 +51,7 @@ export class AppComponent {
       this.sideMenu();
       // Atribui a variável user o usuário logado no app
       this.user = JSON.parse(localStorage.getItem('app.user'));
+      console.log(this.user)
     });
   }
 
