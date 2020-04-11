@@ -31,10 +31,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.verificaUser();
+  }
+
+  private verificaUser() {
     this.user = JSON.parse(localStorage.getItem('app.user'));
-      if (this.user != null){
-        this.navCtrl.navigateRoot('home');
-      }
+    if (this.user != null) {
+      this.navCtrl.navigateRoot('home');
+    }
   }
 
   showKeyboard() {
