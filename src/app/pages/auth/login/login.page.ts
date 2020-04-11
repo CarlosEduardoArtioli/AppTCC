@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController, IonInput } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { User } from 'src/app/models/user.model';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { User } from 'src/app/models/user.model';
 export class LoginPage implements OnInit {
   public form: FormGroup;
   user: any;
+  @ViewChild('myInput', {static: true}) myInput: IonInput;
 
   constructor(
     private fb: FormBuilder,
@@ -20,6 +22,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private fbAuth: AngularFireAuth,
+    public keyboard: Keyboard
   ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
@@ -32,6 +35,10 @@ export class LoginPage implements OnInit {
       if (this.user != null){
         this.navCtrl.navigateRoot('home');
       }
+  }
+
+  showKeyboard() {
+    this.myInput.setFocus();
   }
 
   async submit() {

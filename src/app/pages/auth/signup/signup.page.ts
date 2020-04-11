@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController, IonInput } from '@ionic/angular';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-signup',
@@ -11,6 +11,7 @@ import { LoadingController, NavController, ToastController } from '@ionic/angula
 })
 export class SignupPage implements OnInit {
   public form: FormGroup;
+  @ViewChild('myInput', {static: true}) myInput: IonInput;
 
   constructor(
     private fb: FormBuilder,
@@ -18,6 +19,7 @@ export class SignupPage implements OnInit {
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private fbAuth: AngularFireAuth,
+    public keyboard: Keyboard
   ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
@@ -27,6 +29,10 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  showKeyboard() {
+    this.myInput.setFocus();
   }
 
   async submit() {
