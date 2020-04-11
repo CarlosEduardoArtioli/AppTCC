@@ -4,6 +4,7 @@ import { Platform, ActionSheetController, NavController } from '@ionic/angular';
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
+import { app } from 'firebase';
 
 
 @Component({
@@ -51,7 +52,9 @@ export class AppComponent {
       this.sideMenu();
       // Atribui a variável user o usuário logado no app
       this.user = JSON.parse(localStorage.getItem('app.user'));
-      console.log(this.user)
+      if (this.user.name == ""){
+        localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+      }
     });
   }
 
@@ -84,7 +87,22 @@ export class AppComponent {
       // Header com nome 'Opções'
       header: 'Opções',
       // Gera botões
-      buttons: [{
+      buttons: [
+        {
+          text: 'Alterar Nome',
+          icon: 'person',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'Alterar Foto',
+          icon: 'person-circle',
+          handler: () => {
+            
+          }
+        },
+        {
         text: 'Logout',
         icon: 'power',
         role: 'destructive',

@@ -8,11 +8,13 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-item>
-              <ion-avatar (click)="showOptions()">
+            <ion-item (click)="showOptions()">
+              <ion-avatar>
                 <img src="{{user.image}}">
               </ion-avatar>
-              {{user.name}}
+              <div>
+                {{user.name}}
+              </div>
             </ion-item>
           </ion-buttons>
         </ion-toolbar>
