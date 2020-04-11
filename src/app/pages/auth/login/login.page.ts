@@ -12,6 +12,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class LoginPage implements OnInit {
   public form: FormGroup;
+  user: any;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +28,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.user = JSON.parse(localStorage.getItem('app.user'));
+      if (this.user != null){
+        this.navCtrl.navigateRoot('home');
+      }
   }
 
   async submit() {

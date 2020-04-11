@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  // Declaração da variável firebaseConfig que recebe os dados do Banco
   firebaseConfig: {
     apiKey: "AIzaSyC_-dosbJBWTmLTKD9GcBcATZ3-R8rYpmk",
     authDomain: "crudionic-4c066.firebaseapp.com",
