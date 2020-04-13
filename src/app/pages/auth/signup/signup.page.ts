@@ -10,7 +10,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  // Declaração de variáveis
   public form: FormGroup;
+  // Não faço ideia pra que isso serve, só sei que acho que tem haver com o keyboard
   @ViewChild('myInput', {static: true}) myInput: IonInput;
 
   constructor(
@@ -21,7 +23,9 @@ export class SignupPage implements OnInit {
     private fbAuth: AngularFireAuth,
     public keyboard: Keyboard
   ) {
+    // Atribui a variável form o valor do grupo de valores do FormBuilder da página HTML 
     this.form = this.fb.group({
+    // Validators.required é um parâmetro para se o usuário não preencher a variável retornar um erro
       email: ['', Validators.required],
       password: ['', Validators.required],
     })
@@ -31,35 +35,54 @@ export class SignupPage implements OnInit {
 
   }
 
+  // Função para mostrar o keyboard
   showKeyboard() {
     this.myInput.setFocus();
   }
 
+  // Função para o envio da autenticação
   async submit() {
+    // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
     const loading = await this.loadingCtrl.create({ message: "Cadastrando..." });
+    // Mostra a mensagem na tela
     loading.present();
 
+    // Função que cria um usuário com email e senha e seus valores são pegos do HTML
     this.fbAuth.auth.createUserWithEmailAndPassword(this.form.controls['email'].value, this.form.controls['password'].value)
+    // Quando cria
       .then((data) => {
+        // Mostra mensagem de "Bem-Vindo!"
         this.showMessage("Bem-vindo!");
+        // Tira a mensagem de carregando da tela
         loading.dismiss();
+        // Navega para a página 'login'
         this.navCtrl.navigateRoot('login');
       })
+      // Caso ocorra erro
       .catch((err) => {
+        // Tira a mensagem de carregando da tela
         loading.dismiss();
+        // Mostra mensagem de "Não foi possível realizar seu cadastro"
         this.showMessage("Não foi possível realizar seu cadastro");
       });
-    // console.log(res);
   }
 
+  // Função para mostrar mensagem na tela que recebe o paramêtro message
   async showMessage(message: string) {
-    await this.toastCtrl.create({ message: message, duration: 3000}).then((toastData)=>{
+    // Aguarda a criação de um Toast Controller, com a mensagem passada no parâmetro, com duração de 3 segundos
+    await this.toastCtrl.create({ message: message, duration: 3000})
+    // Quando o Toast Controller é terminado
+    .then((toastData)=>{
+      // Escreve os dados no console
       console.log(toastData);
+      // Mostra a mensagem na tela
       toastData.present();
     });
   }
 
+  // Função de cancelar o Signup
   async cancel() {
+    // Navega de volta para a página 'login'
     this.navCtrl.navigateBack('login');
   }
 }

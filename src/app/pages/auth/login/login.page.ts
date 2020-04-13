@@ -12,8 +12,10 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  // Declaração de variáveis
   public form: FormGroup;
   user: any;
+  // Não faço ideia pra que isso serve, só sei que acho que tem haver com o keyboard
   @ViewChild('myInput', {static: true}) myInput: IonInput;
 
   constructor(
@@ -38,6 +40,11 @@ export class LoginPage implements OnInit {
     this.verificaUser();
   }
 
+  // Função para mostrar o keyboard
+  showKeyboard() {
+    this.myInput.setFocus();
+  }
+
   // Função para verificar se já existe um usuário logado
   private verificaUser() {
     // Atribui a variável user o resultado da seguinte consulta
@@ -54,6 +61,7 @@ export class LoginPage implements OnInit {
   async submit() {
     // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
     const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+    // Mostra a mensagem na tela
     loading.present();
 
     // Função que faz o login com email e senha, ela pega os valores do HTML

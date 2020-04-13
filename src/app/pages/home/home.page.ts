@@ -15,10 +15,17 @@ export class HomePage implements OnInit {
     private aptService: DeviceService
   ) { }
 
+  // Função quando a página é iniciada
   ngOnInit() {
+    // Chama a função 'fetchDevices()'
     this.fetchDevices();
+
+    // Atribui a variávei 'deviceRes' o seguinte valor
+    // Puxa a função 'getDeviceList'
     let deviceRes = this.aptService.getDeviceList();
+    // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
+      // "Subscreve" a variável devices com os dispostivos e seus valores
       this.Devices = [];
       res.forEach(item => {
         let a = item.payload.toJSON();
@@ -35,7 +42,7 @@ export class HomePage implements OnInit {
   }
 
   // Função para mudar o status do dispositivo
-  mudaStatus(id){
+  mudaStatus(id: any){
     // Chama a função mudaStatus no AppointmentService
      this.aptService.mudaStatus(id);
   }

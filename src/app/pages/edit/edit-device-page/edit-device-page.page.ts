@@ -10,9 +10,10 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['./edit-device-page.page.scss'],
 })
 export class EditDevicePagePage implements OnInit {
+  // Declaração de variávies
   updateDeviceForm: FormGroup;
   id: any;
-  imagem: string = "";
+  imagem = "";
 
   constructor(
     private aptService: DeviceService,
@@ -34,7 +35,7 @@ export class EditDevicePagePage implements OnInit {
       mac: [''],
       icon: ['']
     })
-    console.log(this.updateDeviceForm.value)
+    console.log(this.updateDeviceForm.value);
   }
 
   updateForm() {

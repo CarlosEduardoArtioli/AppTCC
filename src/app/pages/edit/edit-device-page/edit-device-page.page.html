@@ -31,7 +31,7 @@
 
       <ion-item>
         <ion-icon slot="start" src="/assets/svg/{{ imagem }}.svg"></ion-icon>
-        <ion-input formControlName="icon" value="{{ imagem }}"></ion-input>
+        <ion-input formControlName="icon" type="text" required></ion-input>
         <ion-label>
         <ion-button (click)="escolherImagem()" slot="end">Selecionar</ion-button>
         </ion-label>
