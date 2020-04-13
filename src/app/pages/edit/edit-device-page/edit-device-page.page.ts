@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../../../services/device.service';
+import { DeviceService } from '../../../services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActionSheetController } from '@ionic/angular';
@@ -15,7 +15,7 @@ export class EditDevicePagePage implements OnInit {
   imagem: string = "";
 
   constructor(
-    private aptService: AppointmentService,
+    private aptService: DeviceService,
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder,

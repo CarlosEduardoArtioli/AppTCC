@@ -7,7 +7,6 @@
   <ion-menu side="start" menuId="first" contentId="content1"  *ngIf="showComponent">
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
             <ion-item (click)="showOptions()">
               <ion-avatar>
                 <img src="{{user.image}}">
@@ -16,7 +15,6 @@
                 {{user.name}}
               </div>
             </ion-item>
-          </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content>

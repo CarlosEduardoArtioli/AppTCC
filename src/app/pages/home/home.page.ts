@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dispositivos } from '../../models/device.model';
-import { AppointmentService } from '../../services/device.service';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ export class HomePage implements OnInit {
   Devices = [];
 
   constructor(
-    private aptService: AppointmentService
+    private aptService: DeviceService
   ) { }
 
   ngOnInit() {

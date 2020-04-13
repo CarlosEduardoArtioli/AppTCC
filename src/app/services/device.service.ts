@@ -12,7 +12,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
   providedIn: 'root'
 })
 
-export class AppointmentService {
+export class DeviceService {
   // Declaração das variáveis
 
   // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados 
