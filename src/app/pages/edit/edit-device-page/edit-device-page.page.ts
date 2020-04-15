@@ -12,7 +12,7 @@ import { ActionSheetController } from '@ionic/angular';
 export class EditDevicePagePage implements OnInit {
   // Declaração de variávies
   updateDeviceForm: FormGroup;
-  id: any;
+  mac: any;
   imagem = "";
 
   constructor(
@@ -23,8 +23,8 @@ export class EditDevicePagePage implements OnInit {
     public actionSheetController: ActionSheetController
   ) {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
-    this.id = this.actRoute.snapshot.paramMap.get('id');
-    this.aptService.getDevice(this.id).valueChanges().subscribe(res => {
+    this.mac = this.actRoute.snapshot.paramMap.get('mac');
+    this.aptService.getDevice(this.mac).valueChanges().subscribe(res => {
       this.imagem = res.icon;
       this.updateDeviceForm.setValue(res);
     });
@@ -43,7 +43,7 @@ export class EditDevicePagePage implements OnInit {
   }
 
   updateForm() {
-    this.aptService.updateDevice(this.id, this.updateDeviceForm.value)
+    this.aptService.updateDevice(this.updateDeviceForm.value)
       .then(() => {
         this.router.navigate(['/home']);
       })

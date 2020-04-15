@@ -30,7 +30,7 @@ const routes: Routes = [
   // Rota 'edit-device-page/:id'
   // Essa rota recebe o id passado em seu page.ts para redirecinar o usuário para a página de edição de certo dispositivo
   {
-    path: 'edit-device-page/:id',
+    path: 'edit-device-page/:mac',
     loadChildren: () => import('./pages/edit/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule), 
     canActivate: [AuthGuard] 
   },
@@ -46,6 +46,11 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/auth/signup/signup.module').then( m => m.SignupPageModule)
   },
+  {
+    path: 'functions',
+    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule)
+  },
+
 ];
 
 @NgModule({
