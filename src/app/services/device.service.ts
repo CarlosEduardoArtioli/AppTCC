@@ -29,29 +29,34 @@ export class DeviceService {
     // AngularFireDatabase é uma classe para refernciar o banco
     // Recebeu o apelido de db
     private db: AngularFireDatabase
-    ) { 
-      this.user = JSON.parse(localStorage.getItem('app.user'));
-      this.user.email = this.user.email.replace(/[.#$]+/g, '');
-    }
+  ) {
+    this.user = JSON.parse(localStorage.getItem('app.user'));
+    this.user.email = this.user.email.replace(/[.#$]+/g, '');
+  }
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createDevice(apt: Dispositivos) {
+  createDevice(apt: Dispositivos, mac: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    return this.deviceListRef.push({
+    this.db.object(`/users/${this.user.email}/dispositivos/${mac}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: apt.name,
       status: apt.status,
       mac: apt.mac,
       icon: apt.icon
-    })
+    })//.then(res => {
+      // Escreve no console o valor do formulário
+      //console.log(res)
+    //})
+      // Caso ocorra um erro, ele o escreve no console
+     // .catch(error => console.log(error));
   }
 
   // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
-  getDevice(id: string) {
+  getDevice(mac: any) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${id}`);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${mac}`);
     // Retorna o deviceRef para a função
     return this.deviceRef;
   }
@@ -66,7 +71,7 @@ export class DeviceService {
 
   // Função que atualiza os dados do objeto
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateDevice(id, apt: Dispositivos) {
+  updateDevice(apt: Dispositivos) {
     // Retorna para a função a atualização dos dados
     return this.deviceRef.update({
       name: apt.name,
@@ -77,26 +82,26 @@ export class DeviceService {
   }
 
   // Função que exclui os dados do objeto com o id passado
-  deleteDevice(id: string) {
+  deleteDevice(mac: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${id}`);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${mac}`);
     // Remove o objeto que foi atribuido ao deviceRef
     this.deviceRef.remove();
   }
 
   // Função para mudar o status do dispositivo, com a função é passado o parametro id, fornecido pela função
-  mudaStatus(id){
+  mudaStatus(mac: any) {
     // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
-    this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).once('value').then(snapshot =>{
+    this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).once('value').then(snapshot => {
       // Verifica se o valor do nó é igual a 'on'
-      if ((snapshot.val()) == 'ligado'){
+      if ((snapshot.val()) == 'ligado') {
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
-        this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).set('desligado');
+        this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).set('desligado');
       }
-      else{
+      else {
         // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
-        this.db.database.ref(`/users/${this.user.email}/dispositivos/${id}/status`).set('ligado');
+        this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).set('ligado');
       }
     })
   }

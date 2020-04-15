@@ -10,6 +10,7 @@ import { DeviceService } from '../../services/device.service';
 })
 export class AdicionarPage implements OnInit {
   deviceForm: FormGroup;
+  mac: any;
 
   constructor(
     private aptService: DeviceService,
@@ -29,6 +30,7 @@ export class AdicionarPage implements OnInit {
     })
   }
 
+
   // Função para enviar o formulário
   formSubmit() {
     // Se o formulário for diferente de válido
@@ -37,17 +39,13 @@ export class AdicionarPage implements OnInit {
       return false;
       // Se o formulário for válido
     } else {
+       this.mac = this.deviceForm.value.mac;
       // "Puxa" a função 'createDevice' do DeviceService e passa o valor do 'deviceForm'
-      this.aptService.createDevice(this.deviceForm.value).then(res => {
-        // Escreve no console o valor do formulário
-        console.log(res)
+      this.aptService.createDevice(this.deviceForm.value, this.mac)
         // "Reseta" o formulário para uma nova inserção de dados
         this.deviceForm.reset();
         // Navega para a página 'home'
         this.router.navigate(['/home']);
-      })
-        // Caso ocorra um erro, ele o escreve no console
-        .catch(error => console.log(error));
     }
   }
 }
