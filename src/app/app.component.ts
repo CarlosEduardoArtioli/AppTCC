@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { Platform, ActionSheetController, NavController } from '@ionic/angular';
+import { Platform, ActionSheetController, NavController, AlertController } from '@ionic/angular';
 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { app } from 'firebase';
+import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
+import { asLiteral } from '@angular/compiler/src/render3/view/util';
 
 
 @Component({
@@ -23,26 +25,29 @@ export class AppComponent {
 
   // Variável showComponent
   showComponent: boolean;
-  
+  novoNome: any;
+
   constructor(
     private platform: Platform,
     private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
-    private router:Router
+    private router: Router,
+    private alerCtrl: AlertController
+
   ) {
     router.events.forEach((event) => {
       if (this.router.url === '/login') {
         this.showComponent = false
+      }
+      else {
+        if (this.router.url === '/signup') {
+          this.showComponent = false
         }
-        else{
-          if (this.router.url === '/signup') {
-            this.showComponent = false
-            }
-            else{
-              this.showComponent = true;
-              this.initializeApp();
-            }
+        else {
+          this.showComponent = true;
+          this.initializeApp();
         }
+      }
     });
   }
 
@@ -52,10 +57,55 @@ export class AppComponent {
       this.sideMenu();
       // Atribui a variável user o usuário logado no app
       this.user = JSON.parse(localStorage.getItem('app.user'));
-      if (this.user.name == ""){
+      if (this.user.name == "") {
         localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
       }
     });
+  }
+
+ async alterarNome() {
+
+    const alert = await this.alerCtrl.create({
+
+      header: 'Novo Nome',
+      inputs: [
+        {
+          name: 'new-name',
+          id: 'newname',
+          placeholder: 'Escreva um novo nome',
+          value: this.novoNome
+        },
+      ],
+      buttons: [  
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Salvar',
+          handler: data => {
+            this.user = JSON.parse(localStorage.getItem('app.user'));
+           if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
+           this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
+           localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+            this.newname();
+            window.location.reload(true);
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+ async newname() {
+    const alert = await this.alerCtrl.create({
+      header: 'Seu nome foi alterado',
+    });
+      await alert.present();
   }
 
   sideMenu() {
@@ -92,33 +142,34 @@ export class AppComponent {
           text: 'Alterar Nome',
           icon: 'person',
           handler: () => {
-            
+            this.alterarNome();
           }
         },
         {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
-            
+
           }
         },
         {
-        text: 'Logout',
-        icon: 'power',
-        role: 'destructive',
-        // Quando o Logout é acionado ele remove o usuário do local storage e redireciona para a página de login
-        handler: () => {
-          localStorage.removeItem('app.user');
-          this.navCtrl.navigateRoot("/login");
-        }
-      }, {
-        // Botão para cancelar
-        text: 'Cancelar',
-        icon: 'close',
-        role: 'cancel',
-      }]
+          text: 'Logout',
+          icon: 'power',
+          role: 'destructive',
+          // Quando o Logout é acionado ele remove o usuário do local storage e redireciona para a página de login
+          handler: () => {
+            localStorage.removeItem('app.user');
+            this.navCtrl.navigateRoot("/login");
+          }
+        }, {
+          // Botão para cancelar
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel',
+        }]
     });
     // Aguarda o actionSheet carregar antes de mostrar
     await actionSheet.present();
   }
 }
+
