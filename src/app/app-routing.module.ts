@@ -45,7 +45,11 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/auth/signup/signup.module').then( m => m.SignupPageModule)
+  },  {
+    path: 'functions',
+    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule)
   },
+
 ];
 
 @NgModule({
