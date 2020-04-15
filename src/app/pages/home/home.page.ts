@@ -9,6 +9,7 @@ import { DeviceService } from '../../services/device.service';
 })
 
 export class HomePage implements OnInit {
+  // Declaração de variáveis
   Devices = [];
 
   constructor(
@@ -25,7 +26,7 @@ export class HomePage implements OnInit {
     let deviceRes = this.aptService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
-      // "Subscreve" a variável devices com os dispostivos e seus valores
+      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
         let a = item.payload.toJSON();
@@ -35,8 +36,11 @@ export class HomePage implements OnInit {
     })
   }
 
+  // Função para mostrar no console a lista de dispositivos
   fetchDevices() {
+    // Pega os valores do caminho os subscreve no 'res'
     this.aptService.getDeviceList().valueChanges().subscribe(res => {
+      // Escreve no console a lista de dispositivos
       console.log(res)
     })
   }

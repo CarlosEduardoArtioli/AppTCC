@@ -22,20 +22,24 @@ export class EditDevicePagePage implements OnInit {
     public fb: FormBuilder,
     public actionSheetController: ActionSheetController
   ) {
+    // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
     this.id = this.actRoute.snapshot.paramMap.get('id');
     this.aptService.getDevice(this.id).valueChanges().subscribe(res => {
+      this.imagem = res.icon;
       this.updateDeviceForm.setValue(res);
     });
   }
 
+  // Função para quando a página for iniciada
   ngOnInit() {
+    // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
     this.updateDeviceForm = this.fb.group({
       name: [''],
       status: [''],
       mac: [''],
       icon: ['']
     })
-    console.log(this.updateDeviceForm.value);
+    console.log(this.updateDeviceForm.value); 
   }
 
   updateForm() {
