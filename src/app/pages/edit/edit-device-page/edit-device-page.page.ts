@@ -61,19 +61,19 @@ export class EditDevicePagePage implements OnInit {
         },
         {
         text: 'Lâmpada',
-        icon: 'trash',
+        icon: '/assets/svg/Lâmpada.svg',
         handler: () => {
           this.imagem = "Lâmpada"
         }
       }, {
         text: 'Televisão',
-        icon: 'share',
+        icon: '/assets/svg/Televisão.svg',
         handler: () => {
           this.imagem = "Televisão"
         }
       }, {
         text: 'Ventilador',
-        icon: 'arrow-dropright-circle',
+        icon: '/assets/svg/Ventilador.svg',
         handler: () => {
           this.imagem = "Ventilador"
         }

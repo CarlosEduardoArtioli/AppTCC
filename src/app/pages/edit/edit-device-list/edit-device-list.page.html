@@ -15,25 +15,25 @@
     <ion-item *ngFor="let device of Devices" class="user-list">
       <ion-label>
         <h5>
-          <ion-icon name="bulb"></ion-icon> {{device.name}}
+          <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.name}}
         </h5>
         <h5>
-          <ion-icon name="information-circle"></ion-icon> {{device.status}}
+          <ion-icon name="contrast"></ion-icon> {{device.status}}
         </h5>
         <h5>
-          <ion-icon name="desktop"></ion-icon> {{device.mac}}
+          <ion-icon name="hardware-chip-outline"></ion-icon> {{device.mac}}
         </h5>
         <h5>
-          <ion-icon name="file-tray-full"></ion-icon> {{device.icon}}
+          <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.icon}}
         </h5>
       </ion-label>
 
       <div class="item-note" item-end>
-        <button ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 
-        <button ion-button clear (click)="deleteDevice(device.$key)">
+        <button class="transparent" ion-button clear (click)="deleteDevice(device.$key)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>
         </button>
 
