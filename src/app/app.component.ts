@@ -4,9 +4,6 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
-import { app } from 'firebase';
-import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
-import { asLiteral } from '@angular/compiler/src/render3/view/util';
 
 
 @Component({
