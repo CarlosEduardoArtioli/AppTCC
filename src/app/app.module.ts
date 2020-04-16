@@ -24,6 +24,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { AuthGuard } from './guards/auth.guard';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,7 +43,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   providers: [
     Keyboard,
     AuthGuard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ImagePicker,
+    File
   ],
   bootstrap: [AppComponent]
 })

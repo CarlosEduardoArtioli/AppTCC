@@ -7,6 +7,15 @@ import { Router } from '@angular/router';
 import { app } from 'firebase';
 import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 import { asLiteral } from '@angular/compiler/src/render3/view/util';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx';
+
+export interface ImagePickerOptions {
+  maximumImagesCount?: number;
+  width?: number;
+  height?: number;
+  quality?: number;
+}
 
 
 @Component({
@@ -26,13 +35,16 @@ export class AppComponent {
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
+  image: any;
 
   constructor(
     private platform: Platform,
     private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
-    private alerCtrl: AlertController
+    private alerCtrl: AlertController,
+    private imagePicker: ImagePicker,
+    private file:File
 
   ) {
     router.events.forEach((event) => {
@@ -62,6 +74,26 @@ export class AppComponent {
       }
     });
   }
+
+PickAImage() {
+var options: ImagePickerOptions={
+  maximumImagesCount: 1,
+  width: 100,
+  height: 100
+}
+  this.imagePicker.getPictures(options).then((results) => {
+    for(var interval = 0;interval<results.length;interval++)
+    {
+      let filename = results[interval].substring(results[interval]
+        .lastIndexOf('/')+1)
+        let path = results[interval].substring(0,results[interval].lastIndexOf
+          ('/')+1)
+        this.file.readAsDataURL(path,filename).then((base64string)=>{
+          this.image.push(base64string);
+        })
+    }
+  })
+}
 
  async alterarNome() {
 
@@ -149,7 +181,7 @@ export class AppComponent {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
-
+            this.PickAImage();
           }
         },
         {
