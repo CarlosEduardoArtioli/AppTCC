@@ -89,7 +89,7 @@ export class AppComponent {
            this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
            localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
             this.newname();
-            window.location.reload(true);
+            this.user = JSON.parse(localStorage.getItem('app.user'));
             }
           }
         }
