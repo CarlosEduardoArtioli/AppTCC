@@ -1,7 +1,8 @@
 {
   "name": "crudFirebase",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

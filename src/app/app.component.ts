@@ -4,9 +4,6 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
-import { app } from 'firebase';
-import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
-import { asLiteral } from '@angular/compiler/src/render3/view/util';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 
@@ -16,7 +13,6 @@ export interface ImagePickerOptions {
   height?: number;
   quality?: number;
 }
-
 
 @Component({
   selector: 'app-root',
@@ -124,7 +120,7 @@ var options: ImagePickerOptions={
            this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
            localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
             this.newname();
-            window.location.reload(true);
+            this.user = JSON.parse(localStorage.getItem('app.user'));
             }
           }
         }
