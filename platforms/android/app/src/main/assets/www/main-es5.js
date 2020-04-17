@@ -927,16 +927,30 @@
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/fesm2015/router.js"); // Importação do Model do usuário
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/image-picker/ngx */
+    "./node_modules/@ionic-native/image-picker/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @ionic-native/file/ngx */
+    "./node_modules/@ionic-native/file/ngx/index.js"); // Importação do Model do usuário
 
 
     let AppComponent = class AppComponent {
-      constructor(platform, navCtrl, actionSheetCtrl, router, alerCtrl) {
+      constructor(platform, navCtrl, actionSheetCtrl, router, alerCtrl, imagePicker, file) {
         this.platform = platform;
         this.navCtrl = navCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
         this.router = router;
-        this.alerCtrl = alerCtrl; // Variável user
+        this.alerCtrl = alerCtrl;
+        this.imagePicker = imagePicker;
+        this.file = file; // Variável user
 
         this.user = new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"]('', '', 'https://placehold.it/80');
         router.events.forEach(event => {
@@ -966,6 +980,23 @@
         });
       }
 
+      PickAImage() {
+        var options = {
+          maximumImagesCount: 1,
+          width: 100,
+          height: 100
+        };
+        this.imagePicker.getPictures(options).then(results => {
+          for (var interval = 0; interval < results.length; interval++) {
+            let filename = results[interval].substring(results[interval].lastIndexOf('/') + 1);
+            let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
+            this.file.readAsDataURL(path, filename).then(base64string => {
+              this.image.push(base64string);
+            });
+          }
+        });
+      }
+
       alterarNome() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
           const alert = yield this.alerCtrl.create({
@@ -991,7 +1022,7 @@
                   this.novoNome = document.getElementById('newname').value;
                   localStorage.setItem('app.user', JSON.stringify(new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
                   this.newname();
-                  window.location.reload(true);
+                  this.user = JSON.parse(localStorage.getItem('app.user'));
                 }
               }
             }]
@@ -1042,7 +1073,9 @@
             }, {
               text: 'Alterar Foto',
               icon: 'person-circle',
-              handler: () => {}
+              handler: () => {
+                this.PickAImage();
+              }
             }, {
               text: 'Logout',
               icon: 'power',
@@ -1076,6 +1109,10 @@
       type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
     }, {
       type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
+    }, {
+      type: _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__["ImagePicker"]
+    }, {
+      type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_6__["File"]
     }];
 
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1086,7 +1123,7 @@
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./app.component.scss */
       "./src/app/app.component.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])], AppComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"], _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_5__["ImagePicker"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_6__["File"]])], AppComponent);
     /***/
   },
 
@@ -1198,7 +1235,19 @@
 
     var _angular_service_worker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @angular/service-worker */
-    "./node_modules/@angular/service-worker/fesm2015/service-worker.js"); // Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app 
+    "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
+    /* harmony import */
+
+
+    var _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! @ionic-native/image-picker/ngx */
+    "./node_modules/@ionic-native/image-picker/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    /*! @ionic-native/file/ngx */
+    "./node_modules/@ionic-native/file/ngx/index.js"); // Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app 
     // Mas não são todas
     //  firebase imports, remove what you don't require
     // environment
@@ -1214,7 +1263,7 @@
       providers: [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_12__["Keyboard"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
-      }],
+      }, _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_15__["ImagePicker"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_16__["File"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
     })], AppModule);
     /***/
