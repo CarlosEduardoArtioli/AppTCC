@@ -24,7 +24,7 @@ export class AppComponent {
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
-  image: any;
+  image: any=[];
 
   constructor(
     private platform: Platform,
@@ -66,15 +66,15 @@ export class AppComponent {
 
 PickAImage() {
 var options: ImagePickerOptions={
-  maximumImagesCount: 1
+  maximumImagesCount: 1,
+  allow_video: false
 }
-  this.imagePicker.getPictures(options).then((results) => {
+  this.imagePicker.getPictures(options).then((results)=>{
     for(var interval = 0;interval<results.length;interval++)
     {
       let filename = results[interval].substring(results[interval]
         .lastIndexOf('/')+1)
-        let path = results[interval].substring(0,results[interval].lastIndexOf
-          ('/')+1)
+        let path = results[interval].substring(0,results[interval].lastIndexOf('/')+1)
         this.file.readAsDataURL(path,filename).then((base64string)=>{
           this.image.push(base64string);
         })
