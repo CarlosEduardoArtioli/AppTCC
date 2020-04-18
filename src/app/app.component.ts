@@ -4,15 +4,8 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
-
-export interface ImagePickerOptions {
-  maximumImagesCount?: number;
-  width?: number;
-  height?: number;
-  quality?: number;
-}
 
 @Component({
   selector: 'app-root',
@@ -39,8 +32,8 @@ export class AppComponent {
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
     private alerCtrl: AlertController,
-    private imagePicker: ImagePicker,
-    private file:File
+    public imagePicker: ImagePicker,
+    public file: File
 
   ) {
     router.events.forEach((event) => {
@@ -73,9 +66,7 @@ export class AppComponent {
 
 PickAImage() {
 var options: ImagePickerOptions={
-  maximumImagesCount: 1,
-  width: 100,
-  height: 100
+  maximumImagesCount: 1
 }
   this.imagePicker.getPictures(options).then((results) => {
     for(var interval = 0;interval<results.length;interval++)
@@ -89,6 +80,7 @@ var options: ImagePickerOptions={
         })
     }
   })
+  localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)));
 }
 
  async alterarNome() {

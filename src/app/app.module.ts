@@ -27,6 +27,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+export interface ImagePickerOptions {
+  maximumImagesCount?: number;
+  width?: number;
+  height?: number;
+  quality?: number;
+}
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
