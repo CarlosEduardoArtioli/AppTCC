@@ -64,26 +64,25 @@ export class AppComponent {
     });
   }
 
-PickAImage() {
-var options: ImagePickerOptions={
-  maximumImagesCount: 1
-}
-  this.imagePicker.getPictures(options).then((results) => {
-    for(var interval = 0;interval<results.length;interval++)
-    {
-      let filename = results[interval].substring(results[interval]
-        .lastIndexOf('/')+1)
-        let path = results[interval].substring(0,results[interval].lastIndexOf
-          ('/')+1)
-        this.file.readAsDataURL(path,filename).then((base64string)=>{
+  PickAImage() {
+    var options: ImagePickerOptions = {
+      maximumImagesCount: 1
+    }
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var interval = 0; interval < results.length; interval++) {
+        let filename = results[interval].substring(results[interval]
+          .lastIndexOf('/') + 1)
+        let path = results[interval].substring(0, results[interval].lastIndexOf
+          ('/') + 1)
+        this.file.readAsDataURL(path, filename).then((base64string) => {
           this.image.push(base64string);
         })
-    }
-  })
-  localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)));
-}
+      }
+    })
+    localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)));
+  }
 
- async alterarNome() {
+  async alterarNome() {
 
     const alert = await this.alerCtrl.create({
 
@@ -96,7 +95,7 @@ var options: ImagePickerOptions={
           value: this.novoNome
         },
       ],
-      buttons: [  
+      buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
@@ -108,11 +107,11 @@ var options: ImagePickerOptions={
           text: 'Salvar',
           handler: data => {
             this.user = JSON.parse(localStorage.getItem('app.user'));
-           if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
-           this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
-           localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
-            this.newname();
-            this.user = JSON.parse(localStorage.getItem('app.user'));
+            if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
+              this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
+              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+              this.newname();
+              this.user = JSON.parse(localStorage.getItem('app.user'));
             }
           }
         }
@@ -121,11 +120,11 @@ var options: ImagePickerOptions={
     await alert.present();
   }
 
- async newname() {
+  async newname() {
     const alert = await this.alerCtrl.create({
       header: 'Seu nome foi alterado',
     });
-      await alert.present();
+    await alert.present();
   }
 
   sideMenu() {
