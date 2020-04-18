@@ -982,9 +982,7 @@
 
       PickAImage() {
         var options = {
-          maximumImagesCount: 1,
-          width: 100,
-          height: 100
+          maximumImagesCount: 1
         };
         this.imagePicker.getPictures(options).then(results => {
           for (var interval = 0; interval < results.length; interval++) {
@@ -995,6 +993,7 @@
             });
           }
         });
+        localStorage.setItem('app.user', JSON.stringify(new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](this.user.name, this.user.email, this.image)));
       }
 
       alterarNome() {
