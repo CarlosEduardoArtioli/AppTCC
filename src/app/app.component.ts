@@ -70,17 +70,15 @@ var options: ImagePickerOptions={
   allow_video: false
 }
   this.imagePicker.getPictures(options).then((results)=>{
-    for(var interval = 0;interval<results.length;interval++)
-    {
-      let filename = results[interval].substring(results[interval]
-        .lastIndexOf('/')+1)
-        let path = results[interval].substring(0,results[interval].lastIndexOf('/')+1)
+      let filename = results.substring(results.lastIndexOf('/')+1);
+        let path = results.substring(0,results.lastIndexOf('/')+1);
         this.file.readAsDataURL(path,filename).then((base64string)=>{
           this.image.push(base64string);
         })
+      })
+      if (this.image != "") {
+    localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)))
       }
-    })
-    localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)));
   }
 
   async alterarNome() {
