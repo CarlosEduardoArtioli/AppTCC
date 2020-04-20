@@ -31,7 +31,7 @@ export class AppComponent {
     private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
-    private alerCtrl: AlertController,
+    private alertCtrl: AlertController,
     public imagePicker: ImagePicker,
     public file: File
 
@@ -83,7 +83,7 @@ var options: ImagePickerOptions={
 
   async alterarNome() {
 
-    const alert = await this.alerCtrl.create({
+    const alert = await this.alertCtrl.create({
 
       header: 'Novo Nome',
       inputs: [
@@ -120,7 +120,7 @@ var options: ImagePickerOptions={
   }
 
   async newname() {
-    const alert = await this.alerCtrl.create({
+    const alert = await this.alertCtrl.create({
       header: 'Seu nome foi alterado',
     });
     await alert.present();
