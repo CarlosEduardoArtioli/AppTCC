@@ -100,7 +100,7 @@ export class AppComponent {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           handler: data => {
             console.log('Cancel clicked');

@@ -97,15 +97,19 @@ export class LoginPage implements OnInit {
     // Função que faz login com o Google
     this.fbAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
       // Quando pega os dados
-      .then((data) => {
+      .then(async (data) => {
         // Escreve no console os dados
         console.log(data);
         // "Seta" no local storage um item com o nome 'app.user' com um JSON com os valores recebidos 
         localStorage.setItem('app.user', JSON.stringify(new User(data.user.displayName, data.user.email, data.user.photoURL)));
-        // Chama a função 'showMessage()' e passa o parâmetro "Fazendo Login..."
-        this.showMessage("Fazendo Login...");
+        // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
+        const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+        // Mostra a mensagem na tela
+        loading.present();
         // Navega para a página 'home'
         this.navCtrl.navigateRoot('home');
+        // Função que retira a mensagem de "Autenticando..."
+        loading.dismiss();
       })
       // Caso ocorra erro
       .catch((err) => {
