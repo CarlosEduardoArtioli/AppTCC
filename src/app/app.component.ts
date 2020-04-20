@@ -19,12 +19,12 @@ export class AppComponent {
   pages: { title: string; url: string; icon: string; }[];
 
   // Variável user
-  public user: User = new User('', '', 'https://placehold.it/80');
+  public user: User = new User('', '', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
 
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
-  image: any=[];
+  image: any;
 
   constructor(
     private platform: Platform,
@@ -64,21 +64,25 @@ export class AppComponent {
     });
   }
 
-PickAImage() {
-var options: ImagePickerOptions={
-  maximumImagesCount: 1,
-  allow_video: false
-}
-  this.imagePicker.getPictures(options).then((results)=>{
-      let filename = results.substring(results.lastIndexOf('/')+1);
-        let path = results.substring(0,results.lastIndexOf('/')+1);
-        this.file.readAsDataURL(path,filename).then((base64string)=>{
-          this.image.push(base64string);
+  async PickAImage() {
+    var options: ImagePickerOptions = {
+      maximumImagesCount: 2,
+      width: 100,
+      height: 100,
+      allow_video: false
+    }
+
+    this.imagePicker.getPictures(options).then((results) => {
+      for (var interval = 0; interval < results.length; interval++) {
+        let filename = results[interval].substring(results[interval].lastIndexOf('/') + 1);
+        let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
+        this.file.readAsDataURL(path, filename).then(async (base64string) => {
+          this.image.push(base64string)
+          localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, path + filename)))
+          this.user = JSON.parse(localStorage.getItem('app.user'));
         })
-      })
-      if (this.image != "") {
-    localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)))
       }
+    })
   }
 
   async alterarNome() {

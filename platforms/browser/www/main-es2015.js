@@ -819,7 +819,7 @@ let AppComponent = class AppComponent {
         this.imagePicker = imagePicker;
         this.file = file;
         // Variável user
-        this.user = new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"]('', '', 'https://placehold.it/80');
+        this.user = new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"]('', '', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
         router.events.forEach((event) => {
             if (this.router.url === '/login') {
                 this.showComponent = false;
@@ -847,20 +847,27 @@ let AppComponent = class AppComponent {
         });
     }
     PickAImage() {
-        var options = {
-            maximumImagesCount: 1,
-            width: 100,
-            height: 100
-        };
-        this.imagePicker.getPictures(options).then((results) => {
-            for (var interval = 0; interval < results.length; interval++) {
-                let filename = results[interval].substring(results[interval]
-                    .lastIndexOf('/') + 1);
-                let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
-                this.file.readAsDataURL(path, filename).then((base64string) => {
-                    this.image.push(base64string);
-                });
-            }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            var options = {
+                maximumImagesCount: 2,
+                width: 100,
+                height: 100,
+                allow_video: false
+            };
+            this.imagePicker.getPictures(options).then((results) => {
+                for (var interval = 0; interval < results.length; interval++) {
+                    let filename = results[interval].substring(results[interval].lastIndexOf('/') + 1);
+                    let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
+                    this.file.readAsDataURL(path, filename).then((base64string) => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                        this.image.push(base64string);
+                        localStorage.setItem('app.user', JSON.stringify(new _models_user_model__WEBPACK_IMPORTED_MODULE_3__["User"](this.user.name, this.user.email, path + filename)));
+                        const alert = yield this.alerCtrl.create({
+                            header: this.user.name,
+                        });
+                        yield alert.present();
+                    }));
+                }
+            });
         });
     }
     alterarNome() {

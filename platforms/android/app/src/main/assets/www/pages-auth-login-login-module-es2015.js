@@ -131,14 +131,22 @@ let LoginPage = class LoginPage {
     }
     // Função para verificar se já existe um usuário logado
     verificaUser() {
-        // Atribui a variável user o resultado da seguinte consulta
-        // Acessa o local storage e pega o valor do item 'app.user' e o transforma de um JSON para uma string
-        this.user = JSON.parse(localStorage.getItem('app.user'));
-        // Se o usuário for diferente de nulo
-        if (this.user != null) {
-            // Navega para a página 'home'
-            this.navCtrl.navigateRoot('home');
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            // Atribui a variável user o resultado da seguinte consulta
+            // Acessa o local storage e pega o valor do item 'app.user' e o transforma de um JSON para uma string
+            this.user = JSON.parse(localStorage.getItem('app.user'));
+            // Se o usuário for diferente de nulo
+            if (this.user != null) {
+                // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
+                const loading = yield this.loadingCtrl.create({ message: "Autenticando..." });
+                // Mostra a mensagem na tela
+                loading.present();
+                // Navega para a página 'home'
+                this.navCtrl.navigateRoot('home');
+                // Função que retira a mensagem de "Autenticando..."
+                loading.dismiss();
+            }
+        });
     }
     // Função para o envio da autenticação
     submit() {
@@ -180,6 +188,8 @@ let LoginPage = class LoginPage {
                 console.log(data);
                 // "Seta" no local storage um item com o nome 'app.user' com um JSON com os valores recebidos 
                 localStorage.setItem('app.user', JSON.stringify(new src_app_models_user_model__WEBPACK_IMPORTED_MODULE_6__["User"](data.user.displayName, data.user.email, data.user.photoURL)));
+                // Chama a função 'showMessage()' e passa o parâmetro "Fazendo Login..."
+                this.showMessage("Fazendo Login...");
                 // Navega para a página 'home'
                 this.navCtrl.navigateRoot('home');
             })
