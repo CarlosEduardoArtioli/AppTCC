@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "crudionic-4c066"
+    "y": "beaver-house",
+    "default": "beaver-house"
   }
 }

@@ -2,13 +2,13 @@ export const environment = {
   production: false,
   // Declaração da variável firebaseConfig que recebe os dados do Banco
   firebaseConfig: {
-    apiKey: "AIzaSyC_-dosbJBWTmLTKD9GcBcATZ3-R8rYpmk",
-    authDomain: "crudionic-4c066.firebaseapp.com",
-    databaseURL: "https://crudionic-4c066.firebaseio.com",
-    projectId: "crudionic-4c066",
-    storageBucket: "crudionic-4c066.appspot.com",
-    messagingSenderId: "130734090106",
-    appId: "1:130734090106:web:066eb295ea4ba1372d58c3",
-    measurementId: "G-7S154GSYE6"
+    apiKey: "AIzaSyA8iOOqR48kLLMSZXDlEacReBr7qz3jGqw",
+    authDomain: "beaver-house.firebaseapp.com",
+    databaseURL: "https://beaver-house.firebaseio.com",
+    projectId: "beaver-house",
+    storageBucket: "beaver-house.appspot.com",
+    messagingSenderId: "1020997153306",
+    appId: "1:1020997153306:web:8ab75cacfb0672465397a3",
+    measurementId: "G-XRB384CT7R"
   }
 };
