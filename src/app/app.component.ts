@@ -19,12 +19,12 @@ export class AppComponent {
   pages: { title: string; url: string; icon: string; }[];
 
   // Variável user
-  public user: User = new User('', '', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
+  public user: User = new User('', '', 'https://placehold.it/80');
 
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
-  image: any;
+  image: any=[];
 
   constructor(
     private platform: Platform,
@@ -64,7 +64,7 @@ export class AppComponent {
     });
   }
 
-  async PickAImage() {
+  async pickAImage() {
     var options: ImagePickerOptions = {
       maximumImagesCount: 2,
       width: 100,
@@ -78,12 +78,13 @@ export class AppComponent {
         let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
         this.file.readAsDataURL(path, filename).then(async (base64string) => {
           this.image.push(base64string)
-          localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, path + filename)))
-          this.user = JSON.parse(localStorage.getItem('app.user'));
+          console.log(this.image)
         })
-      }
-    })
-  }
+        if (this.image != "")
+          localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)))
+        }
+      })
+    }
 
   async alterarNome() {
 
@@ -112,7 +113,7 @@ export class AppComponent {
             this.user = JSON.parse(localStorage.getItem('app.user'));
             if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
               this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
-              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
               this.newname();
               this.user = JSON.parse(localStorage.getItem('app.user'));
             }
@@ -171,7 +172,7 @@ export class AppComponent {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
-            this.PickAImage();
+            this.pickAImage();
           }
         },
         {
