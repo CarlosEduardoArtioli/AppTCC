@@ -105,4 +105,10 @@ export class DeviceService {
       }
     })
   }
+
+  // Função para mudar o nome do usuário, com a função é passado o parametro name, fornecido pela função
+  mudaNome(name) {
+    // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
+    this.db.database.ref(`/users/${this.user.email}/settings`).set(name);
+  }
 }
