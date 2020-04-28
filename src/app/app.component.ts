@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
+import { firebase } from '@firebase/app';
+import '@firebase/storage';
 
 @Component({
   selector: 'app-root',
@@ -160,6 +162,36 @@ export class AppComponent {
       ]
   }
 
+  private upload() {
+    return new Promise<void>(async (resolve, reject) => {
+        const filePicker = document.querySelector('input');
+
+        if (!filePicker || !filePicker.files 
+            || filePicker.files.length <= 0) {
+            reject('No file selected.');
+            return;
+        }
+        const myFile = filePicker.files[0];
+
+        try {        
+          const storagePathAndFilename =
+             `myFolder/mySubfolders/${myFile.name}`
+
+          const ref = 
+             firebase.storage().ref(storagePathAndFilename);
+
+          await ref.put(myFile);
+
+          const myDownloadUrl = await ref.getDownloadURL();
+
+          console.log(`Your image url is ${myDownloadUrl}`);
+          
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+    }); 
+}
 
   // Função para aparecer opções ao clicar no usuário
   async showOptions() {
@@ -180,7 +212,6 @@ export class AppComponent {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
-            this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
