@@ -26,6 +26,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Camera } from '@ionic-native/Camera/ngx';
 
 export interface ImagePickerOptions {
   maximumImagesCount?: number;
@@ -52,7 +53,8 @@ export interface ImagePickerOptions {
     AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ImagePicker,
-    File
+    File,
+    Camera
   ],
   bootstrap: [AppComponent]
 })

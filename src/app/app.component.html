@@ -4,27 +4,27 @@
 -->
 
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="content1"  *ngIf="showComponent" >
-      <ion-header>
-        <ion-toolbar>
-            <ion-item (click)="showOptions()" lines="none">
-              <ion-avatar slot="start">
-                <img src="{{user.image}}">
-              </ion-avatar>
-              <ion-label >{{user.name}}</ion-label>
-            </ion-item>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list *ngFor="let page of pages" lines="none">
+  <ion-menu side="start" menuId="first" contentId="content1" *ngIf="showComponent">
+    <ion-header>
+      <ion-toolbar>
+        <ion-item (click)="showOptions()" lines="none">
+          <ion-avatar slot="start">
+            <img src="{{user.image}}">
+          </ion-avatar>
+          <ion-label>{{user.name}}</ion-label>
+        </ion-item>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list *ngFor="let page of pages" lines="none">
         <ion-menu-toggle auto-hide="true">
           <ion-item [routerLink]="page.url" routerDirection="forward">
-              <ion-icon [name]="page.icon" slot="start"></ion-icon>
-                 {{page.title}} 
+            <ion-icon [name]="page.icon" slot="start"></ion-icon>
+            {{page.title}}
           </ion-item>
         </ion-menu-toggle>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-<ion-router-outlet id="content1"></ion-router-outlet>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content1"></ion-router-outlet>
 </ion-app>

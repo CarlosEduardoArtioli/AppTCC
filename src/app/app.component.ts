@@ -4,8 +4,9 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,13 @@ export class AppComponent {
   showComponent: boolean;
   novoNome: any;
   image: any=[];
+  croppedImagepath = "";
+  isLoading = false;
+
+  imagePickerOptions = {
+    maximumImagesCount: 1,
+    quality: 50
+  };
 
   constructor(
     private platform: Platform,
@@ -33,7 +41,8 @@ export class AppComponent {
     private router: Router,
     private alertCtrl: AlertController,
     public imagePicker: ImagePicker,
-    public file: File
+    public file: File,
+    private camera: Camera
 
   ) {
     router.events.forEach((event) => {
@@ -64,28 +73,27 @@ export class AppComponent {
     });
   }
 
-  async pickAImage() {
-    var options: ImagePickerOptions = {
-      maximumImagesCount: 2,
-      width: 100,
-      height: 100,
-      allow_video: false
-    }
+// ========================================================================================
 
-    this.imagePicker.getPictures(options).then((results) => {
-      for (var interval = 0; interval < results.length; interval++) {
-        let filename = results[interval].substring(results[interval].lastIndexOf('/') + 1);
-        let path = results[interval].substring(0, results[interval].lastIndexOf('/') + 1);
-        this.file.readAsDataURL(path, filename).then(async (base64string) => {
-          this.image.push(base64string)
-          console.log(this.image)
-        })
-        if (this.image != "")
-          localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.image)))
-        }
-      })
+  pickImage(sourceType) {
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: sourceType,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
     }
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
+  }
 
+// ========================================================================================
+    
   async alterarNome() {
 
     const alert = await this.alertCtrl.create({
@@ -172,7 +180,7 @@ export class AppComponent {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
-            this.pickAImage();
+            this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
