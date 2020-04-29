@@ -4,11 +4,9 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 // Importação do Model do usuário
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
-import { firebase } from '@firebase/app';
+import { ToastController } from '@ionic/angular';
 import '@firebase/storage';
+
 
 @Component({
   selector: 'app-root',
@@ -27,7 +25,7 @@ export class AppComponent {
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
-  image: any=[];
+  image: any = [];
   croppedImagepath = "";
   isLoading = false;
 
@@ -42,9 +40,7 @@ export class AppComponent {
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
     private alertCtrl: AlertController,
-    public imagePicker: ImagePicker,
-    public file: File,
-    private camera: Camera
+    private toastController: ToastController
 
   ) {
     router.events.forEach((event) => {
@@ -54,10 +50,13 @@ export class AppComponent {
       else {
         if (this.router.url === '/signup') {
           this.showComponent = false
-        }
-        else {
+        } else {
+          if (this.router.url === '/take-photo') {
+          this.showComponent = false
+          } else {
           this.showComponent = true;
           this.initializeApp();
+          }
         }
       }
     });
@@ -75,27 +74,6 @@ export class AppComponent {
     });
   }
 
-// ========================================================================================
-
-  pickImage(sourceType) {
-    const options: CameraOptions = {
-      quality: 100,
-      sourceType: sourceType,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      // let base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
-  }
-
-// ========================================================================================
-    
   async alterarNome() {
 
     const alert = await this.alertCtrl.create({
@@ -135,10 +113,11 @@ export class AppComponent {
   }
 
   async newname() {
-    const alert = await this.alertCtrl.create({
-      header: 'Seu nome foi alterado',
+    const toast = await this.toastController.create({
+      header: 'Seu nome foi alterado.',
+      duration: 2000
     });
-    await alert.present();
+    await toast.present();
   }
 
   sideMenu() {
@@ -162,37 +141,6 @@ export class AppComponent {
       ]
   }
 
-  private upload() {
-    return new Promise<void>(async (resolve, reject) => {
-        const filePicker = document.querySelector('input');
-
-        if (!filePicker || !filePicker.files 
-            || filePicker.files.length <= 0) {
-            reject('No file selected.');
-            return;
-        }
-        const myFile = filePicker.files[0];
-
-        try {        
-          const storagePathAndFilename =
-             `myFolder/mySubfolders/${myFile.name}`
-
-          const ref = 
-             firebase.storage().ref(storagePathAndFilename);
-
-          await ref.put(myFile);
-
-          const myDownloadUrl = await ref.getDownloadURL();
-
-          console.log(`Your image url is ${myDownloadUrl}`);
-          
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-    }); 
-}
-
   // Função para aparecer opções ao clicar no usuário
   async showOptions() {
     // Cria um actionSheet
@@ -212,6 +160,7 @@ export class AppComponent {
           text: 'Alterar Foto',
           icon: 'person-circle',
           handler: () => {
+            this.navCtrl.navigateRoot('take-photo');
           }
         },
         {
