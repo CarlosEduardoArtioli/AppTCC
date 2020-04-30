@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1588276528958,
+  "timestamp": 1588277715956,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -203,8 +203,8 @@
         "/common-es2015.0f31ffda4da2bbdd79f9.js",
         "/common-es5.0f31ffda4da2bbdd79f9.js",
         "/index.html",
-        "/main-es2015.163df13a21f896088fb1.js",
-        "/main-es5.163df13a21f896088fb1.js",
+        "/main-es2015.ce58c4144b93bee9d197.js",
+        "/main-es5.ce58c4144b93bee9d197.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.6a90a00bff9cd939a94c.js",
         "/polyfills-es5.46a9e8f6324bbe74c014.js",
@@ -467,9 +467,9 @@
     "/assets/svg/Ventilador.svg": "1866dd1e1b3d476a172a644f87a1b3714c88a7d2",
     "/common-es2015.0f31ffda4da2bbdd79f9.js": "bfbbff823e7512b8a32ecfd3626a1c2a27d46e60",
     "/common-es5.0f31ffda4da2bbdd79f9.js": "8eef1fe4060d7b1ecd9494099e6ec1ebad8aea23",
-    "/index.html": "0b9684c4e7c52ffcaee7d65584dcbcdabdac11a3",
-    "/main-es2015.163df13a21f896088fb1.js": "6d2a0b6ced1035201b971bc1c9c2188a19e19bbe",
-    "/main-es5.163df13a21f896088fb1.js": "8071ca94f575ef908e1d2e0ef6871f44956f57b9",
+    "/index.html": "1ccac95c30b27539d75adf4dc4b859cee88c212d",
+    "/main-es2015.ce58c4144b93bee9d197.js": "d57290606647edc59e73625cefce3d62f3d1a83d",
+    "/main-es5.ce58c4144b93bee9d197.js": "5c221eed9016cc4356469c07e1bef8c27405d772",
     "/manifest.webmanifest": "f66b9d40b876fb1c7e8bd789b4a130b8fba2c455",
     "/polyfills-es2015.6a90a00bff9cd939a94c.js": "df6b5754282b3076ccb8f532fa3442885fd37115",
     "/polyfills-es5.46a9e8f6324bbe74c014.js": "021928e7f080f7dacf8131cbbabd2aba89f53a42",

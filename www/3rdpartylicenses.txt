@@ -274,16 +274,7 @@ Apache-2.0
 @firebase/util
 Apache-2.0
 
-@ionic-native/camera
-MIT
-
 @ionic-native/core
-MIT
-
-@ionic-native/file
-MIT
-
-@ionic-native/image-picker
 MIT
 
 @ionic-native/keyboard
