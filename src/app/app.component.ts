@@ -5,7 +5,6 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import '@firebase/storage';
 
 
 @Component({
@@ -20,19 +19,11 @@ export class AppComponent {
   pages: { title: string; url: string; icon: string; }[];
 
   // Variável user
-  public user: User = new User('', '', 'https://placehold.it/80');
+  public user: User = new User('', '', '');
 
   // Variável showComponent
   showComponent: boolean;
   novoNome: any;
-  image: any = [];
-  croppedImagepath = "";
-  isLoading = false;
-
-  imagePickerOptions = {
-    maximumImagesCount: 1,
-    quality: 50
-  };
 
   constructor(
     private platform: Platform,
@@ -40,7 +31,7 @@ export class AppComponent {
     private actionSheetCtrl: ActionSheetController,
     private router: Router,
     private alertCtrl: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
 
   ) {
     router.events.forEach((event) => {
@@ -52,10 +43,10 @@ export class AppComponent {
           this.showComponent = false
         } else {
           if (this.router.url === '/take-photo') {
-          this.showComponent = false
+            this.showComponent = false
           } else {
-          this.showComponent = true;
-          this.initializeApp();
+            this.showComponent = true;
+            this.initializeApp();
           }
         }
       }
@@ -154,13 +145,6 @@ export class AppComponent {
           icon: 'person',
           handler: () => {
             this.alterarNome();
-          }
-        },
-        {
-          text: 'Alterar Foto',
-          icon: 'person-circle',
-          handler: () => {
-            this.navCtrl.navigateRoot('take-photo');
           }
         },
         {

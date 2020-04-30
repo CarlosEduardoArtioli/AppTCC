@@ -48,10 +48,8 @@ const routes: Routes = [
   },
   {
     path: 'functions',
-    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule)
-  },  {
-    path: 'take-photo',
-    loadChildren: () => import('./pages/take-photo/take-photo.module').then( m => m.TakePhotoPageModule)
+    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule), 
+    canActivate: [AuthGuard] 
   },
 
 

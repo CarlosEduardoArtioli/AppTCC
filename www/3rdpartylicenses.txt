@@ -274,6 +274,9 @@ Apache-2.0
 @firebase/util
 Apache-2.0
 
+@ionic-native/camera
+MIT
+
 @ionic-native/core
 MIT
 
