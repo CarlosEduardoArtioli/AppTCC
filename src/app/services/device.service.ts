@@ -75,7 +75,6 @@ export class DeviceService {
     // Retorna para a função a atualização dos dados
     return this.deviceRef.update({
       name: apt.name,
-      status: apt.status,
       mac: apt.mac,
       icon: apt.icon
     })

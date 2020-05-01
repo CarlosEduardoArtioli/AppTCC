@@ -35,9 +35,8 @@ export class EditDevicePagePage implements OnInit {
     // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
     this.updateDeviceForm = this.fb.group({
       name: [''],
-      status: [''],
+      icon: [''],
       mac: [''],
-      icon: ['']
     })
     console.log(this.updateDeviceForm.value); 
   }
