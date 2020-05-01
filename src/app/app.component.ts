@@ -124,11 +124,6 @@ export class AppComponent {
           url: "edit-device-list",
           icon: "create"
         },
-        {
-          title: "Adicionar",
-          url: "adicionar",
-          icon: "add-circle"
-        },
       ]
   }
 
