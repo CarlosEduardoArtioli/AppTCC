@@ -56,7 +56,7 @@ const routes: Routes = [
 // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
 {
   path: '**',
-  loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), 
+  redirectTo: 'home', 
   canActivate: [AuthGuard] 
 },
 
