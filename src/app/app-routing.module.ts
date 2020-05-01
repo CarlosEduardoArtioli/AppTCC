@@ -51,7 +51,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule), 
     canActivate: [AuthGuard] 
   },
-
+  // Rota "home"  em casos especiais
+// Esta rota leva até a home caso o usuario esteja logado e digite 
+// alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
+{
+  path: '**',
+  loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), 
+  canActivate: [AuthGuard] 
+},
 
 ];
 
