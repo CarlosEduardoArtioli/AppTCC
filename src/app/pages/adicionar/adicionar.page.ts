@@ -13,7 +13,7 @@ export class AdicionarPage implements OnInit {
   mac: any;
 
   constructor(
-    private aptService: DeviceService,
+    private deviceService: DeviceService,
     private router: Router,
     public fb: FormBuilder,
     public actRoute: ActivatedRoute,
@@ -41,7 +41,7 @@ export class AdicionarPage implements OnInit {
     } else {
        this.mac = this.deviceForm.value.mac;
       // "Puxa" a função 'createDevice' do DeviceService e passa o valor do 'deviceForm'
-      this.aptService.createDevice(this.deviceForm.value, this.mac)
+      this.deviceService.createDevice(this.deviceForm.value, this.mac)
         // "Reseta" o formulário para uma nova inserção de dados
         this.deviceForm.reset();
         // Navega para a página 'home'

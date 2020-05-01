@@ -5,7 +5,7 @@ import { Platform, ActionSheetController, NavController, AlertController } from 
 import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +32,7 @@ export class AppComponent {
     private router: Router,
     private alertCtrl: AlertController,
     private toastController: ToastController,
+    private userService: UserService
 
   ) {
     router.events.forEach((event) => {
@@ -61,54 +62,19 @@ export class AppComponent {
       this.user = JSON.parse(localStorage.getItem('app.user'));
       if (this.user.name == "") {
         localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+        this.userService.updateUserName(this.user.name);
+      }
+
+      if (this.userService.getUser() == null) {
+        this.userService.updateUserName(this.user.name);
+      }
+      else {
+        this.userService.getUserName().valueChanges().subscribe(res => {
+          this.user.name = res
+          localStorage.setItem('app.user', JSON.stringify(new User(res, this.user.email, this.user.image)));
+        });
       }
     });
-  }
-
-  async alterarNome() {
-
-    const alert = await this.alertCtrl.create({
-
-      header: 'Novo Nome',
-      inputs: [
-        {
-          name: 'new-name',
-          id: 'newname',
-          placeholder: 'Escreva um novo nome',
-          value: this.novoNome
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Salvar',
-          handler: data => {
-            this.user = JSON.parse(localStorage.getItem('app.user'));
-            if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
-              this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
-              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
-              this.newname();
-              this.user = JSON.parse(localStorage.getItem('app.user'));
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async newname() {
-    const toast = await this.toastController.create({
-      header: 'Seu nome foi alterado.',
-      duration: 2000
-    });
-    await toast.present();
   }
 
   sideMenu() {
@@ -161,5 +127,53 @@ export class AppComponent {
     // Aguarda o actionSheet carregar antes de mostrar
     await actionSheet.present();
   }
+
+  async alterarNome() {
+
+    const alert = await this.alertCtrl.create({
+
+      header: 'Novo Nome',
+      inputs: [
+        {
+          name: 'new-name',
+          id: 'newname',
+          placeholder: 'Escreva um novo nome',
+          value: this.novoNome
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Salvar',
+          handler: data => {
+            this.user = JSON.parse(localStorage.getItem('app.user'));
+            if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
+              this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
+              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
+              this.newname();
+              this.user = JSON.parse(localStorage.getItem('app.user'));
+              this.userService.updateUserName(this.user.name)
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async newname() {
+    const toast = await this.toastController.create({
+      header: 'Seu nome foi alterado.',
+      duration: 2000
+    });
+    await toast.present();
+  }
+
 }
 

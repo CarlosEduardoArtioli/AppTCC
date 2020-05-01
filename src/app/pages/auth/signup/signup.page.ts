@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, NavController, ToastController, IonInput } from '@ionic/angular';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-signup',
@@ -12,16 +11,13 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 export class SignupPage implements OnInit {
   // Declaração de variáveis
   public form: FormGroup;
-  // Não faço ideia pra que isso serve, só sei que acho que tem haver com o keyboard
-  @ViewChild('myInput', {static: true}) myInput: IonInput;
 
   constructor(
     private fb: FormBuilder,
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     private toastCtrl: ToastController,
-    private fbAuth: AngularFireAuth,
-    public keyboard: Keyboard
+    private fbAuth: AngularFireAuth
   ) {
     // Atribui a variável form o valor do grupo de valores do FormBuilder da página HTML 
     this.form = this.fb.group({
@@ -33,11 +29,6 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
 
-  }
-
-  // Função para mostrar o keyboard
-  showKeyboard() {
-    this.myInput.setFocus();
   }
 
   // Função para o envio da autenticação

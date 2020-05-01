@@ -4,7 +4,6 @@ import { LoadingController, NavController, ToastController, IonInput } from '@io
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { User } from 'src/app/models/user.model';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +23,6 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private fbAuth: AngularFireAuth,
-    public keyboard: Keyboard
   ) {
     // Atribui a variável form o valor do grupo de valores do FormBuilder da página HTML 
     this.form = this.fb.group({
@@ -38,11 +36,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     // Chama a função 'verificaUser()'
     this.verificaUser();
-  }
-
-  // Função para mostrar o keyboard
-  showKeyboard() {
-    this.myInput.setFocus();
   }
 
   // Função para verificar se já existe um usuário logado
