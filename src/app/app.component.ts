@@ -62,14 +62,14 @@ export class AppComponent {
       this.user = JSON.parse(localStorage.getItem('app.user'));
       if (this.user.name == "") {
         localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
-        this.userService.updateUserName(this.user.name);
+        this.userService.updateUserName(this.user.name, this.user.email);
       }
 
-      if (this.userService.getUser() == null) {
-        this.userService.updateUserName(this.user.name);
+      if (this.userService.getUser(this.user.email) == null) {
+        this.userService.updateUserName(this.user.name, this.user.email);
       }
       else {
-        this.userService.getUserName().valueChanges().subscribe(res => {
+        this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
           this.user.name = res
           localStorage.setItem('app.user', JSON.stringify(new User(res, this.user.email, this.user.image)));
         });
@@ -158,7 +158,7 @@ export class AppComponent {
               localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
               this.newname();
               this.user = JSON.parse(localStorage.getItem('app.user'));
-              this.userService.updateUserName(this.user.name)
+              this.userService.updateUserName(this.user.name, this.user.email)
             }
           }
         }
