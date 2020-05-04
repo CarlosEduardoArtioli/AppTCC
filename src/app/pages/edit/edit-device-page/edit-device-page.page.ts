@@ -52,11 +52,16 @@ export class EditDevicePagePage implements OnInit {
       .catch(error => console.log(error));
   }
 
+  // Função para aparecer os ícones para ser selecionado.
   async escolherImagem() {
+    // Cria um actionSheet.
     const actionSheet = await this.actionSheetController.create({
+      // Header com nome 'Imagens'.
       header: 'Imagens',
+      // Gera botões
       buttons: [
         {
+          // Botão cancelar
           text: 'Cancelar',
           icon: 'close',
           role: 'cancel',

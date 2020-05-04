@@ -128,11 +128,13 @@ export class AppComponent {
     await actionSheet.present();
   }
 
+  // Funcão para aparecer o alert com o input que irá receber o novo nome do usuário.
   async alterarNome() {
-
+    // Cria um alert
     const alert = await this.alertCtrl.create({
-
+    // Header com nome 'Novo Nome'.
       header: 'Novo Nome',
+      // Gera inputs
       inputs: [
         {
           name: 'new-name',
@@ -141,8 +143,10 @@ export class AppComponent {
           value: this.novoNome
         },
       ],
+      // Gera botões
       buttons: [
         {
+          // Botão para cancelar
           text: 'Cancelar',
           role: 'cancel',
           handler: data => {
@@ -153,11 +157,16 @@ export class AppComponent {
           text: 'Salvar',
           handler: data => {
             this.user = JSON.parse(localStorage.getItem('app.user'));
+            // if apenas para saber se o input não está vázio.
             if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
+              // this.nome será = ao que está valor do input com Id 'newname'.
               this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
+              // Substitui o nome anterior "this.user.name" para o novo "this.novoNome".
               localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
+              // Puxa a função do ion-toast.
               this.newname();
               this.user = JSON.parse(localStorage.getItem('app.user'));
+              // Função para mudar o nome do usuário.
               this.userService.updateUserName(this.user.name, this.user.email)
             }
           }
@@ -167,6 +176,7 @@ export class AppComponent {
     await alert.present();
   }
 
+  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
   async newname() {
     const toast = await this.toastController.create({
       header: 'Seu nome foi alterado.',
