@@ -38,7 +38,10 @@ export class EditDevicePagePage implements OnInit {
       mac: [''],
       icon: [''],
     })
-    console.log(this.updateDeviceForm.value); 
+    console.log(this.updateDeviceForm.value);
+    this.aptService.getDevice(this.mac).valueChanges().subscribe(res => {
+      this.imagem = res.icon;
+    });
   }
 
   updateForm() {
@@ -59,24 +62,24 @@ export class EditDevicePagePage implements OnInit {
           role: 'cancel',
         },
         {
-        text: 'Lâmpada',
-        icon: '/assets/svg/Lâmpada.svg',
-        handler: () => {
-          this.imagem = "Lâmpada"
-        }
-      }, {
-        text: 'Televisão',
-        icon: '/assets/svg/Televisão.svg',
-        handler: () => {
-          this.imagem = "Televisão"
-        }
-      }, {
-        text: 'Ventilador',
-        icon: '/assets/svg/Ventilador.svg',
-        handler: () => {
-          this.imagem = "Ventilador"
-        }
-      }]
+          text: 'Lâmpada',
+          icon: '/assets/svg/Lâmpada.svg',
+          handler: () => {
+            this.imagem = "Lâmpada"
+          }
+        }, {
+          text: 'Televisão',
+          icon: '/assets/svg/Televisão.svg',
+          handler: () => {
+            this.imagem = "Televisão"
+          }
+        }, {
+          text: 'Ventilador',
+          icon: '/assets/svg/Ventilador.svg',
+          handler: () => {
+            this.imagem = "Ventilador"
+          }
+        }]
     });
     await actionSheet.present();
   }
