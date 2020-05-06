@@ -90,6 +90,11 @@ export class AppComponent {
           url: "edit-device-list",
           icon: "create"
         },
+        {
+          title: "Funções",
+          url: "functions",
+          icon: "construct"
+        },
       ]
   }
 
