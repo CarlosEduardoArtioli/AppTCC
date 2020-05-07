@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from '../../../services/device.service';
+import { DeviceService } from '../../../../services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActionSheetController } from '@ionic/angular';

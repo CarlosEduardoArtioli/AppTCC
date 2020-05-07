@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Editar
+      Editar Cômodos
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,22 +12,22 @@
 <ion-content>
   <ion-list class="ios list-ios hydrated">
 
-    <ion-item *ngFor="let device of Devices" class="user-list">
+    <ion-item *ngFor="let room of Rooms" class="user-list">
       <ion-label>
         <h5>
-          <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.name}}
+          <ion-icon name="home"></ion-icon> {{room.name}}
         </h5>
         <h5>
-          <ion-icon name="contrast"></ion-icon> {{device.status}}
+          <ion-icon name="contrast"></ion-icon> {{room.color}}
         </h5>
       </ion-label>
 
       <div class="item-note" item-end>
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-room-page/', room.$key]"> 
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 
-        <button class="transparent" ion-button clear (click)="deleteDevice(device.$key)">
+        <button class="transparent" ion-button clear (click)="deleteRoom(room.$key)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>
         </button>
 

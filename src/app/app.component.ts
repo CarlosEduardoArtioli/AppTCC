@@ -86,9 +86,19 @@ export class AppComponent {
           icon: "hardware-chip"
         },
         {
-          title: "Editar",
+          title: "Editar Dispositivo",
           url: "edit-device-list",
           icon: "create"
+        },
+        {
+          title: "Editar Cômodos",
+          url: "edit-room-list",
+          icon: "home"
+        },
+        {
+          title: "Adicionar Cômodos",
+          url: "add-room-page",
+          icon: "add-circle"
         },
         {
           title: "Funções",

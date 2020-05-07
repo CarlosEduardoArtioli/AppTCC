@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { EditDevicePagePageRoutingModule } from './edit-device-page-routing.module';
 
 import { EditDevicePagePage } from './edit-device-page.page';
-
  
 @NgModule({
   imports: [

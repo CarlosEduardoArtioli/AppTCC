@@ -24,14 +24,14 @@ const routes: Routes = [
   // Rota 'edit-device-list'
   {
     path: 'edit-device-list',
-    loadChildren: () => import('./pages/edit/edit-device-list/edit-device-list.module').then( m => m.EditDeviceListPageModule), 
+    loadChildren: () => import('./pages/edit/device/edit-device-list/edit-device-list.module').then( m => m.EditDeviceListPageModule), 
     canActivate: [AuthGuard] 
   },
   // Rota 'edit-device-page/:id'
   // Essa rota recebe o id passado em seu page.ts para redirecinar o usuário para a página de edição de certo dispositivo
   {
     path: 'edit-device-page/:mac',
-    loadChildren: () => import('./pages/edit/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule), 
+    loadChildren: () => import('./pages/edit/device/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule), 
     canActivate: [AuthGuard] 
   },
   // Rota 'login'
@@ -51,6 +51,21 @@ const routes: Routes = [
     loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule), 
     canActivate: [AuthGuard] 
   },
+  {
+    path: 'edit-room-list',
+    loadChildren: () => import('./pages/edit/room/edit-room-list/edit-room-list.module').then( m => m.EditRoomListPageModule), 
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'edit-room-page/:room',
+    loadChildren: () => import('./pages/edit/room/edit-room-page/edit-room-page.module').then( m => m.EditRoomPagePageModule), 
+    canActivate: [AuthGuard] 
+  },
+  {
+    path: 'add-room-page',
+    loadChildren: () => import('./pages/edit/room/add-room-page/add-room-page.module').then( m => m.AddRoomPagePageModule), 
+    canActivate: [AuthGuard]
+  },
   // Rota "home"  em casos especiais
 // Esta rota leva até a home caso o usuario esteja logado e digite 
 // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
@@ -59,6 +74,7 @@ const routes: Routes = [
   redirectTo: 'home', 
   canActivate: [AuthGuard] 
 },
+
 
 ];
 

@@ -4,4 +4,4 @@ export class Room {
        public name: string = '',
        public color: string = '',
        ) {} 
-    }
+}

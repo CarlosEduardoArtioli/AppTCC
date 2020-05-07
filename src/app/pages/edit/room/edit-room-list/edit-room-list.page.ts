@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Dispositivos } from '../../../models/device.model';
-import { DeviceService } from '../../../services/device.service';
+import { Room } from '../../../../models/room.model';
+import { roomService } from '../../../../services/room.service';
 
 @Component({
-  selector: 'app-edit-device-list',
-  templateUrl: './edit-device-list.page.html',
-  styleUrls: ['./edit-device-list.page.scss'],
+  selector: 'app-edit-room-list',
+  templateUrl: './edit-room-list.page.html',
+  styleUrls: ['./edit-room-list.page.scss'],
 })
-export class EditDeviceListPage implements OnInit {
+export class EditRoomListPage implements OnInit {
+
   // Declaração de variáveis
-  Devices = [];
+  Rooms = [];
 
   constructor(
-    private aptService: DeviceService
+    private roomService: roomService
   ) { }
 
   // Função quando a página é iniciada
@@ -22,15 +23,15 @@ export class EditDeviceListPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.aptService.getDeviceList();
+    let roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de dispositivos
-    deviceRes.snapshotChanges().subscribe(res => {
+    roomRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável devices com os dispostivos e seus valores
-      this.Devices = [];
+      this.Rooms = [];
       res.forEach(item => {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.Devices.push(a as Dispositivos);
+        this.Rooms.push(a as Room); 
       })
     })
   }
@@ -38,7 +39,7 @@ export class EditDeviceListPage implements OnInit {
   // Função para mostrar a lista de dispositvos no console
   fetchDevices() {
     // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
-    this.aptService.getDeviceList().valueChanges().subscribe(res => {
+    this.roomService.getRoomList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
       console.log(res)
     })
@@ -46,13 +47,13 @@ export class EditDeviceListPage implements OnInit {
 
 
   // Função para deletar o dispositivo que recebe o parâmetro 'id'
-  deleteDevice(id: any) {
+  deleteRoom(room: any) {
     // Escreve no console o 'id'
-    console.log(id)
+    console.log(room)
     // Se for confirmado a mensagem
     if (window.confirm('Tem certeza que deseja excluir?')) {
       // "Puxa" a função 'deleteDevice' passando o parâmetro id
-      this.aptService.deleteDevice(id)
+      this.roomService.deleteDevice(room)
     }
   }
 
