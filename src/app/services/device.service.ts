@@ -43,6 +43,7 @@ export class DeviceService {
       name: apt.name,
       status: apt.status,
       mac: apt.mac,
+      room: apt.room,
       icon: apt.icon
     })//.then(res => {
       // Escreve no console o valor do formulário
@@ -76,6 +77,7 @@ export class DeviceService {
     return this.deviceRef.update({
       name: apt.name,
       mac: apt.mac,
+      room: apt.room,
       icon: apt.icon
     })
   }

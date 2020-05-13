@@ -36,6 +36,7 @@ export class EditDevicePagePage implements OnInit {
     this.updateDeviceForm = this.fb.group({
       name: [''],
       mac: [''],
+      room: [''],
       icon: [''],
     })
     console.log(this.updateDeviceForm.value);

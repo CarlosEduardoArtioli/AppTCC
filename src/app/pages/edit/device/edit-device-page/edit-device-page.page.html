@@ -14,12 +14,19 @@
     <form [formGroup]="updateDeviceForm" (ngSubmit)="updateForm()">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
-        <ion-input formControlName="name" type="text" required></ion-input>
+        <ion-input formControlName="name" type="text" required>
+        </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">MAC</ion-label>
         <ion-input formControlName="mac" type="text" disabled>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Cômodo</ion-label>
+        <ion-input formControlName="room" type="text" required>
         </ion-input>
       </ion-item>
 

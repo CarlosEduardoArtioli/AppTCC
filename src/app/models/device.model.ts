@@ -7,6 +7,7 @@ export class Dispositivos {
        public status: string = '',
        public mac: string = '',
        public icon: string = '',
+       public room: string = ''
     ) {} 
 }
 

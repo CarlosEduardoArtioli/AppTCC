@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dispositivos } from '../../models/device.model';
 import { DeviceService } from '../../services/device.service';
+import { Room } from '../../models/room.model';
+import { roomService } from '../../services/room.service';
+import { IonSegment } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +14,12 @@ import { DeviceService } from '../../services/device.service';
 export class HomePage implements OnInit {
   // Declaração de variáveis
   Devices = [];
+  Rooms = [];
+  selectTabs = "all";
 
   constructor(
-    private aptService: DeviceService
+    private deviceService: DeviceService,
+    private roomService: roomService
   ) { }
 
   // Função quando a página é iniciada
@@ -21,9 +27,10 @@ export class HomePage implements OnInit {
     // Chama a função 'fetchDevices()'
     this.fetchDevices();
 
+    this.fetchRooms();
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.aptService.getDeviceList();
+    let deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
@@ -34,12 +41,35 @@ export class HomePage implements OnInit {
         this.Devices.push(a as Dispositivos);
       })
     })
+
+    // Atribui a variávei 'deviceRes' o seguinte valor
+    // Puxa a função 'getDeviceList'
+    let roomRes = this.roomService.getRoomList();
+    // Pega os valores da lista de dispositivos
+    roomRes.snapshotChanges().subscribe(res => {
+      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
+      this.Rooms = [];
+      res.forEach(item => {
+        let a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.Rooms.push(a as Room);
+      })
+    })
   }
 
   // Função para mostrar no console a lista de dispositivos
   fetchDevices() {
     // Pega os valores do caminho os subscreve no 'res'
-    this.aptService.getDeviceList().valueChanges().subscribe(res => {
+    this.deviceService.getDeviceList().valueChanges().subscribe(res => {
+      // Escreve no console a lista de dispositivos
+      console.log(res)
+    })
+  }
+
+  // Função para mostrar no console a lista de dispositivos
+  fetchRooms() {
+    // Pega os valores do caminho os subscreve no 'res'
+    this.roomService.getRoomList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
       console.log(res)
     })
@@ -48,6 +78,6 @@ export class HomePage implements OnInit {
   // Função para mudar o status do dispositivo
   mudaStatus(id: any){
     // Chama a função mudaStatus no AppointmentService
-     this.aptService.mudaStatus(id);
+     this.deviceService.mudaStatus(id);
   }
 }

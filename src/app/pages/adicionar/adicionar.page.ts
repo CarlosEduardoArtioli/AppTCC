@@ -26,6 +26,7 @@ export class AdicionarPage implements OnInit {
       name: [''],
       status: [''],
       mac: [''],
+      room: [''],
       icon: ['']
     })
   }
