@@ -15,18 +15,12 @@
 
     <ion-item *ngFor="let room of Rooms">
       <ion-label>
-        <h5>
+        <h2>
           <ion-icon name="home"></ion-icon> {{room.name}}
-        </h5>
-        <h5>
-          <ion-icon name="contrast"></ion-icon> {{room.color}}
-        </h5>
+        </h2>
       </ion-label>
 
       <div class="item-note" item-end>
-        <button class="transparent" ion-button clear [routerLink]="['/edit-room-page/', room.$key]"> 
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
-        </button>
 
         <button class="transparent" ion-button clear (click)="deleteRoom(room.$key)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>

@@ -38,8 +38,7 @@ export class roomService {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
     this.db.object(`/users/${this.user.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
-      name: apt.name,
-      color: apt.color
+      name: apt.name
     })//.then(res => {
       // Escreve no console o valor do formulário
       //console.log(res)
@@ -70,8 +69,7 @@ export class roomService {
   updateDevice(apt: Room) {
     // Retorna para a função a atualização dos dados
     return this.roomRef.update({
-      name: apt.name,
-      color: apt.color
+      name: apt.name
     })
   }
 

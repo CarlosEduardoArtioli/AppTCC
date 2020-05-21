@@ -23,8 +23,7 @@ export class AddRoomPagePage implements OnInit {
   ngOnInit() {
     // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
     this.roomForm = this.fb.group({
-      name: [''],
-      color: ['']
+      name: ['']
     })
   }
 

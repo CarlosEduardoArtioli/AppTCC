@@ -25,7 +25,6 @@ export class EditDevicePagePage implements OnInit {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
     this.aptService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.imagem = res.icon;
       this.updateDeviceForm.setValue(res);
     });
   }
