@@ -36,22 +36,15 @@ export class AppComponent {
 
   ) {
     router.events.forEach((event) => {
-      if (this.router.url === '/login') {
+      if (this.router.url === '/login' || this.router.url === '/signup') {
         this.showComponent = false
       }
       else {
-        if (this.router.url === '/signup') {
-          this.showComponent = false
-        } else {
-          if (this.router.url === '/take-photo') {
-            this.showComponent = false
-          } else {
-            this.showComponent = true;
-            this.initializeApp();
-          }
-        }
+        this.showComponent = true;
+        this.initializeApp();
       }
-    });
+    }
+    )
   }
 
   initializeApp() {
@@ -60,7 +53,8 @@ export class AppComponent {
       this.sideMenu();
       // Atribui a variável user o usuário logado no app
       this.user = JSON.parse(localStorage.getItem('app.user'));
-      if (this.user.name == "") {
+
+      if (this.user.name === "") {
         localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
         this.userService.updateUserName(this.user.name, this.user.email);
       }
@@ -68,12 +62,13 @@ export class AppComponent {
       if (this.userService.getUser(this.user.email) == null) {
         this.userService.updateUserName(this.user.name, this.user.email);
       }
-      else {
-        this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-          this.user.name = res
-          localStorage.setItem('app.user', JSON.stringify(new User(res, this.user.email, this.user.image)));
-        });
-      }
+
+       else {
+          this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+             this.user.name = res
+              localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.user.image)));
+              });
+            }
     });
   }
 
@@ -86,19 +81,9 @@ export class AppComponent {
           icon: "hardware-chip"
         },
         {
-          title: "Editar Dispositivo",
-          url: "edit-device-list",
+          title: "Editar",
+          url: "edit-page",
           icon: "create"
-        },
-        {
-          title: "Editar Cômodos",
-          url: "edit-room-list",
-          icon: "home"
-        },
-        {
-          title: "Adicionar Cômodos",
-          url: "add-room-page",
-          icon: "add-circle"
         },
         {
           title: "Funções",
@@ -147,7 +132,7 @@ export class AppComponent {
   async alterarNome() {
     // Cria um alert
     const alert = await this.alertCtrl.create({
-    // Header com nome 'Novo Nome'.
+      // Header com nome 'Novo Nome'.
       header: 'Novo Nome',
       // Gera inputs
       inputs: [

@@ -46,7 +46,7 @@ export class UserService {
         email = email.replace(/[.#$]+/g, '');
         // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
         // /dispositivos/id (sendo o id passado junto a função)
-        this.userRef = this.db.object(`/users/${email}/settings`);
+        this.userRef = this.db.object(`/users/${email}/settings/name`);
         // Retorna o deviceRef para a função
         return this.userRef;
     }

@@ -38,7 +38,7 @@ export class DeviceService {
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
   createDevice(apt: Dispositivos, mac: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/dispositivos/${mac}`).set({
+    this.db.object(`/users/${this.user.email}/devices/${mac}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: apt.name,
       status: apt.status,
@@ -57,7 +57,7 @@ export class DeviceService {
   getDevice(mac: any) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${mac}`);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/devices/${mac}`);
     // Retorna o deviceRef para a função
     return this.deviceRef;
   }
@@ -65,7 +65,7 @@ export class DeviceService {
   // Função que "Pega" a lista de todos objetos com seus respectivos valores
   getDeviceList() {
     // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
-    this.deviceListRef = this.db.list(`/users/${this.user.email}/dispositivos`);
+    this.deviceListRef = this.db.list(`/users/${this.user.email}/devices`);
     // Retorna o deviceListRef para a função
     return this.deviceListRef;
   }
@@ -86,7 +86,7 @@ export class DeviceService {
   deleteDevice(mac: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.deviceRef = this.db.object(`/users/${this.user.email}/dispositivos/${mac}`);
+    this.deviceRef = this.db.object(`/users/${this.user.email}/devices/${mac}`);
     // Remove o objeto que foi atribuido ao deviceRef
     this.deviceRef.remove();
   }
@@ -94,15 +94,15 @@ export class DeviceService {
   // Função para mudar o status do dispositivo, com a função é passado o parametro id, fornecido pela função
   mudaStatus(mac: any) {
     // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
-    this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).once('value').then(snapshot => {
+    this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).once('value').then(snapshot => {
       // Verifica se o valor do nó é igual a 'on'
       if ((snapshot.val()) == 'ligado') {
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
-        this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).set('desligado');
+        this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).set('desligado');
       }
       else {
         // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
-        this.db.database.ref(`/users/${this.user.email}/dispositivos/${mac}/status`).set('ligado');
+        this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).set('ligado');
       }
     })
   }

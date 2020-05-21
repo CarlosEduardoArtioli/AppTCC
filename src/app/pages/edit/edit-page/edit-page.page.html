@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Editar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list class="ios list-ios hydrated">
+
+    <ion-item [routerLink]="['/edit-device-list']">
+          <ion-icon name="desktop-outline"></ion-icon> Dispositivos
+    </ion-item>
+    <ion-item [routerLink]="['/edit-room-list']">
+      <ion-icon name="home"></ion-icon> Cômodos
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

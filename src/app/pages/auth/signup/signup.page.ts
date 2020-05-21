@@ -43,7 +43,7 @@ export class SignupPage implements OnInit {
     // Quando cria
       .then((data) => {
         // Mostra mensagem de "Bem-Vindo!"
-        this.showMessage("Bem-vindo!");
+        this.showMessage("Obrigado por Cadastrar!");
         // Tira a mensagem de carregando da tela
         loading.dismiss();
         // Navega para a página 'login'

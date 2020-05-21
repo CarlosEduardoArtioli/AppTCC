@@ -6,13 +6,14 @@
     <ion-title>
       Editar Cômodos
     </ion-title>
+    <ion-icon name="add-circle-outline" [routerLink]="['/add-room-page']" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list class="ios list-ios hydrated">
 
-    <ion-item *ngFor="let room of Rooms" class="user-list">
+    <ion-item *ngFor="let room of Rooms">
       <ion-label>
         <h5>
           <ion-icon name="home"></ion-icon> {{room.name}}

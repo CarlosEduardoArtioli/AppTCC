@@ -66,6 +66,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/edit/room/add-room-page/add-room-page.module').then( m => m.AddRoomPagePageModule), 
     canActivate: [AuthGuard]
   },
+  {
+    path: 'edit-page',
+    loadChildren: () => import('./pages/edit/edit-page/edit-page.module').then( m => m.EditPagePageModule)
+  },
   // Rota "home"  em casos especiais
 // Esta rota leva até a home caso o usuario esteja logado e digite 
 // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
@@ -74,6 +78,7 @@ const routes: Routes = [
   redirectTo: 'home', 
   canActivate: [AuthGuard] 
 },
+
 
 
 ];
