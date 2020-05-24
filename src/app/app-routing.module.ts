@@ -52,6 +52,11 @@ const routes: Routes = [
     canActivate: [AuthGuard] 
   },
   {
+    path: 'timer',
+    loadChildren: () => import('./pages/functions/timer/timer.module').then( m => m.TimerPageModule), 
+    canActivate: [AuthGuard] 
+  },
+  {
     path: 'edit-room-list',
     loadChildren: () => import('./pages/edit/room/edit-room-list/edit-room-list.module').then( m => m.EditRoomListPageModule), 
     canActivate: [AuthGuard] 
