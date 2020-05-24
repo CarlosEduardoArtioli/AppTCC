@@ -34,11 +34,11 @@ export class roomService {
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createRoom(apt: Room, room: any) {
+  createRoom(room: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
     this.db.object(`/users/${this.user.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
-      name: apt.name
+      name: room
     })//.then(res => {
       // Escreve no console o valor do formulário
       //console.log(res)

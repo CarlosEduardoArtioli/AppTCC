@@ -6,7 +6,9 @@
     <ion-title>
       Editar Cômodos
     </ion-title>
-    <ion-icon name="add-circle-outline" [routerLink]="['/add-room-page']" slot="end"></ion-icon>
+    <ion-button slot="end" (click)="addRoom()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

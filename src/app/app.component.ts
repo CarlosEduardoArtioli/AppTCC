@@ -40,11 +40,11 @@ export class AppComponent {
         this.showComponent = false
       }
       else {
-        this.showComponent = true;
-        this.initializeApp();
+        this.showComponent = true; 
       }
     }
     )
+    this.initializeApp();
   }
 
   initializeApp() {
