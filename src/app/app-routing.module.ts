@@ -57,11 +57,6 @@ const routes: Routes = [
     canActivate: [AuthGuard] 
   },
   {
-    path: 'add-room-page',
-    loadChildren: () => import('./pages/edit/room/add-room-page/add-room-page.module').then( m => m.AddRoomPagePageModule), 
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'edit-page',
     loadChildren: () => import('./pages/edit/edit-page/edit-page.module').then( m => m.EditPagePageModule)
   },
