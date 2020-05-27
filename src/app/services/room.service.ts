@@ -29,7 +29,7 @@ export class roomService {
     private db: AngularFireDatabase
   ) {
     this.user = JSON.parse(localStorage.getItem('app.user'));
-    this.user.email = this.user.email.replace(/[.#$]+/g, '');
+    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
   }
 
   // Função que cria os dados do dispositivo
