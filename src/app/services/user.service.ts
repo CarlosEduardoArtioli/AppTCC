@@ -48,6 +48,7 @@ export class UserService {
         // /dispositivos/id (sendo o id passado junto a função)
         this.userRef = this.db.object(`/users/${email}/settings/name`);
         // Retorna o deviceRef para a função
+        console.log(this.userRef);
         return this.userRef;
     }
 

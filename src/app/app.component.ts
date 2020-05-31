@@ -19,7 +19,7 @@ export class AppComponent {
   pages: { title: string; url: string; icon: string; }[];
 
   // Variável user
-  public user: User = new User('', '', '');
+  public user: User = new User('', '', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
 
   // Variável showComponent
   showComponent: boolean;
@@ -40,7 +40,7 @@ export class AppComponent {
         this.showComponent = false
       }
       else {
-        this.showComponent = true; 
+        this.showComponent = true;
       }
     }
     )
@@ -51,24 +51,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // Chama a função sideMenu()
       this.sideMenu();
-      // Atribui a variável user o usuário logado no app
+
+      this.userName();
+
       this.user = JSON.parse(localStorage.getItem('app.user'));
-
-      if (this.user.name === "") {
-        localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
-        this.userService.updateUserName(this.user.name, this.user.email);
-      }
-
-      if (this.userService.getUser(this.user.email) == null) {
-        this.userService.updateUserName(this.user.name, this.user.email);
-      }
-
-       else {
-          this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-             this.user.name = res
-              localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.user.image)));
-              });
-            }
     });
   }
 
@@ -92,6 +78,26 @@ export class AppComponent {
         },
       ]
   }
+
+  userName() {
+
+    this.user = JSON.parse(localStorage.getItem('app.user'));
+
+    if (this.user.name == "") {
+      localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+      this.user = JSON.parse(localStorage.getItem('app.user'));
+      this.userService.updateUserName(this.user.name, this.user.email);
+    }
+
+    else {
+      this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+        this.user.name = res
+        localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+      });
+      this.user = JSON.parse(localStorage.getItem('app.user'));
+    }
+  }
+
 
   // Função para aparecer opções ao clicar no usuário
   async showOptions() {
@@ -162,7 +168,8 @@ export class AppComponent {
               // this.nome será = ao que está valor do input com Id 'newname'.
               this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
               // Substitui o nome anterior "this.user.name" para o novo "this.novoNome".
-              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, this.user.image)));
+              this.user = JSON.parse(localStorage.getItem('app.user'));
+              localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
               // Puxa a função do ion-toast.
               this.newname();
               this.user = JSON.parse(localStorage.getItem('app.user'));
