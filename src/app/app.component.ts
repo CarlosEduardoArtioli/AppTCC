@@ -22,7 +22,7 @@ export class AppComponent {
   pages: { title: string; url: string; icon: string; }[];
 
   // Variável user
-  public user: User = new User('', '', 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png');
+  public user: User = new User('', '', '');
 
   // Variável showComponent
   showComponent: boolean;
@@ -107,10 +107,11 @@ export class AppComponent {
     else {
       this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
         this.user.name = res
-        localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+        localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.user.image)));
       });
       this.user = JSON.parse(localStorage.getItem('app.user'));
     }
+    this.user = JSON.parse(localStorage.getItem('app.user'));
   }
 
 
