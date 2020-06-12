@@ -65,6 +65,10 @@ const routes: Routes = [
     path: 'edit-page',
     loadChildren: () => import('./pages/edit/edit-page/edit-page.module').then( m => m.EditPagePageModule)
   },
+  {
+    path: 'timer-add',
+    loadChildren: () => import('./pages/functions/timer-add/timer-add.module').then( m => m.TimerAddPageModule)
+  },
   // Rota "home"  em casos especiais
 // Esta rota leva até a home caso o usuario esteja logado e digite 
 // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
@@ -73,8 +77,6 @@ const routes: Routes = [
   redirectTo: 'home', 
   canActivate: [AuthGuard] 
 },
-
-
 
 ];
 

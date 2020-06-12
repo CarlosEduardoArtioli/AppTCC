@@ -1,15 +1,14 @@
- import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Dispositivos } from '../../../models/device.model';
-import { DeviceService } from '../../../services/device.service';
+import { Component, OnInit } from '@angular/core';
+import { DeviceService } from 'src/app/services/device.service';
 import { AlertController } from '@ionic/angular';
+import { Dispositivos } from 'src/app/models/device.model';
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.page.html',
-  styleUrls: ['./timer.page.scss'],
+  selector: 'app-timer-add',
+  templateUrl: './timer-add.page.html',
+  styleUrls: ['./timer-add.page.scss'],
 })
-export class TimerPage implements OnInit {
+export class TimerAddPage implements OnInit {
   date = new Date().toISOString();
   customPickerOptions: any;
   i = 1;
@@ -96,5 +95,3 @@ export class TimerPage implements OnInit {
     this.deviceService.mudaStatus(id);
   }
 }
-
-

@@ -6,6 +6,7 @@ import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UserService } from './services/user.service';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,10 @@ import { UserService } from './services/user.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  // Declaração das variáveis
-
+  // Declaração das variáveis 
+  i = 1;
+  date = new Date().toISOString();
+  autoRefresh: any;
   // Variável pages que fornece o titulo, url e icone das páginas
   pages: { title: string; url: string; icon: string; }[];
 
@@ -48,6 +51,7 @@ export class AppComponent {
   }
 
   initializeApp() {
+    this.myLoop();
     this.platform.ready().then(() => {
       // Chama a função sideMenu()
       this.sideMenu();
@@ -56,6 +60,17 @@ export class AppComponent {
 
       this.user = JSON.parse(localStorage.getItem('app.user'));
     });
+  }
+
+  myLoop() {         //  create a loop function
+    setTimeout(() => {   //  call a 3s setTimeout when the loop is called
+      this.date = new Date().toISOString();
+      console.log(this.date);                 //  increment the counter
+      if (this.i < 9999) {
+        //  if the counter < 10, call the loop function
+        this.myLoop();             //  ..  again which will trigger another 
+      };                      //  ..  setTimeout()
+    }, 2000);
   }
 
   sideMenu() {

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Timer
+    </ion-title>
+    <ion-button slot="end" (click)="addTimer()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Data Atual</ion-label>
+    <!-- DD MMM, YYYY = Pegar dia, mês e ano -->
+    <ion-datetime [(ngModel)]="date" value="dataAtual" displayFormat="HH:mm" pickerFormat="HH:mm" disabled></ion-datetime>
+  </ion-item>
+  <ion-item>
+      <ion-label>Horário do Timer</ion-label>
+      <ion-datetime id="timer" value="timer" displayFormat="HH:mm"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Dias da Semana</ion-label>
+    <ion-select [interfaceOptions]="customAlertOptions" interface="alert" multiple="true">
+      <ion-select-option value="seg">Seg</ion-select-option>
+      <ion-select-option value="ter">Ter</ion-select-option>
+      <ion-select-option value="qua">Qua</ion-select-option>
+      <ion-select-option value="qui">Qui</ion-select-option>
+      <ion-select-option value="sex">Sex</ion-select-option>
+      <ion-select-option value="sab">Sab</ion-select-option>
+      <ion-select-option value="dom">Dom</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button (click)="done()">Concluir</ion-button>
+</ion-content>
