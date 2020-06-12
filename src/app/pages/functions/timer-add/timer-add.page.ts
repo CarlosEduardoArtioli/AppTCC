@@ -10,7 +10,6 @@ import { Dispositivos } from 'src/app/models/device.model';
 })
 export class TimerAddPage implements OnInit {
   date = new Date().toISOString();
-  customPickerOptions: any;
   i = 1;
   timer: any;
 
