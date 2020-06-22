@@ -31,9 +31,14 @@
       </ion-item>
 
       <ion-item>
+        <ion-label position="floating">Cômodo</ion-label>
+       {{ room }}
+        <ion-button (click)="escolherComodo()" slot="end">Selecionar</ion-button>
+      </ion-item>
+
+      <ion-item>
         <ion-icon slot="start" src="/assets/svg/{{ imagem }}.svg"></ion-icon>
-        <ion-input formControlName="icon" value="{{ imagem }}">
-        </ion-input>
+        {{ imagem }}
         <ion-button (click)="escolherImagem()" slot="end">Selecionar</ion-button>
       </ion-item>
        

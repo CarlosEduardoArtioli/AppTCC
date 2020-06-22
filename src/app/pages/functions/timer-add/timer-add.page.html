@@ -6,9 +6,6 @@
     <ion-title>
       Timer
     </ion-title>
-    <ion-button slot="end" (click)="addTimer()">
-      <ion-icon name="add-circle-outline"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -16,16 +13,25 @@
   <ion-item>
     <ion-label>Data Atual</ion-label>
     <!-- DD MMM, YYYY = Pegar dia, mês e ano -->
-    <ion-datetime [(ngModel)]="date" value="dataAtual" displayFormat="HH:mm" pickerFormat="HH:mm" disabled></ion-datetime>
+    <ion-datetime [dayShortNames]="customDayShortNames" [(ngModel)]="date" id="timerAtual" displayFormat="DDD HH:mm"
+      pickerFormat="DDD HH:mm" disabled></ion-datetime>
   </ion-item>
   <ion-item>
-      <ion-label>Horário do Timer</ion-label>
-      <ion-datetime id="timer" value="timer" displayFormat="HH:mm"></ion-datetime>
+    <ion-label>Horário do Timer</ion-label>
+    <ion-datetime id="timer" value="timer" displayFormat="HH:mm:ss"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Dispositivo</ion-label>
+    <ion-select [compareWith]="compareWith">
+      <ion-select-option id=mac *ngFor="let device of Devices">{{ device.nome }}
+      </ion-select-option>
+    </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label>Dias da Semana</ion-label>
-    <ion-select interface="alert" multiple="true">
+    <ion-select id="week" interface="alert" multiple="true">
       <ion-select-option value="seg">Seg</ion-select-option>
       <ion-select-option value="ter">Ter</ion-select-option>
       <ion-select-option value="qua">Qua</ion-select-option>
@@ -36,5 +42,5 @@
     </ion-select>
   </ion-item>
 
-  <ion-button (click)="done()">Concluir</ion-button>
+  <ion-button (click)="done(device.$key)">Concluir</ion-button>
 </ion-content>

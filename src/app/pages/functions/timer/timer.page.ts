@@ -1,5 +1,4 @@
- import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Dispositivos } from '../../../models/device.model';
 import { DeviceService } from '../../../services/device.service';
 import { AlertController } from '@ionic/angular';
@@ -10,11 +9,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./timer.page.scss'],
 })
 export class TimerPage implements OnInit {
-  date = new Date().toISOString();
-  customPickerOptions: any;
-  i = 1;
-  timer: any;
-
   Devices = [];
 
   constructor(
@@ -26,7 +20,6 @@ export class TimerPage implements OnInit {
   }
 
   ngOnInit() {
-    this.myLoop();
     // Chama a função 'fetchDevices()'
     this.fetchDevices();
 
@@ -43,35 +36,6 @@ export class TimerPage implements OnInit {
         this.Devices.push(a as Dispositivos);
       })
     })
-  }
-
-  myLoop() {         //  create a loop function
-    setTimeout(() => {   //  call a 3s setTimeout when the loop is called
-      this.date = new Date().toISOString();
-      console.log(this.date);                 //  increment the counter
-      console.log('Tô Funfando Timer');
-      if (this.i < 99999) {
-        //  if the counter < 10, call the loop function
-        this.myLoop();             //  ..  again which will trigger another 
-      };                      //  ..  setTimeout()
-    }, 2000);
-  }
-
-  done() {
-    this.timer = document.getElementById("timer");
-    console.log(this.timer.value);
-  }
-
-  myLoop2() {         //  create a loop function
-    setTimeout(() => {   //  call a 3s setTimeout when the loop is called;
-      if (this.timer == this.date) {
-
-      }
-      if (this.i < 99999) {
-        //  if the counter < 10, call the loop function
-        this.myLoop();             //  ..  again which will trigger another 
-      };                      //  ..  setTimeout()
-    }, 2000);
   }
 
   async addTimer() {

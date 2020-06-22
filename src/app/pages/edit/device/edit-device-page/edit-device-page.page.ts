@@ -14,9 +14,10 @@ export class EditDevicePagePage implements OnInit {
   updateDeviceForm: FormGroup;
   mac: any;
   imagem = "";
+  icon = [];
 
   constructor(
-    private aptService: DeviceService,
+    private deviceService: DeviceService,
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder,
@@ -24,8 +25,10 @@ export class EditDevicePagePage implements OnInit {
   ) {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
-    this.aptService.getDevice(this.mac).valueChanges().subscribe(res => {
+    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
       this.updateDeviceForm.setValue(res);
+      this.icon = res;
+      console.log(res);
     });
   }
 
@@ -33,19 +36,21 @@ export class EditDevicePagePage implements OnInit {
   ngOnInit() {
     // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
     this.updateDeviceForm = this.fb.group({
-      name: [''],
-      mac: [''],
-      room: [''],
       icon: [''],
+      mac: [''],
+      name: [''],
+      room: [''],
+      status: [''],
     })
     console.log(this.updateDeviceForm.value);
-    this.aptService.getDevice(this.mac).valueChanges().subscribe(res => {
+    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
       this.imagem = res.icon;
     });
+    console.log(this.icon);
   }
 
   updateForm() {
-    this.aptService.updateDevice(this.updateDeviceForm.value)
+    this.deviceService.updateDevice(this.updateDeviceForm.value)
       .then(() => {
         this.router.navigate(['/home']);
       })

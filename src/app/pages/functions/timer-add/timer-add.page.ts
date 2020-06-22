@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device.service';
 import { AlertController } from '@ionic/angular';
 import { Dispositivos } from 'src/app/models/device.model';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
   selector: 'app-timer-add',
@@ -12,10 +13,15 @@ export class TimerAddPage implements OnInit {
   date = new Date().toISOString();
   i = 1;
   timer: any;
+  mac: any;
+  week: any;
+  customDayShortNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
   Devices = [];
 
+
   constructor(
+    private timerService: TimerService,
     private deviceService: DeviceService,
     private alertCtrl: AlertController
   ) {
@@ -41,13 +47,12 @@ export class TimerAddPage implements OnInit {
         this.Devices.push(a as Dispositivos);
       })
     })
+    console.log(this.Devices);
   }
 
   myLoop() {         //  create a loop function
     setTimeout(() => {   //  call a 3s setTimeout when the loop is called
       this.date = new Date().toISOString();
-      console.log(this.date);                 //  increment the counter
-      console.log('Tô Funfando Timer');
       if (this.i < 99999) {
         //  if the counter < 10, call the loop function
         this.myLoop();             //  ..  again which will trigger another 
@@ -55,21 +60,15 @@ export class TimerAddPage implements OnInit {
     }, 2000);
   }
 
-  done() {
-    this.timer = document.getElementById("timer");
-    console.log(this.timer.value);
-  }
+  done(x: any) {
+    // if apenas para saber se o input não está vázio.
+    if ((<HTMLInputElement>document.getElementById('timer')).value != "" && (<HTMLInputElement>document.getElementById('week')).value != "" && (<HTMLInputElement>document.getElementById('mac')).value != "") {
+      this.timer = (<HTMLInputElement>document.getElementById('timer')).value;
+      this.week = (<HTMLInputElement>document.getElementById('week')).value;
+      this.mac = x;
 
-  myLoop2() {         //  create a loop function
-    setTimeout(() => {   //  call a 3s setTimeout when the loop is called;
-      if (this.timer == this.date) {
-
-      }
-      if (this.i < 99999) {
-        //  if the counter < 10, call the loop function
-        this.myLoop();             //  ..  again which will trigger another 
-      };                      //  ..  setTimeout()
-    }, 2000);
+      this.timerService.createTimer(this.timer, this.week, this.mac);
+    }
   }
 
   async addTimer() {

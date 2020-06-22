@@ -64,8 +64,7 @@ export class AppComponent {
 
   myLoop() {         //  create a loop function
     setTimeout(() => {   //  call a 3s setTimeout when the loop is called
-      this.date = new Date().toISOString();
-      console.log(this.date);                 //  increment the counter
+      this.date = new Date().toISOString();                //  increment the counter
       if (this.i < 9999) {
         //  if the counter < 10, call the loop function
         this.myLoop();             //  ..  again which will trigger another 
