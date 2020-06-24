@@ -47,28 +47,29 @@ export class TimerAddPage implements OnInit {
         this.Devices.push(a as Dispositivos);
       })
     })
-    console.log(this.Devices);
   }
 
-  myLoop() {         //  create a loop function
-    setTimeout(() => {   //  call a 3s setTimeout when the loop is called
+  myLoop() {
+    setTimeout(() => {
       this.date = new Date().toISOString();
       if (this.i < 99999) {
-        //  if the counter < 10, call the loop function
-        this.myLoop();             //  ..  again which will trigger another 
-      };                      //  ..  setTimeout()
+        this.myLoop();
+      };                      
     }, 2000);
   }
 
-  done(x: any) {
+  done(timer: any, week: any, mac: any) {
     // if apenas para saber se o input não está vázio.
-    if ((<HTMLInputElement>document.getElementById('timer')).value != "" && (<HTMLInputElement>document.getElementById('week')).value != "" && (<HTMLInputElement>document.getElementById('mac')).value != "") {
-      this.timer = (<HTMLInputElement>document.getElementById('timer')).value;
-      this.week = (<HTMLInputElement>document.getElementById('week')).value;
-      this.mac = x;
+    if (timer != "" && week != "" && mac != "") {
+      timer = timer.slice(11, 19);
 
-      this.timerService.createTimer(this.timer, this.week, this.mac);
+      this.timerService.createTimer(timer, week, mac);
+
     }
+  }
+
+  onChange(event) {
+    alert("you habe selected id = "+event.target.value);
   }
 
   async addTimer() {

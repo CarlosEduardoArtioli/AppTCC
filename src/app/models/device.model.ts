@@ -7,7 +7,9 @@ export class Dispositivos {
        public status: string = '',
        public mac: string = '',
        public icon: string = '',
-       public room: string = ''
+       public room: string = '',
+       public timer: string = null,
+       public week: string = null
     ) {} 
 }
 

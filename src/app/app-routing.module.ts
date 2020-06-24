@@ -67,7 +67,7 @@ const routes: Routes = [
   },
   {
     path: 'timer-add',
-    loadChildren: () => import('./pages/functions/timer-add/timer-add.module').then( m => m.TimerAddPageModule)
+    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then( m => m.TimerAddPageModule)
   },
   // Rota "home"  em casos especiais
 // Esta rota leva até a home caso o usuario esteja logado e digite 

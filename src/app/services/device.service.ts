@@ -44,7 +44,9 @@ export class DeviceService {
       status: apt.status,
       mac: apt.mac,
       room: apt.room,
-      icon: apt.icon
+      icon: apt.icon,
+      timer: null,
+      week: null
     })//.then(res => {
       // Escreve no console o valor do formulário
       //console.log(res)

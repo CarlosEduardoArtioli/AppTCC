@@ -5,6 +5,7 @@
 import { Injectable } from '@angular/core';
 // Importação do Model do dispositivo
 import { Timer } from '../models/timer.model';
+import { Dispositivos } from '../models/device.model';
 // Importação das bibliotecas do AngularFire
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
@@ -36,7 +37,7 @@ export class TimerService {
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
   createTimer(timer: any, week: any, mac: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/devices/${mac}`).set({
+    this.db.object(`/users/${this.user.email}/devices/${mac}`).update({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       timer: timer,
       week: week
@@ -68,11 +69,11 @@ export class TimerService {
 
   // Função que atualiza os dados do objeto
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateDevice(apt: Timer) {
+  updateDevice(apt: Dispositivos) {
     // Retorna para a função a atualização dos dados
     return this.timerRef.update({
       timer: apt.timer,
-      timerWeek: apt.timerWeek
+      week: apt.week
     })
   }
 
