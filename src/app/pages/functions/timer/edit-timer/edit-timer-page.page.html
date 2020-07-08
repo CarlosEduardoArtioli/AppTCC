@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Editar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <form [formGroup]="updateDeviceForm" (ngSubmit)="updateForm()">
+      <ion-item>
+        <ion-label>Horário do Timer</ion-label>
+      <ion-datetime formControlName="timer" id="timer" [(ngModel)]="timer" displayFormat="HH:mm:ss" required></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Dispositivo</ion-label>
+        <ion-select formControlName="name" [(ngModel)]="mac">
+          <ion-select-option *ngFor="let device of Devices" [value]="device.mac">{{ device.name }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Dias da Semana</ion-label>
+        <ion-select formControlName="week" [(ngModel)]="week" id="week" interface="alert" multiple="true" required>
+          <ion-select-option value="seg">Seg</ion-select-option>
+          <ion-select-option value="ter">Ter</ion-select-option>
+          <ion-select-option value="qua">Qua</ion-select-option>
+          <ion-select-option value="qui">Qui</ion-select-option>
+          <ion-select-option value="sex">Sex</ion-select-option>
+          <ion-select-option value="sab">Sab</ion-select-option>
+          <ion-select-option value="dom">Dom</ion-select-option>
+        </ion-select>
+      </ion-item>       
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Atualizar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
+</ion-content>

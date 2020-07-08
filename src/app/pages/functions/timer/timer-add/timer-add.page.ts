@@ -12,9 +12,16 @@ import { TimerService } from 'src/app/services/timer.service';
 export class TimerAddPage implements OnInit {
   date = new Date().toISOString();
   i = 1;
-  timer: any;
-  mac: any;
-  week: any;
+  public timer: any;
+  public mac: any;
+  public week = [];
+  public week1: any;
+  public week2: any;
+  public week3: any;
+  public week4: any;
+  public week5: any;
+  public week6: any;
+  public week7: any;
   customDayShortNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
   Devices = [];
@@ -54,7 +61,7 @@ export class TimerAddPage implements OnInit {
       this.date = new Date().toISOString();
       if (this.i < 99999) {
         this.myLoop();
-      };                      
+      };
     }, 2000);
   }
 
@@ -62,14 +69,66 @@ export class TimerAddPage implements OnInit {
     // if apenas para saber se o input não está vázio.
     if (timer != "" && week != "" && mac != "") {
       timer = timer.slice(11, 19);
+      console.log(week);
 
-      this.timerService.createTimer(timer, week, mac);
+      if(this.week[0] != null) {
+        this.week1 = this.week[0];
+      } else {
+        this.week1 = "";
+      }
+
+      if(this.week[1] != null) {
+        this.week2 = this.week[1];
+      } else {
+        this.week2 = "";
+      }
+
+      if(this.week[2] != null) {
+        this.week3 = this.week[2];
+      } else {
+        this.week3 = "";
+      }
+
+      if(this.week[3] != null) {
+        this.week4 = this.week[3];
+      } else {
+        this.week4 = "";
+      }
+
+      if(this.week[4] != null) {
+        this.week5 = this.week[4];
+      } else {
+        this.week5 = "";
+      }
+
+      if(this.week[5] != null) {
+        this.week6 = this.week[5];
+      } else {
+        this.week6 = "";
+      }
+
+      if(this.week[6] != null) {
+        this.week7 = this.week[6];
+      } else {
+        this.week7 = "";
+      }
+
+
+      console.log(this.week1);
+      console.log(this.week2);
+      console.log(this.week3);
+      console.log(this.week4);
+      console.log(this.week5);
+      console.log(this.week6);
+      console.log(this.week7);
+
+      this.timerService.createTimer(timer, this.week1, this.week2, this.week3, this.week4, this.week5, this.week6, this.week7, mac);
 
     }
   }
 
   onChange(event) {
-    alert("you habe selected id = "+event.target.value);
+    alert("you habe selected id = " + event.target.value);
   }
 
   async addTimer() {

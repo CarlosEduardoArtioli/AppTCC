@@ -45,8 +45,14 @@ export class DeviceService {
       mac: apt.mac,
       room: apt.room,
       icon: apt.icon,
-      timer: null,
-      week: null
+      timer: "",
+      week1: "",
+      week2: "",
+      week3: "",
+      week4: "",
+      week5: "",
+      week6: "",
+      week7: ""
     })//.then(res => {
       // Escreve no console o valor do formulário
       //console.log(res)

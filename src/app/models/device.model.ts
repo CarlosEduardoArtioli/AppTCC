@@ -8,8 +8,14 @@ export class Dispositivos {
        public mac: string = '',
        public icon: string = '',
        public room: string = '',
-       public timer: string = null,
-       public week: string = null
+       public timer: null,
+       public week1: null,
+       public week2: null,
+       public week3: null,
+       public week4: null,
+       public week5: null,
+       public week6: null,
+       public week7: null,
     ) {} 
 }
 

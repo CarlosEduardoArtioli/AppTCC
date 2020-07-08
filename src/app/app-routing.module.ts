@@ -63,12 +63,20 @@ const routes: Routes = [
   },
   {
     path: 'edit-page',
-    loadChildren: () => import('./pages/edit/edit-page/edit-page.module').then( m => m.EditPagePageModule)
+    loadChildren: () => import('./pages/edit/edit-page/edit-page.module').then( m => m.EditPagePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'timer-add',
-    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then( m => m.TimerAddPageModule)
+    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then( m => m.TimerAddPageModule),
+    canActivate: [AuthGuard]
   },
+  {
+    path: 'edit-timer-page/:mac',
+    loadChildren: () => import('./pages/functions/timer/edit-timer/edit-timer-page.module').then( m => m.EditDevicePagePageModule),
+    canActivate: [AuthGuard]
+  },
+  
   // Rota "home"  em casos especiais
 // Esta rota leva até a home caso o usuario esteja logado e digite 
 // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  

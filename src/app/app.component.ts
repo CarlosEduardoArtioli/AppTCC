@@ -51,7 +51,6 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.myLoop();
     this.platform.ready().then(() => {
       // Chama a função sideMenu()
       this.sideMenu();
@@ -60,16 +59,6 @@ export class AppComponent {
 
       this.user = JSON.parse(localStorage.getItem('app.user'));
     });
-  }
-
-  myLoop() {         //  create a loop function
-    setTimeout(() => {   //  call a 3s setTimeout when the loop is called
-      this.date = new Date().toISOString();                //  increment the counter
-      if (this.i < 9999) {
-        //  if the counter < 10, call the loop function
-        this.myLoop();             //  ..  again which will trigger another 
-      };                      //  ..  setTimeout()
-    }, 2000);
   }
 
   sideMenu() {

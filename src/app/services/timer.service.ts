@@ -4,7 +4,6 @@
 
 import { Injectable } from '@angular/core';
 // Importação do Model do dispositivo
-import { Timer } from '../models/timer.model';
 import { Dispositivos } from '../models/device.model';
 // Importação das bibliotecas do AngularFire
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
@@ -35,13 +34,20 @@ export class TimerService {
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createTimer(timer: any, week: any, mac: any) {
+  createTimer(timer: any, week1: any, week2: any, week3: any, week4: any, week5: any, week6: any, week7: any, mac: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/devices/${mac}`).update({
+    this.db.object(`/users/${this.user.email}/devices/${mac}/timer1`).update({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       timer: timer,
-      week: week
+      week1: week1,
+      week2: week2,
+      week3: week3,
+      week4: week4,
+      week5: week5,
+      week6: week6,
+      week7: week7
     })//.then(res => {
+      
       // Escreve no console o valor do formulário
       //console.log(res)
     //})
@@ -69,11 +75,11 @@ export class TimerService {
 
   // Função que atualiza os dados do objeto
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateDevice(apt: Dispositivos) {
+  updateTimer(apt: Dispositivos) {
     // Retorna para a função a atualização dos dados
     return this.timerRef.update({
       timer: apt.timer,
-      week: apt.week
+      week: apt.week1
     })
   }
 
