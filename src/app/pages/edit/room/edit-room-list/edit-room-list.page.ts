@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from '../../../../models/room.model';
-import { roomService } from '../../../../services/room.service';
+import { RoomService } from '../../../../services/room.service';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -15,7 +15,7 @@ export class EditRoomListPage implements OnInit {
   newRoom: any;
 
   constructor(
-    private roomService: roomService,
+    private roomService: RoomService,
     private alertCtrl: AlertController,
     private toastController: ToastController,
   ) { }
@@ -27,17 +27,17 @@ export class EditRoomListPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let roomRes = this.roomService.getRoomList();
+    const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de dispositivos
     roomRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável devices com os dispostivos e seus valores
       this.Rooms = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.Rooms.push(a as Room); 
-      })
-    })
+        this.Rooms.push(a as Room);
+      });
+    });
   }
 
   // Função para mostrar a lista de dispositvos no console
@@ -45,19 +45,19 @@ export class EditRoomListPage implements OnInit {
     // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
     this.roomService.getRoomList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
 
   // Função para deletar o dispositivo que recebe o parâmetro 'id'
   deleteRoom(room: any) {
     // Escreve no console o 'id'
-    console.log(room)
+    console.log(room);
     // Se for confirmado a mensagem
     if (window.confirm('Tem certeza que deseja excluir?')) {
       // "Puxa" a função 'deleteDevice' passando o parâmetro id
-      this.roomService.deleteDevice(room)
+      this.roomService.deleteDevice(room);
     }
   }
 
@@ -90,9 +90,9 @@ export class EditRoomListPage implements OnInit {
           text: 'Salvar',
           handler: data => {
             // if apenas para saber se o input não está vázio.
-            if ((<HTMLInputElement>document.getElementById('newroom')).value != "") {
+            if ((document.getElementById('newroom') as HTMLInputElement).value != '') {
               // this.nome será = ao que está valor do input com Id 'newname'.
-              this.newRoom = (<HTMLInputElement>document.getElementById('newroom')).value;
+              this.newRoom = (document.getElementById('newroom') as HTMLInputElement).value;
               // Puxa a função do ion-toast.
               this.newroom();
               // Função para mudar o nome do usuário.

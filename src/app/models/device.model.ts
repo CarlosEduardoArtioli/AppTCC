@@ -16,7 +16,7 @@ export class Dispositivos {
        public week5: null,
        public week6: null,
        public week7: null,
-    ) {} 
+    ) {}
 }
 
 // Models são os "Modelos" de dados que vão ser enviados ao banco

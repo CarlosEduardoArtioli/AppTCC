@@ -22,17 +22,17 @@ export class EditDeviceListPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.deviceService.getDeviceList();
+    const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável devices com os dispostivos e seus valores
       this.Devices = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
-      })
-    })
+      });
+    });
   }
 
   // Função para mostrar a lista de dispositvos no console
@@ -40,19 +40,19 @@ export class EditDeviceListPage implements OnInit {
     // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
     this.deviceService.getDeviceList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
 
   // Função para deletar o dispositivo que recebe o parâmetro 'id'
   deleteDevice(id: any) {
     // Escreve no console o 'id'
-    console.log(id)
+    console.log(id);
     // Se for confirmado a mensagem
     if (window.confirm('Tem certeza que deseja excluir?')) {
       // "Puxa" a função 'deleteDevice' passando o parâmetro id
-      this.deviceService.deleteDevice(id)
+      this.deviceService.deleteDevice(id);
     }
   }
 

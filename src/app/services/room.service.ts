@@ -12,7 +12,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
   providedIn: 'root'
 })
 
-export class roomService {
+export class RoomService {
   // Declaração das variáveis
 
   // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados 
@@ -39,12 +39,12 @@ export class roomService {
     this.db.object(`/users/${this.user.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: room
-    })//.then(res => {
+    }); // .then(res => {
       // Escreve no console o valor do formulário
-      //console.log(res)
-    //})
+      // console.log(res)
+      // })
       // Caso ocorra um erro, ele o escreve no console
-     // .catch(error => console.log(error));
+      // .catch(error => console.log(error));
   }
 
   // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
@@ -70,7 +70,7 @@ export class roomService {
     // Retorna para a função a atualização dos dados
     return this.roomRef.update({
       name: apt.name
-    })
+    });
   }
 
   // Função que exclui os dados do objeto com o id passado

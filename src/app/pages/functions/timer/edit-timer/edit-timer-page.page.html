@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-list lines="full">
-    <form [formGroup]="updateDeviceForm" (ngSubmit)="updateForm()">
+    <form [formGroup]="updateTimerForm" (ngSubmit)="updateForm()">
       <ion-item>
         <ion-label>Horário do Timer</ion-label>
       <ion-datetime formControlName="timer" id="timer" [(ngModel)]="timer" displayFormat="HH:mm:ss" required></ion-datetime>
@@ -26,7 +26,7 @@
 
       <ion-item>
         <ion-label>Dias da Semana</ion-label>
-        <ion-select formControlName="week" [(ngModel)]="week" id="week" interface="alert" multiple="true" required>
+         <ion-select formControlName="week" [(ngModel)]="week" id="week" interface="alert" multiple="true" required>
           <ion-select-option value="seg">Seg</ion-select-option>
           <ion-select-option value="ter">Ter</ion-select-option>
           <ion-select-option value="qua">Qua</ion-select-option>

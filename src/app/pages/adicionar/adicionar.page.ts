@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { DeviceService } from '../../services/device.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class AdicionarPage implements OnInit {
       mac: [''],
       room: [''],
       icon: ['']
-    })
+    });
   }
 
 
@@ -42,11 +42,11 @@ export class AdicionarPage implements OnInit {
     } else {
        this.mac = this.deviceForm.value.mac;
       // "Puxa" a função 'createDevice' do DeviceService e passa o valor do 'deviceForm'
-      this.deviceService.createDevice(this.deviceForm.value, this.mac)
+       this.deviceService.createDevice(this.deviceForm.value, this.mac)
         // "Reseta" o formulário para uma nova inserção de dados
-        this.deviceForm.reset();
+       this.deviceForm.reset();
         // Navega para a página 'home'
-        this.router.navigate(['/home']);
+       this.router.navigate(['/home']);
     }
   }
 }

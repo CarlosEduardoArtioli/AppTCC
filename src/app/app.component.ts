@@ -6,7 +6,6 @@ import { User } from './models/user.model';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UserService } from './services/user.service';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,7 @@ import { $ } from 'protractor';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  // Declaração das variáveis 
+  // Declaração das variáveis
   i = 1;
   date = new Date().toISOString();
   autoRefresh: any;
@@ -40,13 +39,12 @@ export class AppComponent {
   ) {
     router.events.forEach((event) => {
       if (this.router.url === '/login' || this.router.url === '/signup') {
-        this.showComponent = false
-      }
-      else {
+        this.showComponent = false;
+      } else {
         this.showComponent = true;
       }
     }
-    )
+    );
     this.initializeApp();
   }
 
@@ -65,36 +63,34 @@ export class AppComponent {
     this.pages =
       [
         {
-          title: "Dispositivos",
-          url: "home",
-          icon: "hardware-chip"
+          title: 'Dispositivos',
+          url: 'home',
+          icon: 'hardware-chip'
         },
         {
-          title: "Editar",
-          url: "edit-page",
-          icon: "create"
+          title: 'Editar',
+          url: 'edit-page',
+          icon: 'create'
         },
         {
-          title: "Funções",
-          url: "functions",
-          icon: "construct"
+          title: 'Funções',
+          url: 'functions',
+          icon: 'construct'
         },
-      ]
+      ];
   }
 
   userName() {
 
     this.user = JSON.parse(localStorage.getItem('app.user'));
 
-    if (this.user.name == "") {
+    if (this.user.name === '') {
       localStorage.setItem('app.user', JSON.stringify(new User(this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
       this.user = JSON.parse(localStorage.getItem('app.user'));
       this.userService.updateUserName(this.user.name, this.user.email);
-    }
-
-    else {
+    } else {
       this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-        this.user.name = res
+        this.user.name = res;
         localStorage.setItem('app.user', JSON.stringify(new User(this.user.name, this.user.email, this.user.image)));
       });
       this.user = JSON.parse(localStorage.getItem('app.user'));
@@ -125,7 +121,7 @@ export class AppComponent {
           // Quando o Logout é acionado ele remove o usuário do local storage e redireciona para a página de login
           handler: () => {
             localStorage.removeItem('app.user');
-            this.navCtrl.navigateRoot("/login");
+            this.navCtrl.navigateRoot('/login');
           }
         }, {
           // Botão para cancelar
@@ -168,9 +164,9 @@ export class AppComponent {
           handler: data => {
             this.user = JSON.parse(localStorage.getItem('app.user'));
             // if apenas para saber se o input não está vázio.
-            if ((<HTMLInputElement>document.getElementById('newname')).value != "") {
+            if ((document.getElementById('newname') as HTMLInputElement).value != '') {
               // this.nome será = ao que está valor do input com Id 'newname'.
-              this.novoNome = (<HTMLInputElement>document.getElementById('newname')).value;
+              this.novoNome = ( document.getElementById('newname') as HTMLInputElement).value;
               // Substitui o nome anterior "this.user.name" para o novo "this.novoNome".
               this.user = JSON.parse(localStorage.getItem('app.user'));
               localStorage.setItem('app.user', JSON.stringify(new User(this.novoNome, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
@@ -178,7 +174,7 @@ export class AppComponent {
               this.newname();
               this.user = JSON.parse(localStorage.getItem('app.user'));
               // Função para mudar o nome do usuário.
-              this.userService.updateUserName(this.user.name, this.user.email)
+              this.userService.updateUserName(this.user.name, this.user.email);
             }
           }
         }

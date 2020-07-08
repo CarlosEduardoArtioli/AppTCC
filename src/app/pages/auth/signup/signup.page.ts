@@ -19,12 +19,12 @@ export class SignupPage implements OnInit {
     private toastCtrl: ToastController,
     private fbAuth: AngularFireAuth
   ) {
-    // Atribui a variável form o valor do grupo de valores do FormBuilder da página HTML 
+    // Atribui a variável form o valor do grupo de valores do FormBuilder da página HTML
     this.form = this.fb.group({
     // Validators.required é um parâmetro para se o usuário não preencher a variável retornar um erro
       email: ['', Validators.required],
       password: ['', Validators.required],
-    })
+    });
   }
 
   ngOnInit() {
@@ -34,16 +34,16 @@ export class SignupPage implements OnInit {
   // Função para o envio da autenticação
   async submit() {
     // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
-    const loading = await this.loadingCtrl.create({ message: "Cadastrando..." });
+    const loading = await this.loadingCtrl.create({ message: 'Cadastrando...' });
     // Mostra a mensagem na tela
     loading.present();
 
     // Função que cria um usuário com email e senha e seus valores são pegos do HTML
-    this.fbAuth.auth.createUserWithEmailAndPassword(this.form.controls['email'].value, this.form.controls['password'].value)
+    this.fbAuth.auth.createUserWithEmailAndPassword(this.form.controls.email.value, this.form.controls.password.value)
     // Quando cria
       .then((data) => {
         // Mostra mensagem de "Bem-Vindo!"
-        this.showMessage("Obrigado por Cadastrar!");
+        this.showMessage('Obrigado por Cadastrar!');
         // Tira a mensagem de carregando da tela
         loading.dismiss();
         // Navega para a página 'login'
@@ -54,7 +54,7 @@ export class SignupPage implements OnInit {
         // Tira a mensagem de carregando da tela
         loading.dismiss();
         // Mostra mensagem de "Não foi possível realizar seu cadastro"
-        this.showMessage("Não foi possível realizar seu cadastro");
+        this.showMessage('Não foi possível realizar seu cadastro');
       });
   }
 

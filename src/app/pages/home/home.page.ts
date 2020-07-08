@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dispositivos } from '../../models/device.model';
 import { DeviceService } from '../../services/device.service';
 import { Room } from '../../models/room.model';
-import { roomService } from '../../services/room.service';
-import { IonSegment } from '@ionic/angular';
+import { RoomService } from '../../services/room.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +14,11 @@ export class HomePage implements OnInit {
   // Declaração de variáveis
   Devices = [];
   Rooms = [];
-  selectTabs = "all";
+  selectTabs = 'all';
 
   constructor(
     private deviceService: DeviceService,
-    private roomService: roomService
+    private roomService: RoomService
   ) { }
 
   // Função quando a página é iniciada
@@ -30,31 +29,31 @@ export class HomePage implements OnInit {
     this.fetchRooms();
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.deviceService.getDeviceList();
+    const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
-      })
-    })
+      });
+    });
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let roomRes = this.roomService.getRoomList();
+    const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de dispositivos
     roomRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Rooms = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Rooms.push(a as Room);
-      })
-    })
+      });
+    });
   }
 
   // Função para mostrar no console a lista de dispositivos
@@ -62,8 +61,8 @@ export class HomePage implements OnInit {
     // Pega os valores do caminho os subscreve no 'res'
     this.deviceService.getDeviceList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
   // Função para mostrar no console a lista de dispositivos
@@ -71,8 +70,8 @@ export class HomePage implements OnInit {
     // Pega os valores do caminho os subscreve no 'res'
     this.roomService.getRoomList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
   // Função para mudar o status do dispositivo

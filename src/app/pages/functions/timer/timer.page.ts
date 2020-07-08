@@ -25,17 +25,17 @@ export class TimerPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.deviceService.getDeviceList();
+    const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
-      })
-    })
+      });
+    });
   }
 
   async addTimer() {
@@ -50,8 +50,8 @@ export class TimerPage implements OnInit {
     // Pega os valores do caminho os subscreve no 'res'
     this.deviceService.getDeviceList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
   // Função para mudar o status do dispositivo

@@ -20,7 +20,7 @@ export class DeviceService {
   // Interface da biblioteca do AngularFire que "devolve" na função o dado pedido
   deviceRef: AngularFireObject<any>;
   // Declaração da variável status
-  status = "";
+  status = '';
   // Declaração da variável user
   user: any;
 
@@ -45,18 +45,18 @@ export class DeviceService {
       mac: apt.mac,
       room: apt.room,
       icon: apt.icon,
-      timer: "",
-      week1: "",
-      week2: "",
-      week3: "",
-      week4: "",
-      week5: "",
-      week6: "",
-      week7: ""
-    })//.then(res => {
+      timer: '',
+      week1: '',
+      week2: '',
+      week3: '',
+      week4: '',
+      week5: '',
+      week6: '',
+      week7: ''
+    }); // .then(res => {
       // Escreve no console o valor do formulário
-      //console.log(res)
-    //})
+      // console.log(res)
+    // })
       // Caso ocorra um erro, ele o escreve no console
      // .catch(error => console.log(error));
   }
@@ -107,11 +107,10 @@ export class DeviceService {
       if ((snapshot.val()) == 'ligado') {
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
         this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).set('desligado');
-      }
-      else {
+      } else {
         // Se não for, ele entra no caminho e altera o valor e muda o valor para 'on'
         this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).set('ligado');
       }
-    })
+    });
   }
 }

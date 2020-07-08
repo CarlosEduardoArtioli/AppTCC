@@ -13,7 +13,8 @@ export class EditDevicePagePage implements OnInit {
   // Declaração de variávies
   updateDeviceForm: FormGroup;
   mac: any;
-  imagem = "";
+  imagem = '';
+  room = '';
   icon = [];
 
   constructor(
@@ -41,12 +42,14 @@ export class EditDevicePagePage implements OnInit {
       name: [''],
       room: [''],
       status: [''],
-    })
+    });
     console.log(this.updateDeviceForm.value);
     this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
       this.imagem = res.icon;
+      this.room = res.room;
     });
     console.log(this.icon);
+    console.log(this.room);
   }
 
   updateForm() {
@@ -75,23 +78,27 @@ export class EditDevicePagePage implements OnInit {
           text: 'Lâmpada',
           icon: '/assets/svg/Lâmpada.svg',
           handler: () => {
-            this.imagem = "Lâmpada"
+            this.imagem = 'Lâmpada';
           }
         }, {
           text: 'Televisão',
           icon: '/assets/svg/Televisão.svg',
           handler: () => {
-            this.imagem = "Televisão"
+            this.imagem = 'Televisão';
           }
         }, {
           text: 'Ventilador',
           icon: '/assets/svg/Ventilador.svg',
           handler: () => {
-            this.imagem = "Ventilador"
+            this.imagem = 'Ventilador';
           }
         }]
     });
     await actionSheet.present();
+  }
+
+  escolherComodo(){
+    
   }
 
 }

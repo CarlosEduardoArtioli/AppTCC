@@ -37,24 +37,24 @@ export class EditDevicePagePage implements OnInit {
   ngOnInit() {
     this.fetchDevices();
 
-    let deviceRes = this.deviceService.getDeviceList();
+    const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
-      })
-    })
+      });
+    });
     // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
     this.updateTimerForm = this.fb.group({
       mac: [''],
       name: [''],
       timer: [''],
       week: [''],
-    })
+    });
     console.log(this.updateTimerForm.value);
   }
 
@@ -66,14 +66,14 @@ export class EditDevicePagePage implements OnInit {
       .catch(error => console.log(error));
   }
 
- // Função para mostrar no console a lista de dispositivos
- fetchDevices() {
-  // Pega os valores do caminho os subscreve no 'res'
-  this.deviceService.getDeviceList().valueChanges().subscribe(res => {
-    // Escreve no console a lista de dispositivos
-    console.log(res)
-  })
-}
+  // Função para mostrar no console a lista de dispositivos
+  fetchDevices() {
+    // Pega os valores do caminho os subscreve no 'res'
+    this.deviceService.getDeviceList().valueChanges().subscribe(res => {
+      // Escreve no console a lista de dispositivos
+      console.log(res);
+    });
+  }
 
 
 }

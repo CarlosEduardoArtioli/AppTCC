@@ -7,12 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { EditDevicePagePageRoutingModule } from './edit-timer-page-routing.module';
 
 import { EditDevicePagePage } from './edit-timer-page.page';
- 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule, 
+    IonicModule,
     EditDevicePagePageRoutingModule,
     ReactiveFormsModule
   ],

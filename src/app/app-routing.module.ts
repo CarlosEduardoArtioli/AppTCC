@@ -11,28 +11,28 @@ const routes: Routes = [
   // Rota 'home'
   // Em certas rotas é passado o canActive para se o usuário não estiver logado o redirecionar para a página de login
   // Assim evitando que o usuário entre no em certas páginas sem o login
-  { path: 'home', 
-  loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), 
-  canActivate: [AuthGuard] 
+  { path: 'home',
+  loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+  canActivate: [AuthGuard]
   },
   // Rota 'adicionar'
   {
     path: 'adicionar',
-    loadChildren: () => import('./pages/adicionar/adicionar.module').then( m => m.AdicionarPageModule), 
-    canActivate: [AuthGuard] 
+    loadChildren: () => import('./pages/adicionar/adicionar.module').then( m => m.AdicionarPageModule),
+    canActivate: [AuthGuard]
   },
   // Rota 'edit-device-list'
   {
     path: 'edit-device-list',
-    loadChildren: () => import('./pages/edit/device/edit-device-list/edit-device-list.module').then( m => m.EditDeviceListPageModule), 
-    canActivate: [AuthGuard] 
+    loadChildren: () => import('./pages/edit/device/edit-device-list/edit-device-list.module').then( m => m.EditDeviceListPageModule),
+    canActivate: [AuthGuard]
   },
   // Rota 'edit-device-page/:id'
   // Essa rota recebe o id passado em seu page.ts para redirecinar o usuário para a página de edição de certo dispositivo
   {
     path: 'edit-device-page/:mac',
-    loadChildren: () => import('./pages/edit/device/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule), 
-    canActivate: [AuthGuard] 
+    loadChildren: () => import('./pages/edit/device/edit-device-page/edit-device-page.module').then( m => m.EditDevicePagePageModule),
+    canActivate: [AuthGuard]
   },
   // Rota 'login'
   // Essa rota não recebe o canActive para que mesmo sem login ela seja acessivel
@@ -48,18 +48,18 @@ const routes: Routes = [
   },
   {
     path: 'functions',
-    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule), 
+    loadChildren: () => import('./pages/functions/functions.module').then( m => m.FunctionsPageModule),
     canActivate: [AuthGuard] 
   },
   {
     path: 'timer',
-    loadChildren: () => import('./pages/functions/timer/timer.module').then( m => m.TimerPageModule), 
-    canActivate: [AuthGuard] 
+    loadChildren: () => import('./pages/functions/timer/timer.module').then( m => m.TimerPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit-room-list',
-    loadChildren: () => import('./pages/edit/room/edit-room-list/edit-room-list.module').then( m => m.EditRoomListPageModule), 
-    canActivate: [AuthGuard] 
+    loadChildren: () => import('./pages/edit/room/edit-room-list/edit-room-list.module').then( m => m.EditRoomListPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit-page',
@@ -76,14 +76,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/functions/timer/edit-timer/edit-timer-page.module').then( m => m.EditDevicePagePageModule),
     canActivate: [AuthGuard]
   },
-  
-  // Rota "home"  em casos especiais
-// Esta rota leva até a home caso o usuario esteja logado e digite 
-// alguma rota que não exista. Por exemplo beaver-house.web.app/abc123  
+// Rota "home"  em casos especiais
+// Esta rota leva até a home caso o usuario esteja logado e digite
+// alguma rota que não exista. Por exemplo beaver-house.web.app/abc123
 {
   path: '**',
-  redirectTo: 'home', 
-  canActivate: [AuthGuard] 
+  redirectTo: 'home',
+  canActivate: [AuthGuard]
 },
 
 ];

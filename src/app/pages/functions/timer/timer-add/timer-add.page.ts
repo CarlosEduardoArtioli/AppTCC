@@ -43,17 +43,17 @@ export class TimerAddPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
-    let deviceRes = this.deviceService.getDeviceList();
+    const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
       // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
-        let a = item.payload.toJSON();
+        const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
-      })
-    })
+      });
+    });
   }
 
   myLoop() {
@@ -61,56 +61,56 @@ export class TimerAddPage implements OnInit {
       this.date = new Date().toISOString();
       if (this.i < 99999) {
         this.myLoop();
-      };
+      }
     }, 2000);
   }
 
   done(timer: any, week: any, mac: any) {
     // if apenas para saber se o input não está vázio.
-    if (timer != "" && week != "" && mac != "") {
+    if (timer != '' && week != '' && mac != '') {
       timer = timer.slice(11, 19);
       console.log(week);
 
       if(this.week[0] != null) {
         this.week1 = this.week[0];
       } else {
-        this.week1 = "";
+        this.week1 = '';
       }
 
       if(this.week[1] != null) {
         this.week2 = this.week[1];
       } else {
-        this.week2 = "";
+        this.week2 = '';
       }
 
       if(this.week[2] != null) {
         this.week3 = this.week[2];
       } else {
-        this.week3 = "";
+        this.week3 = '';
       }
 
       if(this.week[3] != null) {
         this.week4 = this.week[3];
       } else {
-        this.week4 = "";
+        this.week4 = '';
       }
 
       if(this.week[4] != null) {
         this.week5 = this.week[4];
       } else {
-        this.week5 = "";
+        this.week5 = '';
       }
 
       if(this.week[5] != null) {
         this.week6 = this.week[5];
       } else {
-        this.week6 = "";
+        this.week6 = '';
       }
 
       if(this.week[6] != null) {
         this.week7 = this.week[6];
       } else {
-        this.week7 = "";
+        this.week7 = '';
       }
 
 
@@ -128,7 +128,7 @@ export class TimerAddPage implements OnInit {
   }
 
   onChange(event) {
-    alert("you habe selected id = " + event.target.value);
+    alert('you habe selected id = ' + event.target.value);
   }
 
   async addTimer() {
@@ -143,8 +143,8 @@ export class TimerAddPage implements OnInit {
     // Pega os valores do caminho os subscreve no 'res'
     this.deviceService.getDeviceList().valueChanges().subscribe(res => {
       // Escreve no console a lista de dispositivos
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
   // Função para mudar o status do dispositivo

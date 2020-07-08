@@ -33,10 +33,10 @@ export class UserService {
             // Cada variavel recebe o dado que foi passado junto ao parâmetro
             name: name,
             email: email
-        })//.then(res => {
+        }); // .then(res => {
         // Escreve no console o valor do formulário
-        //console.log(res)
-        //})
+        // console.log(res)
+        // })
         // Caso ocorra um erro, ele o escreve no console
         // .catch(error => console.log(error));
     }

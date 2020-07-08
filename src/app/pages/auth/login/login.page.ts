@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
     // Se o usuário for diferente de nulo
     if (this.user != null) {
       // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
-      const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+      const loading = await this.loadingCtrl.create({ message: 'Autenticando...' });
       // Mostra a mensagem na tela
       loading.present();
       // Navega para a página 'home'
@@ -59,12 +59,12 @@ export class LoginPage implements OnInit {
   // Função para o envio da autenticação
   async submit() {
     // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
-    const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+    const loading = await this.loadingCtrl.create({ message: 'Autenticando...' });
     // Mostra a mensagem na tela
     loading.present();
 
     // Função que faz o login com email e senha, ela pega os valores do HTML
-    this.fbAuth.auth.signInWithEmailAndPassword(this.form.controls['email'].value, this.form.controls['password'].value)
+    this.fbAuth.auth.signInWithEmailAndPassword(this.form.controls.email.value, this.form.controls.password.value)
       // Quando pega os dados
       .then((data) => {
         // Função que retira a mensagem de "Autenticando..."
@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
         // Função que retira a mensagem de "Autenticando..."
         loading.dismiss();
         // Chama a função 'showMessage()' e passa o parâmetro "Usuário ou senha inválidos"
-        this.showMessage("Usuário ou senha inválidos");
+        this.showMessage('Usuário ou senha inválidos');
       });
   }
 
@@ -96,7 +96,7 @@ export class LoginPage implements OnInit {
         // "Seta" no local storage um item com o nome 'app.user' com um JSON com os valores recebidos 
         localStorage.setItem('app.user', JSON.stringify(new User(data.user.displayName, data.user.email, data.user.photoURL)));
         // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
-        const loading = await this.loadingCtrl.create({ message: "Autenticando..." });
+        const loading = await this.loadingCtrl.create({ message: 'Autenticando...' });
         // Mostra a mensagem na tela
         loading.present();
         // Navega para a página 'home'
@@ -109,7 +109,7 @@ export class LoginPage implements OnInit {
         // Escreve no console a mensagem de erro
         console.log(err);
         // Chama a função 'showMessage()' e passa o parâmetro "Usuário ou senha inválidos"
-        this.showMessage("Usuário ou senha inválidos");
+        this.showMessage('Usuário ou senha inválidos');
       });
   }
 

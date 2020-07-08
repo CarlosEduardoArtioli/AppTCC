@@ -46,11 +46,10 @@ export class TimerService {
       week5: week5,
       week6: week6,
       week7: week7
-    })//.then(res => {
-      
+    }); // .then(res => {
       // Escreve no console o valor do formulário
-      //console.log(res)
-    //})
+      // console.log(res)
+      // })
       // Caso ocorra um erro, ele o escreve no console
      // .catch(error => console.log(error));
   }
@@ -80,7 +79,7 @@ export class TimerService {
     return this.timerRef.update({
       timer: apt.timer,
       week: apt.week1
-    })
+    });
   }
 
   // Função que exclui os dados do objeto com o id passado
