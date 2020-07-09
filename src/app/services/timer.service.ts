@@ -34,9 +34,9 @@ export class TimerService {
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createTimer(timer: any, week1: any, week2: any, week3: any, week4: any, week5: any, week6: any, week7: any, mac: any) {
+  createTimer(timer: any, week1: any, week2: any, week3: any, week4: any, week5: any, week6: any, week7: any, mac: any, wt: any, action: any) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/devices/${mac}/timer1`).update({
+    this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${wt}`).update({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       timer: timer,
       week1: week1,
@@ -45,7 +45,8 @@ export class TimerService {
       week4: week4,
       week5: week5,
       week6: week6,
-      week7: week7
+      week7: week7,
+      action: action
     }); // .then(res => {
       // Escreve no console o valor do formulário
       // console.log(res)

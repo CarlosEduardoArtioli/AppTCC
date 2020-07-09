@@ -52,7 +52,8 @@ export class DeviceService {
       week4: '',
       week5: '',
       week6: '',
-      week7: ''
+      week7: '',
+      wt: ''
     }); // .then(res => {
       // Escreve no console o valor do formulário
       // console.log(res)

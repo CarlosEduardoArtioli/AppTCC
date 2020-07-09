@@ -58,16 +58,16 @@ export class TimerAddPage implements OnInit {
 
   myLoop() {
     setTimeout(() => {
-      this.date = new Date().toISOString();
+      this.date = new Date().toISOString(); 
       if (this.i < 99999) {
         this.myLoop();
       }
     }, 2000);
   }
 
-  done(timer: any, week: any, mac: any) {
+  done(timer: any, week: any, mac: any, wt: any, action: any) {
     // if apenas para saber se o input não está vázio.
-    if (timer != '' && week != '' && mac != '') {
+    if (timer != '' && week != '' && mac != '' && wt != '') {
       timer = timer.slice(11, 19);
       console.log(week);
 
@@ -122,7 +122,7 @@ export class TimerAddPage implements OnInit {
       console.log(this.week6);
       console.log(this.week7);
 
-      this.timerService.createTimer(timer, this.week1, this.week2, this.week3, this.week4, this.week5, this.week6, this.week7, mac);
+      this.timerService.createTimer(timer, this.week1, this.week2, this.week3, this.week4, this.week5, this.week6, this.week7, mac, wt, action);
 
     }
   }

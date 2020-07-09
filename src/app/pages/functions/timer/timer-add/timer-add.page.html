@@ -42,8 +42,27 @@
         <ion-select-option value="dom">Dom</ion-select-option>
       </ion-select>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Selecione Qual Será Criado</ion-label>
+      <ion-select [(ngModel)]="wt" (ionChange)="onChange($event)" id="wt" interface="alert">
+        <ion-select-option value="timer1">Timer - 1</ion-select-option>
+        <ion-select-option value="timer2">Timer - 2</ion-select-option>
+        <ion-select-option value="timer3">Timer - 3</ion-select-option>
+        <ion-select-option value="timer4">Timer - 4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Status do Dispositivo</ion-label>
+      <ion-select [(ngModel)]="action" (ionChange)="onChange($event)" id="action" interface="alert">
+        <ion-select-option value="ligado">Ligado</ion-select-option>
+        <ion-select-option value="desligado">Desligado</ion-select-option>
+      </ion-select>
+    </ion-item>
+
   </ion-list>
 
-  <ion-button (click)="done(timer, week, mac)">Concluir</ion-button>
+  <ion-button (click)="done(timer, week, mac, wt, action)">Concluir</ion-button>
   <ion-button color="danger" routerLink="/timer">Cancelar</ion-button>
 </ion-content>

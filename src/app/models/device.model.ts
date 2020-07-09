@@ -15,7 +15,7 @@ export class Dispositivos {
        public week4: null,
        public week5: null,
        public week6: null,
-       public week7: null,
+       public week7: null
     ) {}
 }
 
