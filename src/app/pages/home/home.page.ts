@@ -75,7 +75,7 @@ export class HomePage implements OnInit {
   }
 
   // Função para mudar o status do dispositivo
-  mudaStatus(id: any){
+  mudaStatus(id: any) {
     // Chama a função mudaStatus no AppointmentService
      this.deviceService.mudaStatus(id);
   }
