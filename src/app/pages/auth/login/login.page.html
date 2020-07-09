@@ -1,4 +1,4 @@
-<ion-content class="ion-padding" swipeEnabled="false" color="secondary">
+<ion-content class="ion-padding" swipeEnabled="false">
   <br><br>
   <h1 class="ion-text-center logo-white">
     Beaver House
@@ -15,7 +15,6 @@
         <ion-label position="stacked">Senha</ion-label>
         <ion-input #myInput type="password" formControlName="password"></ion-input>
       </ion-item>
-      
     </form>
   </ion-list>
   <br>
@@ -23,7 +22,7 @@
     Entrar
   </ion-button>
   <br>
-  <ion-button ion-item color="light" expand="block" (click)="signInWithGoogle()" >
+  <ion-button ion-item color="light" expand="block" (click)="signInWithGoogle()">
     <ion-icon slot="start" name="logo-google"></ion-icon>&nbsp;&nbsp;Login com Google
   </ion-button>
   <br>
