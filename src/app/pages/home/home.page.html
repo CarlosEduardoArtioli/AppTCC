@@ -15,9 +15,11 @@
 
   <ion-segment color="secondary" scrollable [(ngModel)]="selectTabs">
 
-    <ion-segment-button value="all">
-      <ion-label>Todos</ion-label>
-    </ion-segment-button>
+    <div>
+      <ion-segment-button value="all">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+    </div>
 
     <div *ngFor="let room of Rooms">
       <ion-segment-button value="{{ room.name }}">

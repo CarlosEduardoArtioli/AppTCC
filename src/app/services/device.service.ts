@@ -105,7 +105,7 @@ export class DeviceService {
     // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
     this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).once('value').then(snapshot => {
       // Verifica se o valor do nó é igual a 'on'
-      if ((snapshot.val()) == 'ligado') {
+      if ((snapshot.val()) === 'ligado') {
         // Se for, ele entra no caminho e altera o valor e muda o valor para 'off'
         this.db.database.ref(`/users/${this.user.email}/devices/${mac}/status`).set('desligado');
       } else {

@@ -38,7 +38,7 @@ export class AppComponent {
 
   ) {
     router.events.forEach((event) => {
-      if (this.router.url === '/login' || this.router.url === '/signup') {
+      if (this.router.url === '/login' || this.router.url === '/signup' || this.router.url === '/edit-device-page') {
         this.showComponent = false;
       } else {
         this.showComponent = true;
