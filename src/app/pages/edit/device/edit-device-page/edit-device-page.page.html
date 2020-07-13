@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="menu/edit-device-list"></ion-back-button>
     </ion-buttons>
     <ion-title>
       Editar
@@ -25,7 +25,7 @@
       </ion-item>
 
       <ion-item>
-       {{ room }}
+        {{ room }}
         <ion-button (click)="escolherComodo()" slot="end">Selecionar</ion-button>
       </ion-item>
 
@@ -34,7 +34,7 @@
         {{ imagem }}
         <ion-button (click)="escolherImagem()" slot="end">Selecionar</ion-button>
       </ion-item>
-       
+
 
       <ion-row>
         <ion-col>

@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
       // Mostra a mensagem na tela
       loading.present();
       // Navega para a página 'home'
-      this.navCtrl.navigateRoot('home');
+      this.navCtrl.navigateRoot('menu/home');
       // Função que retira a mensagem de "Autenticando..."
       loading.dismiss();
     }
@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
         // Entra no local storage e "seta" o item 'app.user' com um JSON com os valores recebidos 
         localStorage.setItem('app.user', JSON.stringify(new User('', data.user.email, '')));
         // Navega para a página 'home'
-        this.navCtrl.navigateRoot('home');
+        this.navCtrl.navigateRoot('menu/home');
       })
       // Caso ocorra erro
       .catch((err) => {
@@ -100,7 +100,7 @@ export class LoginPage implements OnInit {
         // Mostra a mensagem na tela
         loading.present();
         // Navega para a página 'home'
-        this.navCtrl.navigateRoot('home');
+        this.navCtrl.navigateRoot('menu/home');
         // Função que retira a mensagem de "Autenticando..."
         loading.dismiss();
       })
