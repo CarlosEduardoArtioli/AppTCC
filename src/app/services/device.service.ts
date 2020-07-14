@@ -81,13 +81,12 @@ export class DeviceService {
 
   // Função que atualiza os dados do objeto
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateDevice(apt: Dispositivos) {
+  updateDevice(nome, icone, comodo) {
     // Retorna para a função a atualização dos dados
     return this.deviceRef.update({
-      name: apt.name,
-      mac: apt.mac,
-      room: apt.room,
-      icon: apt.icon
+      name: nome,
+      room: comodo,
+      icon: icone,
     })
   }
 

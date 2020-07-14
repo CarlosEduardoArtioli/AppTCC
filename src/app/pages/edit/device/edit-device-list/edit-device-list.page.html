@@ -10,31 +10,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="ios list-ios hydrated">
+  <ion-list lines="full">
 
-    <ion-item *ngFor="let device of Devices" class="user-list">
-      <ion-label>
-        <h5>
-          <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.name}}
-        </h5>
-        <h5>
-          <ion-icon name="hardware-chip"></ion-icon> {{device.mac}}
-        </h5>
-        <h5>
-          <ion-icon name="contrast"></ion-icon> {{device.room}}
-        </h5>
-      </ion-label>
+    <ion-item *ngFor="let device of Devices">
+        <ion-label>
+          <h5>
+            <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.name}}
+          </h5>
+          <h5>
+            <ion-icon name="hardware-chip"></ion-icon> {{device.mac}}
+          </h5>
+          <h5>
+            <ion-icon name="home-outline"></ion-icon> {{device.room}}
+          </h5>
+        </ion-label>
 
-      <div class="item-note" item-end>
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
-        </button>
+        <div>
+          <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+            <ion-icon name="create" style="zoom:2.0"></ion-icon>
+          </button>
 
-        <button class="transparent" ion-button clear (click)="deleteDevice(device.$key)">
-          <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-        </button>
+          <button class="transparent" ion-button clear (click)="deleteDevice(device.$key)">
+            <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+          </button>
 
-      </div>
+        </div>
 
     </ion-item>
 

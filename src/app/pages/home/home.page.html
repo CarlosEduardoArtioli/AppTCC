@@ -13,7 +13,7 @@
 
 <ion-content>
 
-  <ion-segment color="secondary" scrollable [(ngModel)]="selectTabs">
+  <ion-segment color="light shade" scrollable [(ngModel)]="selectTabs">
 
     <div>
       <ion-segment-button value="all">
@@ -36,8 +36,9 @@
           <ion-button fill="solid" expand="block" size="large" class="sqare_button" color="{{ device.status }}"
             (click)="mudaStatus(device.$key)">
             <div class="vertical">
-              <ion-icon slot="start" src="/assets/svg/{{ device.icon }}.svg"></ion-icon>
-              <span class="">{{ device.name }}</span>
+              <ion-icon *ngIf="device.status == 'desligado'" slot="start" src="/assets/svg/{{ device.icon }}.svg"></ion-icon>
+              <ion-icon *ngIf="device.status == 'ligado'" slot="start" src="/assets/svg/{{ device.icon }}dark.svg"></ion-icon>
+              <span>{{ device.name }}</span>
             </div>
           </ion-button>
         </div>

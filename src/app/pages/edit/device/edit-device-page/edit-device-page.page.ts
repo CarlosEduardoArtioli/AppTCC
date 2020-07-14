@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../../../../services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActionSheetController } from '@ionic/angular';
+import { RoomService } from 'src/app/services/room.service';
+import { Room } from 'src/app/models/room.model';
 
 @Component({
   selector: 'app-edit-device-page',
@@ -11,13 +13,28 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class EditDevicePagePage implements OnInit {
   // Declaração de variávies
-  updateDeviceForm: FormGroup;
   mac: any;
-  imagem = '';
-  room = '';
-  icon = [];
+  icone = '';
+  comodo = '';
+  name = '';
+  Icons = [
+    {
+      name: 'Lâmpada',
+      icon: '/assets/svg/Lâmpada.svg',
+    },
+    {
+      name: 'Televisão',
+      icon: '/assets/svg/Televisão.svg',
+    },
+    {
+      name: 'Ventilador',
+      icon: '/assets/svg/Ventilador.svg',
+    }
+  ];
+  Rooms = [];
 
   constructor(
+    private roomService: RoomService,
     private deviceService: DeviceService,
     private actRoute: ActivatedRoute,
     private router: Router,
@@ -27,78 +44,54 @@ export class EditDevicePagePage implements OnInit {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
     this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.updateDeviceForm.setValue(res);
-      this.icon = res;
+      this.icone = res.icon;
+      this.comodo = res.room;
+      this.name = res.name;
       console.log(res);
     });
   }
 
   // Função para quando a página for iniciada
   ngOnInit() {
-    // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
-    this.updateDeviceForm = this.fb.group({
-      icon: [''],
-      mac: [''],
-      name: [''],
-      room: [''],
-      status: [''],
-    });
-    console.log(this.updateDeviceForm.value);
     this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.imagem = res.icon;
-      this.room = res.room;
+      this.name = res.name;
+      this.icone = res.icon;
+      this.comodo = res.room;
     });
-    console.log(this.icon);
-    console.log(this.room);
+    console.log(this.comodo);
+
+    // Chama a função 'fetchDevices()'
+    this.fetchDevices();
+
+    // Atribui a variávei 'deviceRes' o seguinte valor
+    // Puxa a função 'getDeviceList'
+    const roomRes = this.roomService.getRoomList();
+    // Pega os valores da lista de dispositivos
+    roomRes.snapshotChanges().subscribe(res => {
+      // "Subscreve" a variável devices com os dispostivos e seus valores
+      this.Rooms = [];
+      res.forEach(item => {
+        const a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.Rooms.push(a as Room);
+      });
+    });
   }
 
-  updateForm() {
-    this.deviceService.updateDevice(this.updateDeviceForm.value)
+  // Função para mostrar a lista de dispositvos no console
+  fetchDevices() {
+    // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
+    this.roomService.getRoomList().valueChanges().subscribe(res => {
+      // Escreve no console a lista de dispositivos
+      console.log(res);
+    });
+  }
+
+  update() {
+    this.deviceService.updateDevice(this.name, this.icone, this.comodo)
       .then(() => {
         this.router.navigate(['/home']);
       })
       .catch(error => console.log(error));
   }
-
-  // Função para aparecer os ícones para ser selecionado.
-  async escolherImagem() {
-    // Cria um actionSheet.
-    const actionSheet = await this.actionSheetController.create({
-      // Header com nome 'Imagens'.
-      header: 'Imagens',
-      // Gera botões
-      buttons: [
-        {
-          // Botão cancelar
-          text: 'Cancelar',
-          icon: 'close',
-          role: 'cancel',
-        },
-        {
-          text: 'Lâmpada',
-          icon: '/assets/svg/Lâmpada.svg',
-          handler: () => {
-            this.imagem = 'Lâmpada';
-          }
-        }, {
-          text: 'Televisão',
-          icon: '/assets/svg/Televisão.svg',
-          handler: () => {
-            this.imagem = 'Televisão';
-          }
-        }, {
-          text: 'Ventilador',
-          icon: '/assets/svg/Ventilador.svg',
-          handler: () => {
-            this.imagem = 'Ventilador';
-          }
-        }]
-    });
-    await actionSheet.present();
-  }
-
-  escolherComodo(){
-    
-  }
-
 }

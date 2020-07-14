@@ -25,6 +25,7 @@ export class MenuPage implements OnInit {
     },
     {
       title: 'Editar',
+      icon: 'create-outline',
       open: false,
       children: [
         {
@@ -45,6 +46,7 @@ export class MenuPage implements OnInit {
       icon: 'build'
     },
   ];
+
   constructor(
     private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -58,6 +60,7 @@ export class MenuPage implements OnInit {
 
     this.user = JSON.parse(localStorage.getItem('app.user'));
   }
+
   userName() {
 
     this.user = JSON.parse(localStorage.getItem('app.user'));
