@@ -5,20 +5,20 @@
   </h1>
   <br><br>
   <ion-list lines="none">
-    <form [formGroup]="form">
+    <form>
       <ion-item>
         <ion-label position="stacked">E-mail</ion-label>
-        <ion-input #myInput type="email" formControlName="email"></ion-input>
+        <ion-input type="text" #email required></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Senha</ion-label>
-        <ion-input #myInput type="password" formControlName="password"></ion-input>
+        <ion-input type="password" #password required></ion-input>
       </ion-item>
     </form>
   </ion-list>
   <br>
-  <ion-button ion-item color="light" fill="outline" shape="round" expand="full" size="medium" (click)="submit()">
+  <ion-button ion-item color="light" fill="outline" shape="round" expand="full" size="medium" type="submit" (click)="signUp(email, password)">
     Cadastrar
   </ion-button>
   <br>

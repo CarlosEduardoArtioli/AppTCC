@@ -24,40 +24,12 @@ export class UserService {
 
     }
 
-    // Função que cria os dados do dispositivo
-    // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-    createUser(email, name) {
-        email = email.replace(/[.#$]+/g, ':');
-        // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-        this.db.object(`/users/${email}/settings`).set({
-            // Cada variavel recebe o dado que foi passado junto ao parâmetro
-            name: name,
-            email: email
-        }); // .then(res => {
-        // Escreve no console o valor do formulário
-        // console.log(res)
-        // })
-        // Caso ocorra um erro, ele o escreve no console
-        // .catch(error => console.log(error));
-    }
-
-    // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
-    getUser(email) {
-        email = email.replace(/[.#$]+/g, ':');
-        // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
-        // /dispositivos/id (sendo o id passado junto a função)
-        this.userRef = this.db.object(`/users/${email}/settings/name`);
-        // Retorna o deviceRef para a função
-        console.log(this.userRef);
-        return this.userRef;
-    }
-
-    // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
+    // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro
     getUserName(email) {
         email = email.replace(/[.#$]+/g, ':');
         // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
         // /dispositivos/id (sendo o id passado junto a função)
-        this.name = this.db.object(`/users/${email}/settings/name`);
+        this.name = this.db.object(`/users/${email}/settings/displayName`);
 
         return this.name;
     }
@@ -66,6 +38,6 @@ export class UserService {
     updateUserName(name, email) {
         email = email.replace(/[.#$]+/g, ':');
         // Acessa o caminho /dispositivos + id + /status do firebese e "escuta" o valor do nó
-        this.db.database.ref(`/users/${email}/settings/name`).set(name);
+        this.db.database.ref(`/users/${email}/settings/displayName`).set(name);
     }
 }

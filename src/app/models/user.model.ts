@@ -2,10 +2,12 @@
 
 export class User {
     constructor(
-        public name: string = '',
-        public email: string = '',
-        public image: string = '',
-    )  {}
+        public uid: string,
+        public email: string,
+        public displayName: string,
+        public photoURL: string,
+        public emailVerified: boolean,
+    ) { }
 }
 
 // Models são os "Modelos" de dados que vão ser enviados ao banco
