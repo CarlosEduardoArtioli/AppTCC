@@ -22,6 +22,8 @@ export class TimerAddPage implements OnInit {
   public week5: any;
   public week6: any;
   public week7: any;
+  public wt: any;
+  public action: any;
   customDayShortNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
   Devices = [];
@@ -59,10 +61,11 @@ export class TimerAddPage implements OnInit {
   myLoop() {
     setTimeout(() => {
       this.date = new Date().toISOString(); 
-      if (this.i < 99999) {
+      if (this.i < 30) {
         this.myLoop();
+        this.i = this.i + 5;
       }
-    }, 2000);
+    }, 5000);
   }
 
   done(timer: any, week: any, mac: any, wt: any, action: any) {

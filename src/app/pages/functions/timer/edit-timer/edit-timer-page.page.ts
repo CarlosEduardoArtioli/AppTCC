@@ -16,6 +16,8 @@ export class EditDevicePagePage implements OnInit {
   updateTimerForm: FormGroup;
   mac: any;
   Devices = [];
+  timer: any;
+  week: any;
 
   constructor(
     private deviceService: DeviceService,
