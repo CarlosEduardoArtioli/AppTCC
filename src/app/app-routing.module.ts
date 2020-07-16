@@ -54,6 +54,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'verify-email',
+    loadChildren: () => import('./pages/auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
+  },
   // Rota "home"  em casos especiais
   // Esta rota leva até a home caso o usuario esteja logado e digite
   // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123
@@ -62,6 +66,7 @@ const routes: Routes = [
     redirectTo: 'menu/home',
     canActivate: [AuthGuard]
   },
+
 
 
 ];

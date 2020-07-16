@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     // Função de verificação do usuário (A função retorna um booleano(true ou false))
     canActivate() {
         // Busca no local storage o usuário logado
-        const user = localStorage.getItem('app.user');
+        const user = localStorage.getItem('user');
         // Se não houver usuário logado
         if (!user) {
             // Redireciona para a pagina 'login'

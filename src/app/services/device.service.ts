@@ -30,7 +30,7 @@ export class DeviceService {
     // Recebeu o apelido de db
     private db: AngularFireDatabase
   ) {
-    this.user = JSON.parse(localStorage.getItem('app.user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.user.email = this.user.email.replace(/[.#$]+/g, ':');
   }
 

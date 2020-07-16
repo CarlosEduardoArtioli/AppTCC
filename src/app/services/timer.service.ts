@@ -28,7 +28,7 @@ export class TimerService {
     // Recebeu o apelido de db
     private db: AngularFireDatabase
   ) {
-    this.user = JSON.parse(localStorage.getItem('app.user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.user.email = this.user.email.replace(/[.#$]+/g, ':');
   }
 
@@ -48,11 +48,11 @@ export class TimerService {
       week7: week7,
       action: action
     }); // .then(res => {
-      // Escreve no console o valor do formulário
-      // console.log(res)
-      // })
-      // Caso ocorra um erro, ele o escreve no console
-     // .catch(error => console.log(error));
+    // Escreve no console o valor do formulário
+    // console.log(res)
+    // })
+    // Caso ocorra um erro, ele o escreve no console
+    // .catch(error => console.log(error));
   }
 
   // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
