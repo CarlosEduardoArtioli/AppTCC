@@ -52,7 +52,7 @@ export class AuthenticationService {
   PasswordRecover(passwordResetEmail) {
     return this.ngFireAuth.auth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email has been sent, please check your inbox.');
+        window.alert('Email de recuperação de senha enviado, por favor verifique seu email!');
       }).catch((error) => {
         window.alert(error);
       });
@@ -100,6 +100,12 @@ export class AuthenticationService {
     const userLocal = JSON.parse(localStorage.getItem('user'));
     userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
     this.db.object(`/users/${userLocal.email}/settings`).set(userData);
+  }
+
+  SetUserEmail() {
+    const userLocal = JSON.parse(localStorage.getItem('user'));
+    userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
+    this.db.object(`/users/${userLocal.email}/settings`).set(userLocal);
   }
 
   // Sign-out

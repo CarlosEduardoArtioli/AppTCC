@@ -7,7 +7,7 @@
   <ion-list lines="none">
     <form>
       <ion-item>
-        <ion-label position="stacked">E-mail</ion-label>
+        <ion-label position="stacked">Email</ion-label>
         <ion-input type="text" #email required></ion-input>
       </ion-item>
 
@@ -18,11 +18,11 @@
     </form>
   </ion-list>
   <br>
-  <ion-button ion-item color="light" fill="outline" shape="round" expand="full" size="medium" type="submit" (click)="signUp(email, password)">
+  <ion-button ion-item color="dark" fill="outline" shape="round" expand="full" size="medium" type="submit" (click)="signUp(email, password)">
     Cadastrar
   </ion-button>
   <br>
-  <ion-button ion-item color="light" fill="clear" expand="full" (click)="cancel()">
+  <ion-button ion-item color="dark" fill="clear" expand="full" (click)="cancel()">
     Cancelar
   </ion-button>
 </ion-content>

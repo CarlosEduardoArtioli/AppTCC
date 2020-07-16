@@ -67,6 +67,7 @@ export class MenuPage implements OnInit {
     if (this.user.displayName === null) {
       localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png', this.user.emailVerified)));
       this.user = JSON.parse(localStorage.getItem('user'));
+      this.authService.SetUserEmail();
       this.userService.updateUserName(this.user.displayName, this.user.email);
     } else {
       this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
