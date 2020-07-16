@@ -46,7 +46,6 @@ export class MenuPage implements OnInit {
   ];
 
   constructor(
-    private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
     private alertCtrl: AlertController,
     private toastController: ToastController,

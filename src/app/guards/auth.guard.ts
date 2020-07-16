@@ -1,35 +1,24 @@
-// O auth.guard.ts serve para verificar se o usuário está autenticado
-// e não o deixa passar da tela de login/register
-// Para mais informações assistir o curso "Frontend Developer"
-// Curso Angular 8, Ionic 4 e Firebase
-
-import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
-// Importação da classe NavController
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { CanActivate } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthGuard implements CanActivate {
-    constructor(
-        // NavController é uma classe para o controle da navegação dentro do App
-        // Recebeu o apelido de navCtrl
-        private navCtrl: NavController,
-    ) {
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router
+  ) { }
 
-    }
+  canActivate(): Promise<boolean> {
+    return new Promise(resolve => {
+      this.authService.getAuth().onAuthStateChanged(user => {
+        if (!user) { this.router.navigate(['login']); }
 
-    // Função de verificação do usuário (A função retorna um booleano(true ou false))
-    canActivate() {
-        // Busca no local storage o usuário logado
-        const user = localStorage.getItem('user');
-        // Se não houver usuário logado
-        if (!user) {
-            // Redireciona para a pagina 'login'
-            this.navCtrl.navigateRoot('login');
-            // Retorna para a função o valor 'false'
-            return false;
-        }
-        // Se houver usuário logado retorna para a função o valor 'true'
-        return true;
-    }
+        resolve(user ? true : false);
+      });
+    });
+  }
 }
