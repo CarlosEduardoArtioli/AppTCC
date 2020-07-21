@@ -51,7 +51,7 @@ export class AuthenticationService {
       .then(() => {
         window.alert('Email de recuperação de senha enviado, por favor verifique seu email!');
       }).catch((error) => {
-        window.alert(error);
+        console.log(error);
       });
   }
 
@@ -81,7 +81,7 @@ export class AuthenticationService {
           this.SetUserData(result.user);
         });
       }).catch((error) => {
-        window.alert(error);
+        console.log(error);
       });
   }
 
@@ -95,8 +95,12 @@ export class AuthenticationService {
       emailVerified: user.emailVerified
     };
     const userLocal = JSON.parse(localStorage.getItem('user'));
-    userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
-    this.db.object(`/users/${userLocal.email}/settings`).set(userData);
+    if (userLocal.email) {
+      userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
+      this.db.object(`/users/${userLocal.email}/settings`).set(userData);
+    } else {
+      this.SetUserData(user);
+    }
   }
 
   SetUserEmail() {

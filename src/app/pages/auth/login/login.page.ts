@@ -73,7 +73,10 @@ export class LoginPage implements OnInit {
           return false;
         }
       }).catch((error) => {
-        this.showMessage(error.message);
+        if (error.message === 'Cannot read property \'emailVerified\' of null' ) {
+          this.logIn(email, password);
+        }
+        console.log(error.message);
       });
   }
 }
