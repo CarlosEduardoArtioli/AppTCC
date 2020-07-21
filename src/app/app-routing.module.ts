@@ -35,16 +35,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/auth/signup/signup.module').then(m => m.SignupPageModule)
   },
   {
-    path: 'timer',
-    loadChildren: () => import('./pages/functions/timer/timer.module').then(m => m.TimerPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'timer-add',
-    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'edit-timer-page/:mac',
     loadChildren: () => import('./pages/functions/timer/edit-timer/edit-timer-page.module').then(m => m.EditDevicePagePageModule),
     canActivate: [AuthGuard]

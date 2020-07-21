@@ -35,6 +35,16 @@ const routes: Routes = [
         loadChildren: () => import('../functions/functions.module').then(m => m.FunctionsPageModule),
         canActivate: [AuthGuard]
       },
+      {
+        path: 'timer',
+        loadChildren: () => import('../functions/timer/timer.module').then(m => m.TimerPageModule),
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'timer-add',
+        loadChildren: () => import('../functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
+        canActivate: [AuthGuard]
+      },
     ]
   }
 ];

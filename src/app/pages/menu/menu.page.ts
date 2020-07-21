@@ -40,8 +40,15 @@ export class MenuPage implements OnInit {
     },
     {
       title: 'Funções',
-      url: '/menu/functions',
-      icon: 'build'
+      icon: 'build',
+      open: false,
+      children: [
+        {
+          title: 'Timer',
+          url: '/menu/timer',
+          icon: 'alarm-outline'
+        },
+      ]
     },
   ];
 
@@ -54,9 +61,9 @@ export class MenuPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userName();
-
     this.user = JSON.parse(localStorage.getItem('user'));
+
+    this.userName();
   }
 
   userName() {
