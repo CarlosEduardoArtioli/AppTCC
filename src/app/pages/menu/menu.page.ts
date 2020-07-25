@@ -14,7 +14,7 @@ export class MenuPage implements OnInit {
   // Variável user
   user: User;
   novoNome: any;
-  nome: any;
+  name: any;
 
   pages = [
     {
@@ -64,6 +64,8 @@ export class MenuPage implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
+    this.name = this.user.displayName;
+
     this.userName();
   }
 
@@ -77,10 +79,12 @@ export class MenuPage implements OnInit {
     } else {
       this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
         this.user.displayName = res;
+        // tslint:disable-next-line: max-line-length
         localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified)));
       });
     }
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.name = this.user.displayName;
   }
 
 
@@ -151,8 +155,10 @@ export class MenuPage implements OnInit {
               this.newname();
               // Função para mudar o nome do usuário.
               this.userService.updateUserName(this.novoNome, this.user.email);
+              // tslint:disable-next-line: max-line-length
               localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.emailVerified)));
               this.user = JSON.parse(localStorage.getItem('user'));
+              this.name = this.user.displayName;
             }
           }
         }
