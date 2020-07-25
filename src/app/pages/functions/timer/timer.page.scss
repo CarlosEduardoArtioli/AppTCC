@@ -1,49 +1,61 @@
 #container {
-    text-align: center;
-  
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  #container strong {
-    font-size: 20px;
-    line-height: 26px;
-  }
-  
-  #container p {
-    font-size: 16px;
-    line-height: 22px;
-  
-    color: #8c8c8c;
-  
-    margin: 0;
-  }
-  
-  #container a {
-    text-decoration: none;
-  }
-  
-  ion-content ion-toolbar {
-    --background: translucent;
-  }
-  
-  ion-icon {
-    font-size: 44px;
-  }
-  
-  .sqare_button {
-    height: 80px;
-    --vertical-align: middle;
-    --padding-start: 10px;
-    --padding-end: 10px;
-    --ripple-color: darkcyan;
-    --padding-bottom: 2px !important;
-    --box-shadow: none;
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+
+.sqare_button {
+  height: 80px;
+  --vertical-align: middle;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --ripple-color: darkcyan;
+  --padding-bottom: 2px !important;
+  --box-shadow: none;
+}
+
+.space {
+  padding-left: 15px;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+ion-header {
+  ion-button {
+    --background: transparent;
+    --box-shadow: transparent;
   }
 
-  .space {
-    padding-left: 15px;
+  ion-icon {
+    color: white;
   }
+}

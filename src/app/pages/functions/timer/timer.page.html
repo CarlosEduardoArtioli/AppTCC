@@ -6,26 +6,68 @@
     <ion-title>
       Timer
     </ion-title>
-    <ion-button slot="end" routerLink="/timer-add">
-      <ion-icon name="add-circle-outline"></ion-icon>
+    <ion-button class="transparent" ion-button clear slot="end" routerLink="/timer-add">
+      <ion-icon name="add-circle-outline" style="zoom:1.5"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" *ngFor="let device of Devices">
-        <ion-button fill="solid" expand="block" size="large" class="sqare_button" color="{{ device.status }}"
-          *ngIf="device.timer.length >= 4" [routerLink]="['/edit-timer-page/', device.$key]">
+  <ion-list *ngFor="let device of Devices">
+
+    <ion-item>
+      <ion-label><strong>{{device.name}}</strong></ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="device.timer.timer1.timer.length > 0">
+      <ion-label>{{device.timer.timer1.timer}}</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week2.length"> {{device.timer.timer1.week1}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week3.length && device.timer.timer1.week2.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week4.length && device.timer.timer1.week3.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}, {{device.timer.timer1.week3}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week5.length && device.timer.timer1.week4.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}, {{device.timer.timer1.week3}}, {{device.timer.timer1.week4}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week6.length && device.timer.timer1.week5.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}, {{device.timer.timer1.week3}}, {{device.timer.timer1.week4}}, {{device.timer.timer1.week5}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer1.week7.length && device.timer.timer1.week6.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}, {{device.timer.timer1.week3}}, {{device.timer.timer1.week4}}, {{device.timer.timer1.week5}}, {{device.timer.timer1.week6}}.</ion-label>
+      <ion-label *ngIf="device.timer.timer1.week7.length > 0"> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}, {{device.timer.timer1.week3}}, {{device.timer.timer1.week4}}, {{device.timer.timer1.week5}}, {{device.timer.timer1.week6}}, {{device.timer.timer1.week7}}.</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="device.timer.timer2.timer.length > 0">
+      <ion-label>{{device.timer.timer2.timer}}</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week2.length"> {{device.timer.timer2.week1}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week3.length && device.timer.timer2.week2.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week4.length && device.timer.timer2.week3.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}, {{device.timer.timer2.week3}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week5.length && device.timer.timer2.week4.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}, {{device.timer.timer2.week3}}, {{device.timer.timer2.week4}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week6.length && device.timer.timer2.week5.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}, {{device.timer.timer2.week3}}, {{device.timer.timer2.week4}}, {{device.timer.timer2.week5}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer2.week7.length && device.timer.timer2.week6.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}, {{device.timer.timer2.week3}}, {{device.timer.timer2.week4}}, {{device.timer.timer2.week5}}, {{device.timer.timer2.week6}}.</ion-label>
+      <ion-label *ngIf="device.timer.timer2.week7.length > 0"> {{device.timer.timer2.week1}}, {{device.timer.timer2.week2}}, {{device.timer.timer2.week3}}, {{device.timer.timer2.week4}}, {{device.timer.timer2.week5}}, {{device.timer.timer2.week6}}, {{device.timer.timer2.week7}}.</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="device.timer.timer3.timer.length > 0">
+      <ion-label *ngIf="1 > device.timer.timer3.week2.length"> {{device.timer.timer3.week1}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer3.week3.length && device.timer.timer3.week2.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer3.week4.length && device.timer.timer3.week3.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}, {{device.timer.timer3.week3}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer3.week5.length && device.timer.timer3.week4.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}, {{device.timer.timer3.week3}}, {{device.timer.timer3.week4}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer3.week6.length && device.timer.timer3.week5.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}, {{device.timer.timer3.week3}}, {{device.timer.timer3.week4}}, {{device.timer.timer3.week5}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer3.week7.length && device.timer.timer3.week6.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}, {{device.timer.timer3.week3}}, {{device.timer.timer3.week4}}, {{device.timer.timer3.week5}}, {{device.timer.timer3.week6}}.</ion-label>
+      <ion-label *ngIf="device.timer.timer3.week7.length > 0"> {{device.timer.timer3.week1}}, {{device.timer.timer3.week2}}, {{device.timer.timer3.week3}}, {{device.timer.timer3.week4}}, {{device.timer.timer3.week5}}, {{device.timer.timer3.week6}}, {{device.timer.timer3.week7}}.</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="device.timer.timer4.timer.length > 0">
+      <ion-label *ngIf="1 > device.timer.timer4.week2.length"> {{device.timer.timer4.week1}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer4.week3.length && device.timer.timer4.week2.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer4.week4.length && device.timer.timer4.week3.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}, {{device.timer.timer4.week3}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer4.week5.length && device.timer.timer4.week4.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}, {{device.timer.timer4.week3}}, {{device.timer.timer4.week4}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer4.week6.length && device.timer.timer4.week5.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}, {{device.timer.timer4.week3}}, {{device.timer.timer4.week4}}, {{device.timer.timer4.week5}}.</ion-label>
+      <ion-label *ngIf="1 > device.timer.timer4.week7.length && device.timer.timer4.week6.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}, {{device.timer.timer4.week3}}, {{device.timer.timer4.week4}}, {{device.timer.timer4.week5}}, {{device.timer.timer4.week6}}.</ion-label>
+      <ion-label *ngIf="device.timer.timer4.week7.length > 0"> {{device.timer.timer4.week1}}, {{device.timer.timer4.week2}}, {{device.timer.timer4.week3}}, {{device.timer.timer4.week4}}, {{device.timer.timer4.week5}}, {{device.timer.timer4.week6}}, {{device.timer.timer4.week7}}.</ion-label>
+    </ion-item>
+
+  </ion-list>
+  <!--<ion-button fill="solid" expand="block" size="large" class="sqare_button" color="{{ device.status }}"
+          *ngIf="device.timer.timer1.timer.length >= 4 || device.timer.timer2.timer.length >= 4 || device.timer.timer3.timer.length >= 4 || device.timer.timer4.timer.length >= 4" [routerLink]="['/edit-timer-page/' device.$key]">
           <div class="vertical">
             <ion-icon slot="start" src="/assets/svg/{{ device.icon }}.svg"></ion-icon>
-            <span class="">{{ device.name }} - {{ device.timer }}</span>
+            <span class="">{{ device.name }} - {{ device.timer.timer1.timer }} </span>
           </div>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+        </ion-button> -->
 </ion-content>

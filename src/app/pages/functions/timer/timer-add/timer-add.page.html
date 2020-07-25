@@ -33,13 +33,13 @@
     <ion-item>
       <ion-label>Dias da Semana</ion-label>
       <ion-select [(ngModel)]="week" (ionChange)="onChange($event)" id="week" interface="alert" multiple="true">
-        <ion-select-option value="seg">Seg</ion-select-option>
-        <ion-select-option value="ter">Ter</ion-select-option>
-        <ion-select-option value="qua">Qua</ion-select-option>
-        <ion-select-option value="qui">Qui</ion-select-option>
-        <ion-select-option value="sex">Sex</ion-select-option>
-        <ion-select-option value="sab">Sab</ion-select-option>
-        <ion-select-option value="dom">Dom</ion-select-option>
+        <ion-select-option value="Seg">Seg</ion-select-option>
+        <ion-select-option value="Ter">Ter</ion-select-option>
+        <ion-select-option value="Qua">Qua</ion-select-option>
+        <ion-select-option value="Qui">Qui</ion-select-option>
+        <ion-select-option value="Sex">Sex</ion-select-option>
+        <ion-select-option value="Sab">Sab</ion-select-option>
+        <ion-select-option value="Dom">Dom</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -63,6 +63,6 @@
 
   </ion-list>
 
-  <ion-button (click)="done(timer, week, mac, wt, action)">Concluir</ion-button>
-  <ion-button color="danger" routerLink="/timer">Cancelar</ion-button>
+  <ion-button (click)="done(timer, week, mac, wt, action)" routerLink="/menu/timer">Concluir</ion-button>
+  <ion-button color="danger" routerLink="/menu/timer">Cancelar</ion-button>
 </ion-content>

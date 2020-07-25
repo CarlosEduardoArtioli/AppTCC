@@ -15,9 +15,11 @@ export class EditDevicePagePage implements OnInit {
   // Declaração de variávies
   updateTimerForm: FormGroup;
   mac: any;
+  name: any;
   Devices = [];
   timer: any;
   week: any;
+  wt: any;
 
   constructor(
     private deviceService: DeviceService,
@@ -37,33 +39,23 @@ export class EditDevicePagePage implements OnInit {
 
   // Função para quando a página for iniciada
   ngOnInit() {
+    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
+      this.name = res.name;
+      this.timer = res.timer;
+      this.week = res.week;
+      this.wt = res.wt;
+    });
+    console.log(this.name, this.timer, this.week, this.wt);
+
+    // Chama a função 'fetchDevices()'
     this.fetchDevices();
 
-    const deviceRes = this.deviceService.getDeviceList();
-    // Pega os valores da lista de dispositivos
-    deviceRes.snapshotChanges().subscribe(res => {
-      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
-      this.Devices = [];
-      res.forEach(item => {
-        const a = item.payload.toJSON();
-        a['$key'] = item.key;
-        this.Devices.push(a as Dispositivos);
-      });
-    });
-    // Atribui a variável deviceForm o valor do grupo de valores do FormBuilder da página HTML 
-    this.updateTimerForm = this.fb.group({
-      mac: [''],
-      name: [''],
-      timer: [''],
-      week: [''],
-    });
-    console.log(this.updateTimerForm.value);
   }
 
   updateForm() {
-    this.timerService.updateTimer(this.updateTimerForm.value)
+    this.timerService.updateTimer(this.timer, this.week, this.wt)
       .then(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/menu/timer']);
       })
       .catch(error => console.log(error));
   }
@@ -76,6 +68,4 @@ export class EditDevicePagePage implements OnInit {
       console.log(res);
     });
   }
-
-
 }

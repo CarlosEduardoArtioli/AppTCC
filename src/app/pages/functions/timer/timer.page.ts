@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Dispositivos } from '../../../models/device.model';
 import { DeviceService } from '../../../services/device.service';
 import { AlertController } from '@ionic/angular';
+import { TimerService } from 'src/app/services/timer.service';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
 @Component({
   selector: 'app-timer',
@@ -9,13 +11,18 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./timer.page.scss'],
 })
 export class TimerPage implements OnInit {
+
   Devices = [];
+  Timers = [];
+  macs: any;
+
 
   constructor(
+    private db: AngularFireDatabase,
     private deviceService: DeviceService,
+    private timerService: TimerService,
     private alertCtrl: AlertController
   ) {
-
 
   }
 
@@ -25,6 +32,18 @@ export class TimerPage implements OnInit {
 
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
+    const timerRes = this.timerService.getTimerList(this.macs);
+    // Pega os valores da lista de dispositivos
+    timerRes.snapshotChanges().subscribe(res => {
+      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
+      this.Timers = [];
+      res.forEach(item => {
+        const a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.Timers.push(a as TimerPage);        
+      });
+    });
+
     const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
