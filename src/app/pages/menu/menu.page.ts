@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import { NavController, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
@@ -12,8 +12,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class MenuPage implements OnInit {
 
   // Variável user
-  public user: User;
+  user: User;
   novoNome: any;
+  nome: any;
 
   pages = [
     {
@@ -67,22 +68,10 @@ export class MenuPage implements OnInit {
   }
 
   userName() {
-
-    this.user = JSON.parse(localStorage.getItem('user'));
-
-    if (this.user.displayName === null) {
-      localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png', this.user.emailVerified)));
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.authService.SetUserEmail();
-      this.userService.updateUserName(this.user.displayName, this.user.email);
-    } else {
-      this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-        this.user.displayName = res;
-        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.photoURL, this.user.emailVerified)));
-      });
-      this.user = JSON.parse(localStorage.getItem('user'));
-    }
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+      this.nome = res;
+      console.log(res);
+    });
   }
 
 
@@ -145,17 +134,12 @@ export class MenuPage implements OnInit {
         {
           text: 'Salvar',
           handler: data => {
-            this.user = JSON.parse(localStorage.getItem('user'));
             // if apenas para saber se o input não está vázio.
-            if ((document.getElementById('newname') as HTMLInputElement).value != '') {
+            if ((document.getElementById('newname') as HTMLInputElement).value !== '') {
               // this.nome será = ao que está valor do input com Id 'newname'.
               this.novoNome = (document.getElementById('newname') as HTMLInputElement).value;
-              // Substitui o nome anterior "this.user.name" para o novo "this.novoNome".
-              this.user = JSON.parse(localStorage.getItem('user'));
-              localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.photoURL, this.user.emailVerified)));
               // Puxa a função do ion-toast.
               this.newname();
-              this.user = JSON.parse(localStorage.getItem('user'));
               // Função para mudar o nome do usuário.
               this.userService.updateUserName(this.user.displayName, this.user.email);
             }

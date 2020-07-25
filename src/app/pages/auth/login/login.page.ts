@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  // // Declaração de variáveis
-  user: any;
 
   constructor(
     private loadingCtrl: LoadingController,
@@ -18,13 +17,40 @@ export class LoginPage implements OnInit {
     private toastCtrl: ToastController,
     public authService: AuthenticationService,
     public router: Router,
-  ) {}
+    private formBuilder: FormBuilder
+  ) { }
+  // // Declaração de variáveis
+  user: any;
+  validationsForm: FormGroup;
+  errorMessage = '';
+
+  validationMessages = {
+    email: [
+      { type: 'required', message: 'Insira um email.' },
+      { type: 'pattern', message: 'Insira um email valido.' }
+    ],
+    password: [
+      { type: 'required', message: 'Insira a senha.' },
+      { type: 'minlength', message: 'A senha deve ter mais de 5 caracteres.' }
+    ]
+  };
 
   // Função para quando a página for iniciada
   ngOnInit() {
+    this.validationsForm = this.formBuilder.group({
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
+    });
     // Chama a função 'verificaUser()'
     this.verificaUser();
   }
+
 
   // Função para verificar se já existe um usuário logado
   private async verificaUser() {
@@ -32,7 +58,7 @@ export class LoginPage implements OnInit {
     // Acessa o local storage e pega o valor do item 'app.user' e o transforma de um JSON para uma string
     this.user = JSON.parse(localStorage.getItem('user'));
     // Se o usuário for diferente de nulo
-    if (this.user != null) {
+    if (this.user !== null && this.user.emailVerified === true) {
       // Função para criar uma mensagem de carregando com a mensagem "Autenticando..."
       const loading = await this.loadingCtrl.create({ message: 'Autenticando...' });
       // Mostra a mensagem na tela
@@ -63,8 +89,8 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward('signup');
   }
 
-  logIn(email, password) {
-    this.authService.SignIn(email.value, password.value)
+  logIn(value) {
+    this.authService.SignIn(value)
       .then((res) => {
         if (this.authService.isEmailVerified) {
           this.router.navigate(['menu/home']);
@@ -73,8 +99,8 @@ export class LoginPage implements OnInit {
           return false;
         }
       }).catch((error) => {
-        if (error.message === 'Cannot read property \'emailVerified\' of null' ) {
-          this.logIn(email, password);
+        if (error.message === 'Cannot read property \'emailVerified\' of null') {
+          this.logIn(value);
         }
         console.log(error.message);
       });

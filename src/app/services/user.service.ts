@@ -4,7 +4,7 @@
 
 import { Injectable } from '@angular/core';
 // Importação das bibliotecas do AngularFire
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +13,6 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 export class UserService {
     // Declaração das variáveis
     name: any;
-    // Interface da biblioteca do AngularFire que "devolve" na função o dado pedido
-    userRef: AngularFireObject<any>;
 
     constructor(
         // AngularFireDatabase é uma classe para refernciar o banco

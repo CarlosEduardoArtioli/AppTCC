@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -10,14 +11,42 @@ import { Router } from '@angular/router';
 })
 export class SignupPage implements OnInit {
 
+  validationsForm: FormGroup;
+  errorMessage = '';
+  successMessage = '';
+
+  validationMessages = {
+    email: [
+      { type: 'required', message: 'Insira um email.' },
+      { type: 'pattern', message: 'Insira um email valido.' }
+    ],
+    password: [
+      { type: 'required', message: 'Insira a senha.' },
+      { type: 'minlength', message: 'A senha deve ter mais de 5 caracteres.' }
+    ]
+  };
+
+
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     public authService: AuthenticationService,
-    public router: Router
-  ) {}
+    public router: Router,
+    private formBuilder: FormBuilder
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.validationsForm = this.formBuilder.group({
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
+    });
+  }
 
   // Função para mostrar mensagem na tela que recebe o paramêtro message
   async showMessage(message: string) {
@@ -38,8 +67,8 @@ export class SignupPage implements OnInit {
     this.navCtrl.navigateBack('login');
   }
 
-  signUp(email, password) {
-    this.authService.RegisterUser(email.value, password.value)
+  signUp(value) {
+    this.authService.registerUser(value)
       .then((res) => {
         // Do something here
         this.authService.SendVerificationMail();

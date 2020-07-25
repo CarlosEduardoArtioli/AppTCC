@@ -28,13 +28,21 @@ export class AuthenticationService {
   }
 
   // Login in with email/password
-  SignIn(email, password) {
-    return this.ngFireAuth.auth.signInWithEmailAndPassword(email, password);
+  SignIn(value) {
+    return this.ngFireAuth.auth.signInWithEmailAndPassword(value.email, value.password);
   }
 
-  // Register user with email/password
-  RegisterUser(email, password) {
-    return this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password)
+  registerUser(value) {
+    return new Promise<any>((resolve, reject) => {
+
+      this.ngFireAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(res),
+          err => reject(err));
+
+      this.SetUserEmail();
+    });
+
   }
 
   // Email verification when new user register
@@ -91,7 +99,6 @@ export class AuthenticationService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
       emailVerified: user.emailVerified
     };
     const userLocal = JSON.parse(localStorage.getItem('user'));

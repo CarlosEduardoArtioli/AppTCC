@@ -1,12 +1,12 @@
 <ion-menu contentId="content">
-  
+
   <ion-header>
     <ion-toolbar>
       <ion-item (click)="showOptions()" lines="none">
         <ion-avatar slot="start">
-          <img src="{{user.photoURL}}">
+          <img src='https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'>
         </ion-avatar>
-        <ion-label>{{user.displayName}}</ion-label>
+        <ion-label>{{ nome }}</ion-label>
       </ion-item>
     </ion-toolbar>
   </ion-header>
@@ -34,7 +34,8 @@
 
       <ion-list *ngIf="p.open">
         <ion-menu-toggle>
-          <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active">
+          <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root"
+            routerLinkActive="active">
             <ion-icon [name]="sub.icon" slot="start"></ion-icon>
             <ion-label>
               {{ sub.title }}
