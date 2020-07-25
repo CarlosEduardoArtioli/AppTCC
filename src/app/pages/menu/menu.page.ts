@@ -14,7 +14,7 @@ export class MenuPage implements OnInit {
   // Variável user
   user: User;
   novoNome: any;
-  nome: any;
+  name: any;
 
   pages = [
     {
@@ -64,14 +64,27 @@ export class MenuPage implements OnInit {
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
 
+    this.name = this.user.displayName;
+
     this.userName();
   }
 
   userName() {
-    this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-      this.nome = res;
-      console.log(res);
-    });
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+    if (this.user.displayName === null) {
+      localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified)));
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.userService.updateUserName(this.user.displayName, this.user.email);
+    } else {
+      this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+        this.user.displayName = res;
+        // tslint:disable-next-line: max-line-length
+        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified)));
+      });
+    }
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.name = this.user.displayName;
   }
 
 
@@ -141,7 +154,11 @@ export class MenuPage implements OnInit {
               // Puxa a função do ion-toast.
               this.newname();
               // Função para mudar o nome do usuário.
-              this.userService.updateUserName(this.user.displayName, this.user.email);
+              this.userService.updateUserName(this.novoNome, this.user.email);
+              // tslint:disable-next-line: max-line-length
+              localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.emailVerified)));
+              this.user = JSON.parse(localStorage.getItem('user'));
+              this.name = this.user.displayName;
             }
           }
         }
