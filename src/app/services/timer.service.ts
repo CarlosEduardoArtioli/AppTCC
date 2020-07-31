@@ -88,11 +88,22 @@ export class TimerService {
   }
 
   // Função que exclui os dados do objeto com o id passado
-  deleteDevice(timer: any) {
+  deleteTimer(mac: any, timer: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.timerRef = this.db.object(`/users/${this.user.email}/timers/${timer}`);
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Remove o objeto que foi atribuido ao deviceRef
-    this.timerRef.remove();
+    return this.timerRef.set({
+      action: "",
+      timer: "",
+      week1: "",
+      week2: "",
+      week3: "",
+      week4: "",
+      week5: "",
+      week6: "",
+      week7: ""
+      
+    });
   }
 }

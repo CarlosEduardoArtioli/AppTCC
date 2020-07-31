@@ -20,19 +20,19 @@
     </ion-item>
     <ion-item>
       <ion-label>Horário do Timer</ion-label>
-      <ion-datetime id="timer" [(ngModel)]="timer" (ionChange)="onChange($event)" displayFormat="HH:mm:ss"></ion-datetime>
+      <ion-datetime id="timer" [(ngModel)]="timer" (ionChange)="onChange($event)" displayFormat="HH:mm:ss" required></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Dispositivo</ion-label>
       <ion-select [(ngModel)]="mac" (ionChange)="onChange($event)">
-        <ion-select-option *ngFor="let device of Devices" [value]="device.mac">{{ device.name }}</ion-select-option>
+        <ion-select-option *ngFor="let device of Devices" [value]="device.mac" required>{{ device.name }}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Dias da Semana</ion-label>
-      <ion-select [(ngModel)]="week" (ionChange)="onChange($event)" id="week" interface="alert" multiple="true">
+      <ion-select [(ngModel)]="week" (ionChange)="onChange($event)" id="week" interface="alert" multiple="true" required>
         <ion-select-option value="Seg">Seg</ion-select-option>
         <ion-select-option value="Ter">Ter</ion-select-option>
         <ion-select-option value="Qua">Qua</ion-select-option>
@@ -44,8 +44,8 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Selecione Qual Será Criado</ion-label>
-      <ion-select [(ngModel)]="wt" (ionChange)="onChange($event)" id="wt" interface="alert">
+      <ion-label>Selecione o Timer</ion-label>
+      <ion-select [(ngModel)]="wt" (ionChange)="onChange($event)" id="wt" interface="alert" required>
         <ion-select-option value="timer1">Timer - 1</ion-select-option>
         <ion-select-option value="timer2">Timer - 2</ion-select-option>
         <ion-select-option value="timer3">Timer - 3</ion-select-option>
@@ -54,8 +54,8 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Status do Dispositivo</ion-label>
-      <ion-select [(ngModel)]="action" (ionChange)="onChange($event)" id="action" interface="alert">
+      <ion-label>Ação</ion-label>
+      <ion-select [(ngModel)]="action" (ionChange)="onChange($event)" id="action" interface="alert" required>
         <ion-select-option value="Ligar">Ligar</ion-select-option>
         <ion-select-option value="Desligar">Desligar</ion-select-option>
       </ion-select>
@@ -63,6 +63,6 @@
 
   </ion-list>
 
-  <ion-button (click)="done(timer, week, mac, wt, action)" routerLink="/menu/timer">Concluir</ion-button>
+  <ion-button  (click)="done(timer, week, mac, wt, action)" routerLink="/menu/timer">Concluir</ion-button>
   <ion-button color="danger" routerLink="/menu/timer">Cancelar</ion-button>
 </ion-content>

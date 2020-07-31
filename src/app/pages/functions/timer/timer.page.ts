@@ -73,6 +73,18 @@ export class TimerPage implements OnInit {
     });
   }
 
+  // Função para deletar o dispositivo que recebe o parâmetro 'id'
+  deleteTimer(id: any, timer: any) {
+    // Escreve no console o 'id'
+    console.log(id);
+    console.log(timer);
+    // Se for confirmado a mensagem
+    if (window.confirm('Tem certeza que deseja excluir?')) {
+      // "Puxa" a função 'deleteDevice' passando o parâmetro id
+      this.timerService.deleteTimer(id, timer);
+    }
+  }
+
   // Função para mudar o status do dispositivo
   mudaStatus(id: any) {
     // Chama a função mudaStatus no AppointmentService
