@@ -28,10 +28,11 @@ export class TimerAddPage implements OnInit {
 
   Devices = [];
 
+
   constructor(
     private timerService: TimerService,
     private deviceService: DeviceService,
-    private alertCtrl: AlertController,
+    private alertCtrl: AlertController
   ) {
 
 
