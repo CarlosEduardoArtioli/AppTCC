@@ -15,6 +15,7 @@ export class TimerPage implements OnInit {
   Devices = [];
   Timers = [];
   macs: any;
+  timer: any;
   timer1: any;
   timer2: any;
   timer3: any;
