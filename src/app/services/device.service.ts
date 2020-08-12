@@ -87,7 +87,7 @@ export class DeviceService {
       name: nome,
       room: comodo,
       icon: icone,
-    })
+    });
   }
 
   // Função que exclui os dados do objeto com o id passado

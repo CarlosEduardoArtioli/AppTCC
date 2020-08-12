@@ -1,8 +1,18 @@
 ion-content {
-  --background: rgb(0, 191, 181);
-  --background: linear-gradient(45deg, rgba(0, 191, 181, 1) 35%, rgba(0, 124, 191, 1) 70%);
-
   --ion-text-color: #fff;
+  --background: #2b3566;
+
+  font-family: 'Cerebri Sans';
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+}
+
+ion-toolbar {
+  --background: #212a66;
+  font-family: 'Cerebri Sans';
 }
 
 ion-label {
@@ -11,15 +21,20 @@ ion-label {
 
 ion-icon {
   font-size: 45px;
+  &.dark {
+    color: black;
+  }
 }
 
 .sqare_button {
+  --border-radius: 1rem;
   height: 80px;
   --vertical-align: middle;
   --padding-start: 10px;
   --padding-end: 10px;
   --padding-bottom: 2px;
   --box-shadow: none;
+  font-family: 'Cerebri Sans';
 }
 
 .vertical {
