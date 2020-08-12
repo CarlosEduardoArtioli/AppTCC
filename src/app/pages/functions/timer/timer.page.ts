@@ -43,7 +43,7 @@ export class TimerPage implements OnInit {
       res.forEach(item => {
         const a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.Timers.push(a as TimerPage);        
+        this.Timers.push(a as TimerPage);
       });
     });
 
@@ -81,6 +81,13 @@ export class TimerPage implements OnInit {
     // Chama a função mudaStatus no AppointmentService
     this.deviceService.mudaStatus(id);
   }
-}
 
+  deleteTimer(mac: any, timer: any) {
+    // Se for confirmado a mensagem
+    if (window.confirm('Tem certeza que deseja excluir?')) {
+      // "Puxa" a função 'deleteDevice' passando o parâmetro id
+      this.timerService.deleteTimer(mac, timer);
+    }
+  }
+}
 
