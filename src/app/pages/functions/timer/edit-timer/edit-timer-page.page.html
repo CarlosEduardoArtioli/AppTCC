@@ -38,7 +38,7 @@
       
       <ion-item>
         <ion-label position="floating">Selecione Qual Será Editado</ion-label>
-        <ion-select [(ngModel)]="wt" (ionChange)="onChange($event)" id="wt" value="{{ wt }}" interface="alert" required>
+        <ion-select [(ngModel)]="wt" id="wt" value="{{ wt }}" interface="alert" required>
           <ion-select-option value="timer1">Timer - 1</ion-select-option>
           <ion-select-option value="timer2">Timer - 2</ion-select-option>
           <ion-select-option value="timer3">Timer - 3</ion-select-option>
@@ -48,7 +48,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-button color="primary" shape="full" expand="block" (click)="update()">Atualizar</ion-button>
+          <ion-button color="primary" shape="full" expand="block">Atualizar</ion-button>
         </ion-col>
       </ion-row>
   </ion-list>

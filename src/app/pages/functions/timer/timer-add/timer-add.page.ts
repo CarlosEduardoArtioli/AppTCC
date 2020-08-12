@@ -28,12 +28,12 @@ export class TimerAddPage implements OnInit {
 
   Devices = [];
 
+
   constructor(
     private timerService: TimerService,
     private deviceService: DeviceService,
-    private alertCtrl: AlertController,
+    private alertCtrl: AlertController
   ) {
-
 
   }
 
@@ -60,9 +60,10 @@ export class TimerAddPage implements OnInit {
   myLoop() {
     setTimeout(() => {
       this.date = new Date().toISOString(); 
-      if (this.i < 30) {
+      if (this.i < 60) {
         this.myLoop();
         this.i = this.i + 5;
+        console.log('Timer on');
       }
     }, 5000);
   }
