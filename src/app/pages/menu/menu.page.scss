@@ -1,19 +1,21 @@
-.active{
+.active {
     --ion-text-color: var(--ion-color-primary);
-    ion-icon{
+
+    ion-icon {
         --ion-text-color-rgb: var(--ion-color-primary);
     }
 }
 
-.active-parent{
+.active-parent {
     font-weight: 500;
 }
 
-.sub-item{
+.sub-item {
     padding-left: 20px;
     font-size: small;
 }
 
-ion-content{
+ion-content {
     opacity: 1.0;
+    --background: #1e1e1e !important;
 }

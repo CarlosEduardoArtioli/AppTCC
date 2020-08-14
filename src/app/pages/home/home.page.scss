@@ -1,18 +1,10 @@
-ion-content {
-  --ion-text-color: #fff;
-  --background: #2b3566;
-
-  font-family: 'Cerebri Sans';
-}
-
 ::-webkit-scrollbar,
 *::-webkit-scrollbar {
   display: none;
 }
 
-ion-toolbar {
-  --background: #212a66;
-  font-family: 'Cerebri Sans';
+ion-segment-button {
+  font-family: 'Open Sans', sans-serif;
 }
 
 ion-label {
@@ -21,8 +13,22 @@ ion-label {
 
 ion-icon {
   font-size: 45px;
-  &.dark {
-    color: black;
+  &.ligado {
+    color: #10F028;
+  }
+  &.desligado {
+    color: white;
+  }
+}
+
+span {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  &.ligado {
+    color: #10F028;
+  }
+  &.desligado {
+    color: white;
   }
 }
 

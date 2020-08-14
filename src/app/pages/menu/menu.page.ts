@@ -15,6 +15,7 @@ export class MenuPage implements OnInit {
   user: User;
   novoNome: any;
   name: any;
+  photo: any;
 
   pages = [
     {
@@ -62,29 +63,31 @@ export class MenuPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
-
-    this.name = this.user.displayName;
-
     this.userName();
   }
 
   userName() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    const delay = 1000;
+    setTimeout(() => {
 
-    if (this.user.displayName === null) {
-      localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified)));
       this.user = JSON.parse(localStorage.getItem('user'));
-      this.userService.updateUserName(this.user.displayName, this.user.email);
-    } else {
-      this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-        this.user.displayName = res;
+
+      if (this.user.displayName === null && this.user.photoURL === null) {
         // tslint:disable-next-line: max-line-length
-        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified)));
-      });
-    }
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.name = this.user.displayName;
+        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+        this.user = JSON.parse(localStorage.getItem('user'));
+        this.userService.updateUserName(this.user.displayName, this.user.email);
+      } else {
+        this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+          this.user.displayName = res;
+          // tslint:disable-next-line: max-line-length
+          localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified, this.user.photoURL)));
+        });
+      }
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.name = this.user.displayName;
+      this.photo = this.user.photoURL;
+    }, delay);
   }
 
 
@@ -156,7 +159,7 @@ export class MenuPage implements OnInit {
               // Função para mudar o nome do usuário.
               this.userService.updateUserName(this.novoNome, this.user.email);
               // tslint:disable-next-line: max-line-length
-              localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.emailVerified)));
+              localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.emailVerified, this.user.photoURL)));
               this.user = JSON.parse(localStorage.getItem('user'));
               this.name = this.user.displayName;
             }

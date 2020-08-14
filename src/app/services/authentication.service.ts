@@ -23,6 +23,9 @@ export class AuthenticationService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -85,8 +88,8 @@ export class AuthenticationService {
     return this.ngFireAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/home/login']);
           this.SetUserData(result.user);
+          this.router.navigate(['/home/login']);
         });
       }).catch((error) => {
         console.log(error);
@@ -99,21 +102,31 @@ export class AuthenticationService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      photoURL: user.photoURL
     };
-    const userLocal = JSON.parse(localStorage.getItem('user'));
-    if (userLocal.email) {
+    const delay = 1000;
+    setTimeout(() => {
+      const userLocal = JSON.parse(localStorage.getItem('user'));
       userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
       this.db.object(`/users/${userLocal.email}/settings`).set(userData);
-    } else {
-      this.SetUserData(user);
-    }
+    }, delay);
   }
 
   SetUserEmail() {
     const userLocal = JSON.parse(localStorage.getItem('user'));
-    userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
-    this.db.object(`/users/${userLocal.email}/settings`).set(userLocal);
+    const userData: User = {
+      uid: userLocal.uid,
+      email: userLocal.email,
+      displayName: userLocal.displayName,
+      emailVerified: userLocal.emailVerified,
+      photoURL: userLocal.photoURL
+    };
+    const delay = 1000;
+    setTimeout(() => {
+      userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
+      this.db.object(`/users/${userLocal.email}/settings`).set(userData);
+    }, delay);
   }
 
   // Sign-out
