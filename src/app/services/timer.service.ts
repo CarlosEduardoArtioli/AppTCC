@@ -29,9 +29,9 @@ export class TimerService {
     // Recebeu o apelido de db
     private db: AngularFireDatabase
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
-    this.macs = this.timerRef = this.db.object(`/users/${this.user.email}/devices/`);
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+      this.macs = this.timerRef = this.db.object(`/users/${this.user.email}/devices/`);
   }
 
   // Função que cria os dados do dispositivo
@@ -104,4 +104,5 @@ export class TimerService {
       week6: "",
       week7: ""
     });
-}}
+  }
+}

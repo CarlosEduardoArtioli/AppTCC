@@ -15,18 +15,24 @@
     font-size: small;
 }
 
-// ion-menu,
-// ion-content {
-//     --background: #1e1e1e !important;
-// }
+ion-menu,
+ion-content {
+    --background: #1e1e1e !important;
+    font-family: 'Open Sans', sans-serif;
+}
 
-// img {
-//     border-radius: 100%;
-//     padding: 5px;
-//     width: 70px;
-// }
+ion-action-sheet {
+    --background: white !important;
+}
 
-// .user-menu {
-//     text-align: center !important;
-//     color: white;
-// }
+img {
+    border-radius: 100%;
+    padding: 5px;
+    width: 70px;
+}
+
+.user-menu {
+    text-align: center !important;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
