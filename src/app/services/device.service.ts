@@ -30,8 +30,11 @@ export class DeviceService {
     // Recebeu o apelido de db
     private db: AngularFireDatabase
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+    const delay = 1000;
+    setTimeout(() => {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+    }, delay);
   }
 
   // Função que cria os dados do dispositivo
