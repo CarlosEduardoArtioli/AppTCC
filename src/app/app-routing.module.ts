@@ -48,11 +48,6 @@ const routes: Routes = [
     path: 'verify-email',
     loadChildren: () => import('./pages/auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
   },
-  {
-    path: 'timer-add',
-    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
-    canActivate: [AuthGuard]
-  },
   // Rota "home"  em casos especiais
   // Esta rota leva até a home caso o usuario esteja logado e digite
   // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123
