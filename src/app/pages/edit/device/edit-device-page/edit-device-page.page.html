@@ -18,11 +18,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Icone</ion-label>
-        <ion-icon src="/assets/svg/{{ icone }}.svg"></ion-icon>
-        <ion-select value="{{ icone }}" [(ngModel)]="icone">
-          <ion-select-option *ngFor="let icon of Icons" value="{{ icon.name }}">{{ icon.name }}</ion-select-option>
-        </ion-select>
+        <ion-icon src="/assets/svg/{{ icone }}.svg"></ion-icon>{{ icone }}
+        <ion-button [routerLink]="['/edit-icons/', mac]">Icones</ion-button>
       </ion-item>
 
       <ion-item>

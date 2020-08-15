@@ -53,6 +53,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'edit-icons/:mac',
+    loadChildren: () => import('./pages/edit/device/edit-icons/edit-icons.module').then( m => m.EditIconsPageModule),
+    canActivate: [AuthGuard]
+  },
   // Rota "home"  em casos especiais
   // Esta rota leva até a home caso o usuario esteja logado e digite
   // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123
@@ -61,6 +66,8 @@ const routes: Routes = [
     redirectTo: 'menu/home',
     canActivate: [AuthGuard]
   },
+
+
 
 
 

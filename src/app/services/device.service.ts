@@ -90,6 +90,10 @@ export class DeviceService {
     });
   }
 
+  updateIcon(icone, mac) {
+    return this.db.database.ref(`/users/${this.user.email}/devices/${mac}/icon`).set(icone);
+  }
+
   // Função que exclui os dados do objeto com o id passado
   deleteDevice(mac: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:

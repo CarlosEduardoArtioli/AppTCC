@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="menu/edit-device-page/{{ mac }}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Icones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Lâmpada.svg" (click)="update('Lâmpada')"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Televisão.svg" (click)="update('Televisão')"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Ventilador.svg" (click)="update('Ventilador')"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Hardware.svg" (click)="update('Hardware')"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Ferro de Passar.svg" (click)="update('Ferro de Passar')"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Ar Condicionado.svg" (click)="update('Ar Condicionado')"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Ventilador.svg"></ion-icon>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon src="/assets/svg/Hardware.svg"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
