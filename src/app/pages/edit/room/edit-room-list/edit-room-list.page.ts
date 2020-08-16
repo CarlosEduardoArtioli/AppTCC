@@ -22,9 +22,6 @@ export class EditRoomListPage implements OnInit {
 
   // Função quando a página é iniciada
   ngOnInit() {
-    // Chama a função 'fetchDevices()'
-    this.fetchDevices();
-
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const roomRes = this.roomService.getRoomList();
@@ -38,27 +35,6 @@ export class EditRoomListPage implements OnInit {
         this.Rooms.push(a as Room);
       });
     });
-  }
-
-  // Função para mostrar a lista de dispositvos no console
-  fetchDevices() {
-    // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
-    this.roomService.getRoomList().valueChanges().subscribe(res => {
-      // Escreve no console a lista de dispositivos
-      console.log(res);
-    });
-  }
-
-
-  // Função para deletar o dispositivo que recebe o parâmetro 'id'
-  deleteRoom(room: any) {
-    // Escreve no console o 'id'
-    console.log(room);
-    // Se for confirmado a mensagem
-    if (window.confirm('Tem certeza que deseja excluir?')) {
-      // "Puxa" a função 'deleteDevice' passando o parâmetro id
-      this.roomService.deleteDevice(room);
-    }
   }
 
   // Funcão para aparecer o alert com o input que irá receber o novo nome do usuário.
@@ -90,13 +66,13 @@ export class EditRoomListPage implements OnInit {
           text: 'Salvar',
           handler: data => {
             // if apenas para saber se o input não está vázio.
-            if ((document.getElementById('newroom') as HTMLInputElement).value != '') {
+            if ((document.getElementById('newroom') as HTMLInputElement).value !== '') {
               // this.nome será = ao que está valor do input com Id 'newname'.
               this.newRoom = (document.getElementById('newroom') as HTMLInputElement).value;
               // Puxa a função do ion-toast.
               this.newroom();
               // Função para mudar o nome do usuário.
-              this.roomService.createRoom(this.newRoom)
+              this.roomService.createRoom(this.newRoom, 'Casa');
             }
           }
         }
@@ -112,6 +88,31 @@ export class EditRoomListPage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  // Função para deletar o dispositivo que recebe o parâmetro 'id'
+  deleteRoom(room: any) {
+    this.presentAlertConfirm(room);
+  }
+
+  async presentAlertConfirm(room) {
+    const alert = await this.alertCtrl.create({
+      header: 'EXCLUIR!',
+      message: 'Deseja excluir o cômodo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.roomService.deleteDevice(room);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

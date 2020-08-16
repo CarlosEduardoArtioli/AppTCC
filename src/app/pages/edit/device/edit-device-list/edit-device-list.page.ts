@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dispositivos } from '../../../../models/device.model';
 import { DeviceService } from '../../../../services/device.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-device-list',
@@ -12,14 +13,12 @@ export class EditDeviceListPage implements OnInit {
   Devices = [];
 
   constructor(
-    private deviceService: DeviceService
+    private deviceService: DeviceService,
+    private alertCtrl: AlertController,
   ) { }
 
   // Função quando a página é iniciada
   ngOnInit() {
-    // Chama a função 'fetchDevices()'
-    this.fetchDevices();
-
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const deviceRes = this.deviceService.getDeviceList();
@@ -35,25 +34,29 @@ export class EditDeviceListPage implements OnInit {
     });
   }
 
-  // Função para mostrar a lista de dispositvos no console
-  fetchDevices() {
-    // "Puxa" a função 'getDeviceList' e vê a lista de dispositivos
-    this.deviceService.getDeviceList().valueChanges().subscribe(res => {
-      // Escreve no console a lista de dispositivos
-      console.log(res);
-    });
-  }
-
-
   // Função para deletar o dispositivo que recebe o parâmetro 'id'
   deleteDevice(id: any) {
-    // Escreve no console o 'id'
-    console.log(id);
-    // Se for confirmado a mensagem
-    if (window.confirm('Tem certeza que deseja excluir?')) {
-      // "Puxa" a função 'deleteDevice' passando o parâmetro id
-      this.deviceService.deleteDevice(id);
-    }
+    this.presentAlertConfirm(id);
+  }
+
+  async presentAlertConfirm(id) {
+    const alert = await this.alertCtrl.create({
+      header: 'EXCLUIR!',
+      message: 'Deseja excluir o dispositivo?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.deviceService.deleteDevice(id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

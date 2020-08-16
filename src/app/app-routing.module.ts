@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
   },
+  {
+    path: 'verify-email',
+    loadChildren: () => import('./pages/auth/verify-email/verify-email.module').then(m => m.VerifyEmailPageModule)
+  },
   // Rota 'signup'
   // Essa rota não recebe o canActive para que mesmo sem login ela seja acessivel
   {
@@ -45,17 +49,28 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'verify-email',
-    loadChildren: () => import('./pages/auth/verify-email/verify-email.module').then( m => m.VerifyEmailPageModule)
-  },
-  {
     path: 'timer-add',
     loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'edit-icons/:mac',
-    loadChildren: () => import('./pages/edit/device/edit-icons/edit-icons.module').then( m => m.EditIconsPageModule),
+    loadChildren: () => import('./pages/edit/device/edit-icons/edit-icons.module').then(m => m.EditIconsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-rooms/:mac',
+    loadChildren: () => import('./pages/edit/device/edit-rooms/edit-rooms.module').then(m => m.EditRoomsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-icon-room/:room',
+    loadChildren: () => import('./pages/edit/room/edit-icon-room/edit-icon-room.module').then(m => m.EditIconRoomPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-room-page/:room',
+    loadChildren: () => import('./pages/edit/room/edit-room-page/edit-room-page.module').then(m => m.EditRoomPagePageModule),
     canActivate: [AuthGuard]
   },
   // Rota "home"  em casos especiais
@@ -66,11 +81,6 @@ const routes: Routes = [
     redirectTo: 'menu/home',
     canActivate: [AuthGuard]
   },
-
-
-
-
-
 ];
 
 @NgModule({

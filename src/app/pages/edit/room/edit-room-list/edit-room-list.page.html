@@ -6,31 +6,33 @@
     <ion-title>
       Editar Cômodos
     </ion-title>
-    <ion-button class="transparent" ion-button clear slot="end" (click)="addRoom()">
-      <ion-icon name="add-circle-outline" style="zoom:1.5"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full">
 
-    <ion-item *ngFor="let room of Rooms">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addRoom()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+    <ion-item *ngFor="let room of Rooms" lines="full">
       <ion-label>
         <h2>
-          <ion-icon name="home"></ion-icon> {{room.name}}
+          <ion-icon src="/assets/svg/{{ room.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{room.name}}
         </h2>
       </ion-label>
 
       <div>
+        <button class="transparent" ion-button clear [routerLink]="['/edit-room-page/', room.$key]">
+          <ion-icon name="create" style="zoom:2.0"></ion-icon>
+        </button>
 
         <button class="transparent" ion-button clear (click)="deleteRoom(room.$key)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>
         </button>
-
       </div>
 
     </ion-item>
-
-  </ion-list>
 </ion-content>

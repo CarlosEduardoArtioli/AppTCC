@@ -10,18 +10,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full">
 
-    <ion-item *ngFor="let device of Devices">
+    <ion-item *ngFor="let device of Devices" lines="full">
         <ion-label>
           <h3>
-            <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon> {{device.name}}
+            <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{device.name}}
           </h3>
           <h3>
-            <ion-icon name="hardware-chip"></ion-icon> {{device.mac}}
+            <ion-icon name="wifi-outline"></ion-icon>&nbsp;&nbsp;{{device.ap}}
           </h3>
           <h3>
-            <ion-icon name="home-outline"></ion-icon> {{device.room}}
+            <ion-icon src="/assets/svg/{{ device.iconRoom }}.svg"></ion-icon>&nbsp;&nbsp;{{device.room}}
           </h3>
         </ion-label>
 
@@ -37,5 +36,4 @@
 
     </ion-item>
 
-  </ion-list>
 </ion-content>

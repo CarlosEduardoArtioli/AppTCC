@@ -1,38 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from '../../../../services/device.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
-  selector: 'app-edit-device-page',
-  templateUrl: './edit-device-page.page.html',
-  styleUrls: ['./edit-device-page.page.scss'],
+  selector: 'app-edit-room-page',
+  templateUrl: './edit-room-page.page.html',
+  styleUrls: ['./edit-room-page.page.scss'],
 })
-export class EditDevicePagePage implements OnInit {
+export class EditRoomPagePage implements OnInit {
   // Declaração de variávies
-  mac: any;
-  icone = '';
-  comodo = '';
-  name = '';
-  novoNome = '';
-  iconeComodo = '';
+  room: any;
+  name: string;
+  icon: string;
+  novoNome: string;
 
   constructor(
-    private deviceService: DeviceService,
+    private roomService: RoomService,
     private actRoute: ActivatedRoute,
-    public fb: FormBuilder,
     public actionSheetController: ActionSheetController,
     private alertCtrl: AlertController,
     private toastController: ToastController,
   ) {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
-    this.mac = this.actRoute.snapshot.paramMap.get('mac');
-    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.icone = res.icon;
-      this.comodo = res.room;
+    this.room = this.actRoute.snapshot.paramMap.get('room');
+    this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
       this.name = res.name;
-      this.iconeComodo = res.iconRoom;
+      this.icon = res.icon;
       console.log(res);
     });
   }
@@ -72,7 +66,7 @@ export class EditDevicePagePage implements OnInit {
               // Puxa a função do ion-toast.
               this.newname();
               // Função para mudar o nome do usuário.
-              this.deviceService.updateName(this.novoNome, this.mac);
+              this.roomService.updateName(this.novoNome, this.room);
             }
           }
         }

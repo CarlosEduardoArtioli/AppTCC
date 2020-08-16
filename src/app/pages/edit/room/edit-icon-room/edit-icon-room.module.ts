@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FunctionsPageRoutingModule } from './functions-routing.module';
+import { EditIconRoomPageRoutingModule } from './edit-icon-room-routing.module';
 
-import { FunctionsPage } from './functions.page';
+import { EditIconRoomPage } from './edit-icon-room.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FunctionsPageRoutingModule
+    EditIconRoomPageRoutingModule
   ],
-  declarations: [FunctionsPage]
+  declarations: [EditIconRoomPage]
 })
-export class FunctionsPageModule {}
+export class EditIconRoomPageModule {}

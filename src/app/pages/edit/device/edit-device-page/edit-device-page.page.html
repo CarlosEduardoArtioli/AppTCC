@@ -10,31 +10,32 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full">
-      <ion-item>
-        <ion-label position="floating">Nome</ion-label>
-        <ion-input type="text" required [(ngModel)]="name">
-        </ion-input>
-      </ion-item>
+  <ion-item lines="full">
+    <ion-label>{{ name }}</ion-label>
+    <div>
+      <button class="transparent" ion-button clear (click)="updateName()">
+        <ion-icon name="pencil-outline" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
 
-      <ion-item>
-        <ion-icon src="/assets/svg/{{ icone }}.svg"></ion-icon>{{ icone }}
-        <ion-button [routerLink]="['/edit-icons/', mac]">Icones</ion-button>
-      </ion-item>
+  <ion-item lines="full">
+    <ion-icon src="/assets/svg/{{ icone }}.svg"></ion-icon>
+    <ion-label>&nbsp;&nbsp;{{ icone }}</ion-label>
+    <div>
+      <button class="transparent" ion-button clear [routerLink]="['/edit-icons/', mac]">
+        <ion-icon name="file-tray-full-outline" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
 
-      <ion-item>
-        <ion-label>Cômodo</ion-label>
-        <ion-select value="{{ comodo }}" [(ngModel)]="comodo">
-          <ion-select-option value="Nenhum">Nenhum</ion-select-option>
-          <ion-select-option *ngFor="let room of Rooms" value="{{ room.name }}">{{ room.name }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-
-      <ion-row>
-        <ion-col>
-          <ion-button color="primary" shape="full" expand="block" (click)="update()">Atualizar</ion-button>
-        </ion-col>
-      </ion-row>
-  </ion-list>
+  <ion-item lines="full">
+    <ion-icon src="/assets/svg/{{ iconeComodo }}.svg"></ion-icon>
+    <ion-label>&nbsp;&nbsp;{{ comodo }}</ion-label>
+    <div>
+      <button class="transparent" ion-button clear [routerLink]="['/edit-rooms/', mac]">
+        <ion-icon name="file-tray-full-outline" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
 </ion-content>

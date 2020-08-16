@@ -34,11 +34,12 @@ export class RoomService {
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createRoom(room: any) {
+  createRoom(room: any, icone) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
     this.db.object(`/users/${this.user.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
-      name: room
+      name: room,
+      icon: icone
     }); // .then(res => {
       // Escreve no console o valor do formulário
       // console.log(res)
@@ -69,8 +70,17 @@ export class RoomService {
   updateDevice(apt: Room) {
     // Retorna para a função a atualização dos dados
     return this.roomRef.update({
-      name: apt.name
+      name: apt.name,
+      icon: apt.icon
     });
+  }
+
+  updateName(nome, comodo) {
+    this.db.object(`/users/${this.user.email}/rooms/${comodo}/name`).set(nome);
+  }
+
+  updateIcon(icone, comodo) {
+    return this.db.object(`/users/${this.user.email}/rooms/${comodo}/icon`).set(icone);
   }
 
   // Função que exclui os dados do objeto com o id passado
