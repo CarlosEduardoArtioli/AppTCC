@@ -1,6 +1,5 @@
 ion-content {
-    --background: rgb(7,105,159);
-    --background: linear-gradient(45deg, rgba(7,105,159,1) 35%, rgba(43,53,102,1) 70%);
+    --background: url('../../../../assets/img/backgroundapp.png') no-repeat center center / cover !important;
 
     --ion-text-color: #fff;
 

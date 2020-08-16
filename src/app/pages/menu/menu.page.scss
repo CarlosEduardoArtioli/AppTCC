@@ -17,7 +17,7 @@
 
 ion-menu,
 ion-content {
-    --background: #1e1e1e !important;
+    --background: #1e1e1e;
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -35,4 +35,5 @@ img {
     text-align: center !important;
     color: white;
     font-family: 'Open Sans', sans-serif;
+    background: url('src/assets/img/backgrounduser.png') no-repeat center center / cover !important;
 }
