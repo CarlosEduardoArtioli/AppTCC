@@ -13,14 +13,14 @@
 
   <div *ngFor="let device of Devices">
 
-    <ion-item button (click)="device.open = !device.open">
+    <ion-item button (click)="device.open = !device.open" lines="full">
       <ion-icon slot="end" name="add-outline" *ngIf="!device.open"></ion-icon>
       <ion-icon slot="end" name="remove-outline" *ngIf="device.open"></ion-icon>
       <ion-label><strong>{{device.name}}</strong></ion-label>
     </ion-item>
 
-    <ion-list *ngIf="device.open">
-    <ion-item>
+    <div *ngIf="device.open">
+    <ion-item lines="none">
 
       <ion-label>
         <ion-label *ngIf="1 > device.timer.timer1.timer"> Não adicionado.</ion-label>
@@ -49,7 +49,7 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
 
       <ion-label>
         <ion-label *ngIf="1 > device.timer.timer2.timer"> Não adicionado.</ion-label>
@@ -78,7 +78,7 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="none">
 
       <ion-label>
         <ion-label *ngIf="1 > device.timer.timer3.timer"> Não adicionado.</ion-label>
@@ -107,7 +107,7 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item lines="full">
       
       <ion-label>
         <ion-label *ngIf="1 > device.timer.timer4.timer"> Não adicionado.</ion-label>
@@ -136,7 +136,7 @@
       </div>
     </ion-item>
 
-  </ion-list>
+  </div>
 </div>
 
 </ion-content>

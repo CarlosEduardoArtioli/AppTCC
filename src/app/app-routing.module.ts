@@ -49,11 +49,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'timer-add',
-    loadChildren: () => import('./pages/functions/timer/timer-add/timer-add.module').then(m => m.TimerAddPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'edit-icons/:mac',
     loadChildren: () => import('./pages/edit/device/edit-icons/edit-icons.module').then(m => m.EditIconsPageModule),
     canActivate: [AuthGuard]
