@@ -26,7 +26,6 @@ export class EditTimerPagePage implements OnInit {
   week6: any;
   week7: any;
   newWeek: any;
-  oldWeek: any;
   action: string;
 
   constructor(
@@ -77,26 +76,40 @@ export class EditTimerPagePage implements OnInit {
     console.log(sabado);
     console.log(domingo);
 
-    if (segunda === -1) {
+    if (segunda !== -1) {
       this.week1 = 'seg';
+    } else {
+      this.week1 = '';
     }
     if (terca !== -1) {
       this.week2 = 'ter';
+    } else {
+      this.week2 = '';
     }
     if (quarta !== -1) {
       this.week3 = 'qua';
+    } else {
+      this.week3 = '';
     }
     if (quinta !== -1) {
       this.week4 = 'qui';
+    } else {
+      this.week4 = '';
     }
     if (sexta !== -1) {
       this.week5 = 'sex';
+    } else {
+      this.week5 = '';
     }
     if (sabado !== -1) {
       this.week6 = 'sab';
+    } else {
+      this.week6 = '';
     }
     if (domingo !== -1) {
       this.week7 = 'dom';
+    } else {
+      this.week7 = '';
     }
 
     console.log(this.week1);

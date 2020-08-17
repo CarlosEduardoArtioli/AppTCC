@@ -20,8 +20,8 @@
 
   <ion-item lines="full">
     <ion-label position="floating">Horário do Timer</ion-label>
-    <ion-datetime id="dateTime" [(ngModel)]="dateTime" value="{{ dateTime }}" displayFormat="HH:mm:ss" required>
-    </ion-datetime>
+    <ion-input type="time" [(ngModel)]="dateTime" value="{{ dateTime }}" step="1" required>
+    </ion-input>
   </ion-item>
 
   <ion-item>
