@@ -39,11 +39,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/auth/signup/signup.module').then(m => m.SignupPageModule)
   },
   {
-    path: 'edit-timer-page/:mac',
-    loadChildren: () => import('./pages/functions/timer/edit-timer/edit-timer-page.module').then(m => m.EditDevicePagePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then(m => m.MenuPageModule),
     canActivate: [AuthGuard]
@@ -68,6 +63,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/edit/room/edit-room-page/edit-room-page.module').then(m => m.EditRoomPagePageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'edit-timer-list',
+    loadChildren: () => import('./pages/functions/timer/edit-timer-list/edit-timer-list.module').then( m => m.EditTimerListPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-timer-page/:mac/:timer',
+    loadChildren: () => import('./pages/functions/timer/edit-timer-page/edit-timer-page.module').then( m => m.EditTimerPagePageModule),
+    canActivate: [AuthGuard]
+  },
   // Rota "home"  em casos especiais
   // Esta rota leva até a home caso o usuario esteja logado e digite
   // alguma rota que não exista. Por exemplo beaver-house.web.app/abc123
@@ -76,6 +81,7 @@ const routes: Routes = [
     redirectTo: 'menu/home',
     canActivate: [AuthGuard]
   },
+
 ];
 
 @NgModule({

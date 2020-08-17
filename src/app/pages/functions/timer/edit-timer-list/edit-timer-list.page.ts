@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Dispositivos } from '../../../models/device.model';
-import { DeviceService } from '../../../services/device.service';
 import { AlertController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { DeviceService } from 'src/app/services/device.service';
 import { TimerService } from 'src/app/services/timer.service';
+import { Dispositivos } from 'src/app/models/device.model';
 
 @Component({
-  selector: 'app-timer',
-  templateUrl: './timer.page.html',
-  styleUrls: ['./timer.page.scss'],
+  selector: 'app-edit-timer-list',
+  templateUrl: './edit-timer-list.page.html',
+  styleUrls: ['./edit-timer-list.page.scss'],
 })
-export class TimerPage implements OnInit {
+export class EditTimerListPage implements OnInit {
 
   Devices = [];
   timer: any;
@@ -61,4 +61,5 @@ export class TimerPage implements OnInit {
     await alert.present();
   }
 }
+
 

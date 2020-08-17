@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TimerPageRoutingModule } from '././timer-routing.module';
+import { EditTimerListPageRoutingModule } from './edit-timer-list-routing.module';
 
-import { TimerPage } from '././timer.page';
-
-
+import { EditTimerListPage } from './edit-timer-list.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TimerPageRoutingModule
+    EditTimerListPageRoutingModule
   ],
-  declarations: [TimerPage]
+  declarations: [EditTimerListPage]
 })
-export class TimerPageModule { }
+export class EditTimerListPageModule {}

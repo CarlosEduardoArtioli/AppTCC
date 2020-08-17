@@ -4,19 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditDevicePagePageRoutingModule } from './edit-timer-page-routing.module';
+import { EditTimerPagePageRoutingModule } from './edit-timer-page-routing.module';
 
-import { EditDevicePagePage } from './edit-timer-page.page';
+import { EditTimerPagePage } from './edit-timer-page.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditDevicePagePageRoutingModule,
+    EditTimerPagePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [EditDevicePagePage],
-  entryComponents: []
+  declarations: [EditTimerPagePage]
 })
-export class EditDevicePagePageModule {}
+export class EditTimerPagePageModule {}

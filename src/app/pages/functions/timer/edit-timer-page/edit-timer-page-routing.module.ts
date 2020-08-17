@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditDevicePagePage } from './edit-timer-page.page';
+import { EditTimerPagePage } from './edit-timer-page.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditDevicePagePage
+    component: EditTimerPagePage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EditDevicePagePageRoutingModule {}
+export class EditTimerPagePageRoutingModule {}

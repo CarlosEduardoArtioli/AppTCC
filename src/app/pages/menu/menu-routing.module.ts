@@ -31,8 +31,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'timer',
-        loadChildren: () => import('../functions/timer/timer.module').then(m => m.TimerPageModule),
+        path: 'edit-timer-list',
+        loadChildren: () => import('../functions/timer/edit-timer-list/edit-timer-list.module').then(m => m.EditTimerListPageModule),
         canActivate: [AuthGuard]
       },
     ]

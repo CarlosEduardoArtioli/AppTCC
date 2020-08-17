@@ -62,7 +62,7 @@ export class DeviceService {
      // .catch(error => console.log(error));
   }
 
-  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
+  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro
   getDevice(mac: any) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)

@@ -24,7 +24,7 @@
 
       <ion-label>
         <ion-label *ngIf="1 > device.timer.timer1.timer"> Não adicionado.</ion-label>
-        <ion-label *ngIf="device.timer.timer1.timer > 0"> <ion-icon name="time-outline"></ion-icon> {{device.timer.timer1.timer}}</ion-label>
+        <ion-label *ngIf="device.timer.timer1.timer !== ''"> <ion-icon name="time-outline"></ion-icon> {{device.timer.timer1.timer}}</ion-label>
         
         <ion-label *ngIf="device.timer.timer1.week1.length > 0 && 1 > device.timer.timer1.week2.length">> {{device.timer.timer1.week1}}.</ion-label>
         <ion-label *ngIf="1 > device.timer.timer1.week3.length && device.timer.timer1.week2.length > 0"> <ion-icon name="calendar-outline"></ion-icon> {{device.timer.timer1.week1}}, {{device.timer.timer1.week2}}.</ion-label>
@@ -38,7 +38,7 @@
 
       <div>
 
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer1']">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 
@@ -67,7 +67,7 @@
 
       <div>
 
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer2']">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 
@@ -96,7 +96,7 @@
 
       <div>
 
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer3']">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 
@@ -125,7 +125,7 @@
 
       <div>
 
-        <button class="transparent" ion-button clear [routerLink]="['/edit-device-page/', device.$key]">
+        <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer4']">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
 

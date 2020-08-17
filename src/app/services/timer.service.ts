@@ -3,8 +3,6 @@
 // Service para funções relacionadas ao Dispositivo
 
 import { Injectable } from '@angular/core';
-// Importação do Model do dispositivo
-import { Dispositivos } from '../models/device.model';
 // Importação das bibliotecas do AngularFire
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
@@ -15,7 +13,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 export class TimerService {
   // Declaração das variáveis
 
-  // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados 
+  // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados
   timerListRef: AngularFireList<any>;
   // Interface da biblioteca do AngularFire que "devolve" na função o dado pedido
   timerRef: AngularFireObject<any>;
@@ -29,40 +27,16 @@ export class TimerService {
     // Recebeu o apelido de db
     private db: AngularFireDatabase
   ) {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.user.email = this.user.email.replace(/[.#$]+/g, ':');
-      this.macs = this.timerRef = this.db.object(`/users/${this.user.email}/devices/`);
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+    this.macs = this.timerRef = this.db.object(`/users/${this.user.email}/devices/`);
   }
 
-  // Função que cria os dados do dispositivo
-  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  createTimer(timer: any, week1: any, week2: any, week3: any, week4: any, week5: any, week6: any, week7: any, mac: any, wt: any, action: any) {
-    // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${wt}`).update({
-      // Cada variavel recebe o dado que foi passado junto ao parâmetro
-      timer: timer,
-      week1: week1,
-      week2: week2,
-      week3: week3,
-      week4: week4,
-      week5: week5,
-      week6: week6,
-      week7: week7,
-      action: action
-    }); // .then(res => {
-    // Escreve no console o valor do formulário
-    // console.log(res)
-    // })
-    // Caso ocorra um erro, ele o escreve no console
-    // .catch(error => console.log(error));
-  }
-
-  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
-  getTimer(timer: any, week: any, mac: any) {
+  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro
+  getTimer(timer, mac) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/${timer}`);
-    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/${week}`);
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Retorna o deviceRef para a função
     return this.timerRef;
   }
@@ -77,13 +51,19 @@ export class TimerService {
 
   // Função que atualiza os dados do objeto
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateTimer(timer, week, wt) {
+  updateTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, timer, mac) {
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Retorna para a função a atualização dos dados
     return this.timerRef.update({
-      timer: timer,
-      week: week,
-      wt: wt,
-
+      action: action,
+      timer: dateTime,
+      week1: week1,
+      week2: week2,
+      week3: week3,
+      week4: week4,
+      week5: week5,
+      week6: week6,
+      week7: week7
     });
   }
 
@@ -94,15 +74,15 @@ export class TimerService {
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
 
     return this.timerRef.set({
-      action: "",
-      timer: "",
-      week1: "",
-      week2: "",
-      week3: "",
-      week4: "",
-      week5: "",
-      week6: "",
-      week7: ""
+      action: '',
+      timer: '',
+      week1: '',
+      week2: '',
+      week3: '',
+      week4: '',
+      week5: '',
+      week6: '',
+      week7: ''
     });
   }
 }

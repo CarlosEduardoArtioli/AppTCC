@@ -47,7 +47,7 @@ export class MenuPage implements OnInit {
       children: [
         {
           title: 'Timer',
-          url: '/menu/timer',
+          url: '/menu/edit-timer-list',
           icon: 'alarm-outline'
         },
       ]
