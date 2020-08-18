@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { TimerService } from 'src/app/services/timer.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-timer-page',
@@ -17,7 +17,7 @@ export class EditTimerPagePage implements OnInit {
   name: any;
   Devices = [];
   timer: any;
-  dateTime: any;
+  dateTime = '';
   week1: any;
   week2: any;
   week3: any;
@@ -26,14 +26,15 @@ export class EditTimerPagePage implements OnInit {
   week6: any;
   week7: any;
   newWeek: any;
-  action: string;
+  action = '';
 
   constructor(
     private timerService: TimerService,
     private actRoute: ActivatedRoute,
     private router: Router,
     public fb: FormBuilder,
-    public actionSheetController: ActionSheetController
+    public actionSheetController: ActionSheetController,
+    private toastController: ToastController,
   ) {
     // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
@@ -59,6 +60,10 @@ export class EditTimerPagePage implements OnInit {
     console.log(this.action);
     console.log(this.dateTime);
     console.log(this.newWeek);
+
+    if (this.newWeek === undefined) {
+      this.alert('Insira o horário!');
+    }
 
     const segunda = this.newWeek.indexOf('seg');
     const terca = this.newWeek.indexOf('ter');
@@ -120,7 +125,18 @@ export class EditTimerPagePage implements OnInit {
     console.log(this.week6);
     console.log(this.week7);
 
-    this.updateForm();
+    // tslint:disable-next-line: max-line-length
+    if (this.week1 !== 'seg' && this.week2 !== 'ter' && this.week3 !== 'qua' && this.week4 !== 'qui' && this.week5 !== 'sex' && this.week6 !== 'sab' && this.week7 !== 'dom') {
+      this.alert('Insira os dias da semana!');
+    } else
+      if (this.action === '') {
+        this.alert('Insira a ação!');
+      } else
+        if (this.dateTime === '') {
+          this.alert('Insira o horário!');
+        } else {
+          this.updateForm();
+        }
   }
 
   updateForm() {
@@ -130,5 +146,14 @@ export class EditTimerPagePage implements OnInit {
         this.router.navigate(['/menu/edit-timer-list']);
       })
       .catch(error => console.log(error));
+  }
+
+  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  async alert(mensage) {
+    const toast = await this.toastController.create({
+      header: mensage,
+      duration: 2000
+    });
+    await toast.present();
   }
 }
