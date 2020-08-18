@@ -74,7 +74,10 @@ export class SignupPage implements OnInit {
         this.authService.SendVerificationMail();
         this.router.navigate(['verify-email']);
       }).catch((error) => {
-        this.showMessage(error.message);
+        const delay = 500;
+        setTimeout(() => {
+          this.showMessage(error.message);
+        }, delay);
       });
   }
 }

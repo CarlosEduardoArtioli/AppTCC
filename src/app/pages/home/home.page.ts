@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Dispositivos } from '../../models/device.model';
 import { DeviceService } from '../../services/device.service';
 import { Room } from '../../models/room.model';

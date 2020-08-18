@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,7 @@ export class AuthGuard implements CanActivate {
   canActivate(): Promise<boolean> {
     return new Promise(resolve => {
       this.authService.getAuth().onAuthStateChanged(user => {
-        if (!user) {
-          this.router.navigate(['login']);
-        }
+        if (!user) { this.router.navigate(['login']); }
 
         resolve(user ? true : false);
       });

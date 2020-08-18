@@ -106,7 +106,7 @@ export class EditRoomListPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.roomService.deleteDevice(room);
+            this.roomService.deleteRoom(room);
           }
         }
       ]

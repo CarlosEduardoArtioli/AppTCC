@@ -1,4 +1,4 @@
-// Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app 
+// Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app
 // Mas não são todas
 
 import { NgModule } from '@angular/core';

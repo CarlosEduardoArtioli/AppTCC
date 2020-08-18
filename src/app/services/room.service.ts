@@ -3,8 +3,6 @@
 // Service para funções relacionadas ao Dispositivo
 
 import { Injectable } from '@angular/core';
-// Importação do Model do dispositivo
-import { Room } from '../models/room.model';
 // Importação das bibliotecas do AngularFire
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 
@@ -65,16 +63,6 @@ export class RoomService {
     return this.roomListRef;
   }
 
-  // Função que atualiza os dados do objeto
-  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
-  updateDevice(apt: Room) {
-    // Retorna para a função a atualização dos dados
-    return this.roomRef.update({
-      name: apt.name,
-      icon: apt.icon
-    });
-  }
-
   updateName(nome, comodo) {
     this.db.object(`/users/${this.user.email}/rooms/${comodo}/name`).set(nome);
   }
@@ -84,7 +72,7 @@ export class RoomService {
   }
 
   // Função que exclui os dados do objeto com o id passado
-  deleteDevice(room: any) {
+  deleteRoom(room: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
     this.roomRef = this.db.object(`/users/${this.user.email}/rooms/${room}`);

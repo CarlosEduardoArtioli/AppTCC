@@ -19,7 +19,6 @@ export class TimerService {
   timerRef: AngularFireObject<any>;
   // Declaração da variável user
   user: any;
-  macs: any;
 
 
   constructor(
@@ -29,7 +28,6 @@ export class TimerService {
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.user.email = this.user.email.replace(/[.#$]+/g, ':');
-    this.macs = this.timerRef = this.db.object(`/users/${this.user.email}/devices/`);
   }
 
   // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro
@@ -39,14 +37,6 @@ export class TimerService {
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Retorna o deviceRef para a função
     return this.timerRef;
-  }
-
-  // Função que "Pega" a lista de todos objetos com seus respectivos valores
-  getTimerList(mac: any) {
-    // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
-    this.timerListRef = this.db.list(`/users/${this.user.email}/devices/${mac}/timer`);
-    // Retorna o deviceListRef para a função
-    return this.timerListRef;
   }
 
   // Função que atualiza os dados do objeto

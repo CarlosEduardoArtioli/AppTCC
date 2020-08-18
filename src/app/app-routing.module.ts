@@ -9,12 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   // Em certas rotas é passado o canActive para se o usuário não estiver logado o redirecionar para a página de login
   // Assim evitando que o usuário entre no em certas páginas sem o login
-  // Rota 'adicionar'
-  {
-    path: 'adicionar',
-    loadChildren: () => import('./pages/adicionar/adicionar.module').then(m => m.AdicionarPageModule),
-    canActivate: [AuthGuard]
-  },
+
   // Rota 'edit-device-page/:id'
   // Essa rota recebe o id passado em seu page.ts para redirecinar o usuário para a página de edição de certo dispositivo
   {
