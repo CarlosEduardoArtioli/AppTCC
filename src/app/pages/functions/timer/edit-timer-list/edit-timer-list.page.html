@@ -9,18 +9,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content mode="md">
 
   <div *ngFor="let device of Devices">
 
-    <ion-item button (click)="device.open = !device.open" lines="full">
+    <ion-item button (click)="device.open = !device.open" lines="full" mode="md">
       <ion-icon slot="end" name="chevron-forward-outline" *ngIf="!device.open"></ion-icon>
       <ion-icon slot="end" name="chevron-down-outline" *ngIf="device.open"></ion-icon>
       <ion-label><strong>{{device.name}}</strong></ion-label>
     </ion-item>
 
     <div *ngIf="device.open">
-      <ion-item lines="none">
+      <ion-item lines="none" mode="md">
 
         <ion-label *ngIf="1 > device.timer.timer1.timer"> Não adicionado.</ion-label>
 

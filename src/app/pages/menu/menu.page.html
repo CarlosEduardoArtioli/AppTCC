@@ -2,14 +2,14 @@
 
   <div class="user-menu" (click)="showOptions()">
     <img src='{{ photo }}'>
-    <h3>{{ name }}</h3>
+    <h4>{{ name }}</h4>
   </div>
 
-  <ion-content>
+  <ion-content mode="md">
 
     <div *ngFor="let p of pages">
 
-      <ion-menu-toggle *ngIf="p.url">
+      <ion-menu-toggle *ngIf="p.url" mode="md">
         <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active" lines="full">
           <ion-icon [name]="p.icon" slot="start"></ion-icon>
           <ion-label>
@@ -19,15 +19,15 @@
       </ion-menu-toggle>
 
       <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.active-parent]="p.open"
-        detail=false lines="full">
+        detail=false lines="full" mode="md">
         <ion-icon slot="end" name="chevron-forward-outline" *ngIf="!p.open"></ion-icon>
         <ion-icon slot="end" name="chevron-down-outline" *ngIf="p.open"></ion-icon>
         <ion-icon [name]="p.icon" slot="start"></ion-icon>
         <ion-label>{{ p.title }}</ion-label>
       </ion-item>
 
-      <ion-list *ngIf="p.open">
-        <ion-menu-toggle>
+      <ion-list *ngIf="p.open" mode="md">
+        <ion-menu-toggle mode="md">
           <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root"
             routerLinkActive="active">
             <ion-icon [name]="sub.icon" slot="start"></ion-icon>

@@ -93,7 +93,7 @@ export class LoginPage implements OnInit {
     this.authService.SignIn(value)
       .then((res) => {
         if (this.authService.isEmailVerified) {
-          const delay = 1000;
+          const delay = 500;
           setTimeout(() => {
             this.router.navigate(['menu/home']);
           }, delay);

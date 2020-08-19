@@ -43,7 +43,7 @@ export class AuthenticationService {
           res => resolve(res),
           err => reject(err));
 
-      this.SetUserEmail();
+      this.SetUserEmail(value.name);
     });
 
   }
@@ -89,7 +89,7 @@ export class AuthenticationService {
       .then((result) => {
         this.ngZone.run(() => {
           this.SetUserData(result.user);
-          const delay = 1000;
+          const delay = 500;
           setTimeout(() => {
             this.router.navigate(['/home/login']);
           }, delay);
@@ -116,7 +116,7 @@ export class AuthenticationService {
     }, delay);
   }
 
-  SetUserEmail() {
+  SetUserEmail(name) {
     const userLocal = JSON.parse(localStorage.getItem('user'));
     const userData: User = {
       uid: userLocal.uid,

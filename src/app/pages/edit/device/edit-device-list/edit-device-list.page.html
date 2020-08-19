@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Editar Dispositivo
+      Dispositivo
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,10 +17,10 @@
             <ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{device.name}}
           </h3>
           <h3>
-            <ion-icon name="wifi-outline"></ion-icon>&nbsp;&nbsp;{{device.ap}}
+            <ion-icon src="/assets/svg/{{ device.iconRoom }}.svg"></ion-icon>&nbsp;&nbsp;{{device.room}}
           </h3>
           <h3>
-            <ion-icon src="/assets/svg/{{ device.iconRoom }}.svg"></ion-icon>&nbsp;&nbsp;{{device.room}}
+            <ion-icon name="wifi-outline"></ion-icon>&nbsp;&nbsp;{{device.ap}}
           </h3>
         </ion-label>
 
