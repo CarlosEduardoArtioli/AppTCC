@@ -89,7 +89,10 @@ export class AuthenticationService {
       .then((result) => {
         this.ngZone.run(() => {
           this.SetUserData(result.user);
-          this.router.navigate(['/home/login']);
+          const delay = 1000;
+          setTimeout(() => {
+            this.router.navigate(['/home/login']);
+          }, delay);
         });
       }).catch((error) => {
         console.log(error);

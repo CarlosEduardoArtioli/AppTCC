@@ -19,6 +19,7 @@ export class RoomService {
   roomRef: AngularFireObject<any>;
   // Declaração da variável user
   user: any;
+  email: any;
 
 
   constructor(
@@ -27,14 +28,15 @@ export class RoomService {
     private db: AngularFireDatabase
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+    this.email = this.user.email;
+    this.email = this.email.replace(/[.#$]+/g, ':');
   }
 
   // Função que cria os dados do dispositivo
   // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
   createRoom(room: any, icone) {
     // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
-    this.db.object(`/users/${this.user.email}/rooms/${room}`).set({
+    this.db.object(`/users/${this.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: room,
       icon: icone
@@ -50,7 +52,7 @@ export class RoomService {
   getRoom(room: any) {
     // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.roomRef = this.db.object(`/users/${this.user.email}/rooms/${room}`);
+    this.roomRef = this.db.object(`/users/${this.email}/rooms/${room}`);
     // Retorna o deviceRef para a função
     return this.roomRef;
   }
@@ -58,24 +60,24 @@ export class RoomService {
   // Função que "Pega" a lista de todos objetos com seus respectivos valores
   getRoomList() {
     // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
-    this.roomListRef = this.db.list(`/users/${this.user.email}/rooms`);
+    this.roomListRef = this.db.list(`/users/${this.email}/rooms`);
     // Retorna o deviceListRef para a função
     return this.roomListRef;
   }
 
   updateName(nome, comodo) {
-    this.db.object(`/users/${this.user.email}/rooms/${comodo}/name`).set(nome);
+    this.db.object(`/users/${this.email}/rooms/${comodo}/name`).set(nome);
   }
 
   updateIcon(icone, comodo) {
-    return this.db.object(`/users/${this.user.email}/rooms/${comodo}/icon`).set(icone);
+    return this.db.object(`/users/${this.email}/rooms/${comodo}/icon`).set(icone);
   }
 
   // Função que exclui os dados do objeto com o id passado
   deleteRoom(room: any) {
     // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
     // /dispositivos/id (sendo o id passado junto a função)
-    this.roomRef = this.db.object(`/users/${this.user.email}/rooms/${room}`);
+    this.roomRef = this.db.object(`/users/${this.email}/rooms/${room}`);
     // Remove o objeto que foi atribuido ao deviceRef
     this.roomRef.remove();
   }

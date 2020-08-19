@@ -93,7 +93,10 @@ export class LoginPage implements OnInit {
     this.authService.SignIn(value)
       .then((res) => {
         if (this.authService.isEmailVerified) {
-          this.router.navigate(['menu/home']);
+          const delay = 1000;
+          setTimeout(() => {
+            this.router.navigate(['menu/home']);
+          }, delay);
         } else {
           this.showMessage('Email não verificado');
           return false;
