@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TimerService } from 'src/app/services/timer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController, ToastController } from '@ionic/angular';
@@ -28,6 +28,18 @@ export class EditTimerPagePage implements OnInit {
   newWeek: any;
   action = '';
 
+  public mensagens_validacao = {
+    action: [
+      { tipo: 'required', mensagem: 'O campo ação é obrigatório!' },
+    ],
+    dateTime: [
+      { tipo: 'required', mensagem: 'O campo horário é obrigatório!' },
+    ],
+    newWeek: [
+      { tipo: 'required', mensagem: 'O campo horário é obrigatório!' },
+    ]
+  };
+
   constructor(
     private timerService: TimerService,
     private actRoute: ActivatedRoute,
@@ -51,6 +63,12 @@ export class EditTimerPagePage implements OnInit {
       this.week7 = res.week7;
       console.log(res);
     });
+
+    this.updateTimerForm = fb.group({
+      action: ['', Validators.compose([Validators.required])],
+      dateTime: ['', Validators.compose([Validators.required])],
+      newWeek: ['', Validators.compose([Validators.required])],
+    });
   }
 
   // Função para quando a página for iniciada
@@ -60,10 +78,6 @@ export class EditTimerPagePage implements OnInit {
     console.log(this.action);
     console.log(this.dateTime);
     console.log(this.newWeek);
-
-    if (this.newWeek === undefined) {
-      this.alert('Insira o horário!');
-    }
 
     const segunda = this.newWeek.indexOf('seg');
     const terca = this.newWeek.indexOf('ter');
@@ -125,18 +139,11 @@ export class EditTimerPagePage implements OnInit {
     console.log(this.week6);
     console.log(this.week7);
 
-    // tslint:disable-next-line: max-line-length
-    if (this.week1 !== 'seg' && this.week2 !== 'ter' && this.week3 !== 'qua' && this.week4 !== 'qui' && this.week5 !== 'sex' && this.week6 !== 'sab' && this.week7 !== 'dom') {
-      this.alert('Insira os dias da semana!');
-    } else
-      if (this.action === '') {
-        this.alert('Insira a ação!');
-      } else
-        if (this.dateTime === '') {
-          this.alert('Insira o horário!');
-        } else {
-          this.updateForm();
-        }
+    if (this.updateTimerForm.valid) {
+      this.updateForm();
+    } else {
+      this.alert('Formulário Inválido');
+    }
   }
 
   updateForm() {

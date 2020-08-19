@@ -11,7 +11,7 @@ import { EditTimerPagePage } from './edit-timer-page.page';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     IonicModule,
     EditTimerPagePageRoutingModule,
     ReactiveFormsModule
