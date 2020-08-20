@@ -5,3 +5,14 @@ ion-icon {
 ion-item {
     --background: rgb(43, 53, 102, 0.7);
 }
+
+@media (min-width: 720px) {
+
+    ion-icon {
+        font-size: 35px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+}

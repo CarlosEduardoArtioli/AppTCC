@@ -36,31 +36,31 @@ ion-content {
     ion-content {
         .active {
             --ion-text-color: var(--ion-color-primary);
-        
+
             ion-icon {
                 --ion-text-color-rgb: var(--ion-color-primary);
             }
         }
-        
+
         .active-parent {
             font-weight: 500;
         }
-        
+
         .sub-item {
             padding-left: 16px;
             font-size: small;
         }
-        
+
         ion-menu,
         ion-content {
             --background: #1e1e1e;
             font-family: 'Open Sans', sans-serif;
         }
-        
+
         .user-menu {
             text-align: center !important;
             color: white;
-        
+
             img {
                 border-radius: 100%;
                 padding: 5px;
@@ -71,8 +71,9 @@ ion-content {
         ion-label {
             font-size: 20px;
         }
+
         ion-list ion-label {
             font-size: 16px;
         }
     }
-  }
+}

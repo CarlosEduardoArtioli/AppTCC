@@ -12,7 +12,7 @@
 <ion-content>
   <ion-item lines="full">
     <ion-label>{{ name }}</ion-label>
-    <div>
+    <div class="button">
       <button class="transparent" ion-button clear (click)="updateName()">
         <ion-icon name="pencil-outline" style="zoom:2.0"></ion-icon>
       </button>
@@ -22,7 +22,7 @@
   <ion-item lines="full">
     <ion-icon src="/assets/svg/{{ icon }}.svg"></ion-icon>
     <ion-label>&nbsp;&nbsp;{{ icon }}</ion-label>
-    <div>
+    <div class="button">
       <button class="transparent" ion-button clear [routerLink]="['/edit-icon-room/', room]">
         <ion-icon name="file-tray-full-outline" style="zoom:2.0"></ion-icon>
       </button>

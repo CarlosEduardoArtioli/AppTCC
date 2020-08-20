@@ -2,3 +2,10 @@ ion-icon {
     font-size: 60px;
     color: white;
 }
+
+@media (min-width: 720px) {
+
+    ion-icon {
+        font-size: 180px;
+    }
+}
