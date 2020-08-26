@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { Dispositivos } from 'src/app/models/device.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-timer-list',
@@ -13,11 +14,13 @@ export class EditTimerListPage implements OnInit {
 
   Devices = [];
   timer: any;
+  timerShow: any;
 
   constructor(
     private deviceService: DeviceService,
     private timerService: TimerService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private router: Router
   ) {
 
   }
@@ -39,6 +42,27 @@ export class EditTimerListPage implements OnInit {
 
   deleteTimer(mac: any, timer: any) {
     this.presentAlertConfirm(mac, timer);
+  }
+
+  addTimer(mac, timer1, timer2, timer3, timer4) {
+
+    if (timer1 === false) {
+      this.timerShow = 'timer1';
+    } else
+    if (timer2 === false) {
+      this.timerShow = 'timer2';
+    } else
+    if (timer3 === false) {
+      this.timerShow = 'timer3';
+    } else
+    if (timer4 === false) {
+      this.timerShow = 'timer4';
+    }
+
+    this.timerService.addTimer(mac, this.timerShow).then(() => {
+      this.router.navigate(['/edit-timer-page/', mac, this.timerShow]);
+    })
+      .catch(error => console.log(error));
   }
 
   async presentAlertConfirm(mac, timer) {

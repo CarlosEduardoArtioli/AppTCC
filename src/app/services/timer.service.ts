@@ -47,6 +47,7 @@ export class TimerService {
     return this.timerRef.update({
       action: action,
       timer: dateTime,
+      show: true,
       week1: week1,
       week2: week2,
       week3: week3,
@@ -65,6 +66,24 @@ export class TimerService {
 
     return this.timerRef.set({
       action: '',
+      show: false,
+      timer: '',
+      week1: '',
+      week2: '',
+      week3: '',
+      week4: '',
+      week5: '',
+      week6: '',
+      week7: ''
+    });
+  }
+
+  addTimer(mac, timer) {
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
+
+    return this.timerRef.set({
+      action: '',
+      show: true,
       timer: '',
       week1: '',
       week2: '',

@@ -20,9 +20,13 @@
     </ion-item>
 
     <div *ngIf="device.open">
-      <ion-item lines="none" mode="md">
-
-        <ion-label *ngIf="1 > device.timer.timer1.timer"> Não adicionado.</ion-label>
+      <ion-item
+        (click)="addTimer(device.$key, device.timer.timer1.show, device.timer.timer2.show, device.timer.timer3.show,device.timer.timer4.show)"
+        *ngIf="device.timer.timer1.show === false || device.timer.timer2.show === false || device.timer.timer3.show === false || device.timer.timer4.show === false"
+        lines="full">
+        <ion-icon slot="end" name="add-circle-outline"></ion-icon> Adicionar um novo timer
+      </ion-item>
+      <ion-item lines="none" mode="md" *ngIf="device.timer.timer1.show === true">
 
         <ion-label *ngIf="device.timer.timer1.timer !== ''">
           <ion-label>
@@ -31,9 +35,12 @@
 
           <ion-label>
             <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer1.week1 === 'seg'">Seg</span>
-            <span *ngIf="device.timer.timer1.week2 === 'ter'">Ter</span> <span *ngIf="device.timer.timer1.week3 === 'qua'">Qua</span>
-            <span *ngIf="device.timer.timer1.week4 === 'qui'">Qui</span> <span *ngIf="device.timer.timer1.week5 === 'sex'">Sex</span>
-            <span *ngIf="device.timer.timer1.week6 === 'sab'">Sáb</span> <span *ngIf="device.timer.timer1.week7 === 'dom'">Dom</span>
+            <span *ngIf="device.timer.timer1.week2 === 'ter'">Ter</span> <span
+              *ngIf="device.timer.timer1.week3 === 'qua'">Qua</span>
+            <span *ngIf="device.timer.timer1.week4 === 'qui'">Qui</span> <span
+              *ngIf="device.timer.timer1.week5 === 'sex'">Sex</span>
+            <span *ngIf="device.timer.timer1.week6 === 'sab'">Sáb</span> <span
+              *ngIf="device.timer.timer1.week7 === 'dom'">Dom</span>
           </ion-label>
           <ion-label *ngIf="device.timer.timer1.action.length > 0">
             <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer1.action}}
@@ -51,11 +58,10 @@
           </button>
 
         </div>
+
       </ion-item>
 
-      <ion-item lines="none">
-
-        <ion-label *ngIf="1 > device.timer.timer2.timer"> Não adicionado.</ion-label>
+      <ion-item lines="none" *ngIf="device.timer.timer2.show === true">
 
         <ion-label *ngIf="device.timer.timer2.timer !== ''">
           <ion-label>
@@ -64,9 +70,12 @@
 
           <ion-label>
             <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer2.week1 === 'seg'">Seg</span>
-            <span *ngIf="device.timer.timer2.week2 === 'ter'">Ter</span> <span *ngIf="device.timer.timer2.week3 === 'qua'">Qua</span>
-            <span *ngIf="device.timer.timer2.week4 === 'qui'">Qui</span> <span *ngIf="device.timer.timer2.week5 === 'sex'">Sex</span>
-            <span *ngIf="device.timer.timer2.week6 === 'sab'">Sáb</span> <span *ngIf="device.timer.timer2.week7 === 'dom'">Dom</span>
+            <span *ngIf="device.timer.timer2.week2 === 'ter'">Ter</span> <span
+              *ngIf="device.timer.timer2.week3 === 'qua'">Qua</span>
+            <span *ngIf="device.timer.timer2.week4 === 'qui'">Qui</span> <span
+              *ngIf="device.timer.timer2.week5 === 'sex'">Sex</span>
+            <span *ngIf="device.timer.timer2.week6 === 'sab'">Sáb</span> <span
+              *ngIf="device.timer.timer2.week7 === 'dom'">Dom</span>
           </ion-label>
           <ion-label *ngIf="device.timer.timer2.action.length > 0">
             <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer2.action}}
@@ -86,9 +95,7 @@
         </div>
       </ion-item>
 
-      <ion-item lines="none">
-
-        <ion-label *ngIf="1 > device.timer.timer3.timer"> Não adicionado.</ion-label>
+      <ion-item lines="none" *ngIf="device.timer.timer3.show === true">
 
         <ion-label *ngIf="device.timer.timer3.timer !== ''">
           <ion-label>
@@ -97,9 +104,12 @@
 
           <ion-label>
             <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer3.week1 === 'seg'">Seg</span>
-            <span *ngIf="device.timer.timer3.week2 === 'ter'">Ter</span> <span *ngIf="device.timer.timer3.week3 === 'qua'">Qua</span>
-            <span *ngIf="device.timer.timer3.week4 === 'qui'">Qui</span> <span *ngIf="device.timer.timer3.week5 === 'sex'">Sex</span>
-            <span *ngIf="device.timer.timer3.week6 === 'sab'">Sáb</span> <span *ngIf="device.timer.timer3.week7 === 'dom'">Dom</span>
+            <span *ngIf="device.timer.timer3.week2 === 'ter'">Ter</span> <span
+              *ngIf="device.timer.timer3.week3 === 'qua'">Qua</span>
+            <span *ngIf="device.timer.timer3.week4 === 'qui'">Qui</span> <span
+              *ngIf="device.timer.timer3.week5 === 'sex'">Sex</span>
+            <span *ngIf="device.timer.timer3.week6 === 'sab'">Sáb</span> <span
+              *ngIf="device.timer.timer3.week7 === 'dom'">Dom</span>
           </ion-label>
           <ion-label *ngIf="device.timer.timer3.action.length > 0">
             <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer3.action}}
@@ -119,9 +129,7 @@
         </div>
       </ion-item>
 
-      <ion-item lines="full">
-
-        <ion-label *ngIf="1 > device.timer.timer4.timer"> Não adicionado.</ion-label>
+      <ion-item lines="none" *ngIf="device.timer.timer4.show === true">
 
         <ion-label *ngIf="device.timer.timer4.timer !== ''">
           <ion-label>
@@ -130,9 +138,12 @@
 
           <ion-label>
             <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer4.week1 === 'seg'">Seg</span>
-            <span *ngIf="device.timer.timer4.week2 === 'ter'">Ter</span> <span *ngIf="device.timer.timer4.week3 === 'qua'">Qua</span>
-            <span *ngIf="device.timer.timer4.week4 === 'qui'">Qui</span> <span *ngIf="device.timer.timer4.week5 === 'sex'">Sex</span>
-            <span *ngIf="device.timer.timer4.week6 === 'sab'">Sáb</span> <span *ngIf="device.timer.timer4.week7 === 'dom'">Dom</span>
+            <span *ngIf="device.timer.timer4.week2 === 'ter'">Ter</span> <span
+              *ngIf="device.timer.timer4.week3 === 'qua'">Qua</span>
+            <span *ngIf="device.timer.timer4.week4 === 'qui'">Qui</span> <span
+              *ngIf="device.timer.timer4.week5 === 'sex'">Sex</span>
+            <span *ngIf="device.timer.timer4.week6 === 'sab'">Sáb</span> <span
+              *ngIf="device.timer.timer4.week7 === 'dom'">Dom</span>
           </ion-label>
           <ion-label *ngIf="device.timer.timer4.action.length > 0">
             <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer4.action}}
