@@ -55,14 +55,17 @@ export class DeviceService {
     return this.deviceListRef;
   }
 
+  // Função para atualizar o icone do dispositivo
   updateIcon(icone, mac) {
     return this.db.database.ref(`/users/${this.email}/devices/${mac}/icon`).set(icone);
   }
 
+  // Função para atualizar o nome do dispositivo
   updateName(nome, mac) {
     return this.db.database.ref(`/users/${this.email}/devices/${mac}/name`).set(nome);
   }
 
+  // Função para atualizar o cômodo que o dispositivo se encontra
   updateRoom(room, iconRoom, mac) {
     this.db.database.ref(`/users/${this.email}/devices/${mac}/room`).set(room);
     return this.db.database.ref(`/users/${this.email}/devices/${mac}/iconRoom`).set(iconRoom);

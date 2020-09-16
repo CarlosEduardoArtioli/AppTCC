@@ -22,7 +22,7 @@ export class EditRoomPagePage implements OnInit {
     private alertCtrl: AlertController,
     private toastController: ToastController,
   ) {
-    // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
+    // Atribui a variável 'room' uma "foto" da rota, mais especificamente do 'room'
     this.room = this.actRoute.snapshot.paramMap.get('room');
     this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
       this.name = res.name;
@@ -34,7 +34,7 @@ export class EditRoomPagePage implements OnInit {
   // Função para quando a página for iniciada
   ngOnInit() { }
 
-  // Funcão para aparecer o alert com o input que irá receber o novo nome do usuário.
+  // Funcão para aparecer o alert com o input que irá receber o novo nome do cômodo.
   async updateName() {
     // Cria um alert
     const alert = await this.alertCtrl.create({
@@ -61,11 +61,11 @@ export class EditRoomPagePage implements OnInit {
           handler: data => {
             // if apenas para saber se o input não está vázio.
             if ((document.getElementById('newname') as HTMLInputElement).value !== '') {
-              // this.nome será = ao que está valor do input com Id 'newname'.
+              // novoNome será igual ao que está valor do input com Id 'newname'.
               this.novoNome = (document.getElementById('newname') as HTMLInputElement).value;
               // Puxa a função do ion-toast.
               this.newname();
-              // Função para mudar o nome do usuário.
+              // Função para mudar o nome do cômodo.
               this.roomService.updateName(this.novoNome, this.room);
             }
           }
@@ -75,7 +75,7 @@ export class EditRoomPagePage implements OnInit {
     await alert.present();
   }
 
-  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  // Função para aparecer um ion-toast após salvar o novo nome do cômodo (perfumaria).
   async newname() {
     const toast = await this.toastController.create({
       header: 'O nome foi alterado.',

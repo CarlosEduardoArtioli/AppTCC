@@ -17,22 +17,22 @@
     </ion-fab-button>
   </ion-fab>
 
-    <ion-item *ngFor="let room of Rooms" lines="full">
-      <ion-label>
-        <h2>
-          <ion-icon src="/assets/svg/{{ room.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{room.name}}
-        </h2>
-      </ion-label>
+  <ion-item *ngFor="let room of Rooms" lines="full">
+    <ion-label>
+      <h2>
+        <ion-icon src="/assets/svg/{{ room.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{room.name}}
+      </h2>
+    </ion-label>
 
-      <div class="buttons">
-        <button class="transparent" ion-button clear [routerLink]="['/edit-room-page/', room.$key]">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
-        </button>
+    <div class="buttons">
+      <button class="transparent" ion-button clear [routerLink]="['/edit-room-page/', room.$key]">
+        <ion-icon name="create" style="zoom:2.0"></ion-icon>
+      </button>
 
-        <button class="transparent" ion-button clear (click)="deleteRoom(room.$key)">
-          <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-        </button>
-      </div>
+      <button class="transparent" ion-button clear (click)="deleteRoom(room.$key)">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
 
-    </ion-item>
+  </ion-item>
 </ion-content>

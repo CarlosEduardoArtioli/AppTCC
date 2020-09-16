@@ -1,6 +1,6 @@
 // Services são os "serviços" que podem ser reutilizados por todo o app
 // Geralmente são funções
-// Service para funções relacionadas ao Dispositivo
+// Service para funções relacionadas ao Cômodo
 
 import { Injectable } from '@angular/core';
 // Importação das bibliotecas do AngularFire
@@ -13,7 +13,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 export class RoomService {
   // Declaração das variáveis
 
-  // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados 
+  // Interface da biblioteca do AngularFire que "devolve" na função a lista de dados
   roomListRef: AngularFireList<any>;
   // Interface da biblioteca do AngularFire que "devolve" na função o dado pedido
   roomRef: AngularFireObject<any>;
@@ -32,53 +32,46 @@ export class RoomService {
     this.email = this.email.replace(/[.#$]+/g, ':');
   }
 
-  // Função que cria os dados do dispositivo
-  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
+  // Função que cria os dados do cômodo
   createRoom(room: any, icone) {
-    // Retorna para a função um deviceListRef com um id aleatório(push) com os seguintes dados
     this.db.object(`/users/${this.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: room,
       icon: icone
-    }); // .then(res => {
-      // Escreve no console o valor do formulário
-      // console.log(res)
-      // })
-      // Caso ocorra um erro, ele o escreve no console
-      // .catch(error => console.log(error));
+    });
   }
 
-  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro 
+  // Função que "Pega" os dados do objeto com o cômodo que foi passado no parâmetro
   getRoom(room: any) {
-    // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
-    // /dispositivos/id (sendo o id passado junto a função)
+    // Atribui ao roomRef o objeto do que foi encontrado no caminho passado
     this.roomRef = this.db.object(`/users/${this.email}/rooms/${room}`);
-    // Retorna o deviceRef para a função
+    // Retorna o roomRef para a função
     return this.roomRef;
   }
 
   // Função que "Pega" a lista de todos objetos com seus respectivos valores
   getRoomList() {
-    // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
+    // Atribui ao roomListRef a lista dos objetos encontrados no caminho
     this.roomListRef = this.db.list(`/users/${this.email}/rooms`);
-    // Retorna o deviceListRef para a função
+    // Retorna o roomListRef para a função
     return this.roomListRef;
   }
 
+  // Função para atualizar o nome do cômodo
   updateName(nome, comodo) {
     this.db.object(`/users/${this.email}/rooms/${comodo}/name`).set(nome);
   }
 
+  // Função para atualizar o icone do cômodo
   updateIcon(icone, comodo) {
     return this.db.object(`/users/${this.email}/rooms/${comodo}/icon`).set(icone);
   }
 
-  // Função que exclui os dados do objeto com o id passado
+  // Função que exclui os dados do objeto com o cômodo passado
   deleteRoom(room: any) {
-    // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
-    // /dispositivos/id (sendo o id passado junto a função)
+    // Atribui ao roomRef o objeto que foi encontrado no caminho
     this.roomRef = this.db.object(`/users/${this.email}/rooms/${room}`);
-    // Remove o objeto que foi atribuido ao deviceRef
+    // Remove o objeto que foi atribuido ao roomRef
     this.roomRef.remove();
   }
 }

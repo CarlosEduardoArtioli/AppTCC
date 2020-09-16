@@ -1,6 +1,3 @@
-// Aqui é onde são declarados "Bibliotecas" que vão ser usadas no app
-// Mas não são todas
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -10,13 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-//  firebase imports, remove what you don't require
+// Imports do Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
-// environment
 import { environment } from '../environments/environment';
 import { AuthGuard } from './guards/auth.guard';
 import { ServiceWorkerModule } from '@angular/service-worker';

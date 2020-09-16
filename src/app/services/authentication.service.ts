@@ -30,11 +30,12 @@ export class AuthenticationService {
     });
   }
 
-  // Login in with email/password
+  // Login com email e senha
   SignIn(value) {
     return this.ngFireAuth.auth.signInWithEmailAndPassword(value.email, value.password);
   }
 
+  // Registro com login e senha
   registerUser(value) {
     return new Promise<any>((resolve, reject) => {
 
@@ -43,12 +44,12 @@ export class AuthenticationService {
           res => resolve(res),
           err => reject(err));
 
-      this.SetUserEmail(value.name);
+      this.SetUserEmail();
     });
 
   }
 
-  // Email verification when new user register
+  // Email de verificação quando um usuário e registrado
   SendVerificationMail() {
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
@@ -56,7 +57,7 @@ export class AuthenticationService {
       });
   }
 
-  // Recover password
+  // Recuperar senha
   PasswordRecover(passwordResetEmail) {
     return this.ngFireAuth.auth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
@@ -66,19 +67,19 @@ export class AuthenticationService {
       });
   }
 
-  // Returns true when user is looged in
+  // Retorna true quando o usuário está logado
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-  // Returns true when user's email is verified
+  // Retorna true quando o email esta verificado
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user.emailVerified !== false) ? true : false;
   }
 
-  // Sign in with Gmail
+  // Sign in com Gmail
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
@@ -99,7 +100,7 @@ export class AuthenticationService {
       });
   }
 
-  // Store user in localStorage
+  // Guarda o usuário no localStorage e no Banco de Dados
   SetUserData(user) {
     const userData: User = {
       uid: user.uid,
@@ -116,7 +117,8 @@ export class AuthenticationService {
     }, delay);
   }
 
-  SetUserEmail(name) {
+  // Guarda o usuário no localStorage e no Banco de Dados
+  SetUserEmail() {
     const userLocal = JSON.parse(localStorage.getItem('user'));
     const userData: User = {
       uid: userLocal.uid,
@@ -132,7 +134,7 @@ export class AuthenticationService {
     }, delay);
   }
 
-  // Sign-out
+  // Logout
   SignOut() {
     return this.ngFireAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');

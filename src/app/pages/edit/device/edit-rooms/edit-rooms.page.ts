@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditRoomsPage implements OnInit {
 
+  // Declaração de variáveis
   mac: any;
   Rooms = [];
 
@@ -22,16 +23,17 @@ export class EditRoomsPage implements OnInit {
     private roomService: RoomService,
     private toastController: ToastController,
   ) {
+    // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
-   }
+  }
 
   ngOnInit() {
-    // Atribui a variávei 'deviceRes' o seguinte valor
-    // Puxa a função 'getDeviceList'
+    // Atribui a variávei 'rommRes' o seguinte valor
+    // Puxa a função 'getRoomList'
     const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de dispositivos
     roomRes.snapshotChanges().subscribe(res => {
-      // "Subscreve" a variável devices com os dispostivos e seus valores
+      // "Subscreve" a variável Rooms com os cômodos e seus valores
       this.Rooms = [];
       res.forEach(item => {
         const a = item.payload.toJSON();
@@ -41,6 +43,7 @@ export class EditRoomsPage implements OnInit {
     });
   }
 
+  // Função para atualizar o cômodo
   update(room, IconRoom) {
     this.deviceService.updateRoom(room, IconRoom, this.mac)
       .then(() => {
@@ -50,7 +53,7 @@ export class EditRoomsPage implements OnInit {
       .catch(error => console.log(error));
   }
 
-  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  // Função para aparecer um ion-toast após alterar o cômodo(perfumaria).
   async changeRoom() {
     const toast = await this.toastController.create({
       header: 'O cômodo foi alterado.',

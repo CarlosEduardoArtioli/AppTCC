@@ -18,4 +18,4 @@ import { EditTimerPagePage } from './edit-timer-page.page';
   ],
   declarations: [EditTimerPagePage]
 })
-export class EditTimerPagePageModule {}
+export class EditTimerPagePageModule { }

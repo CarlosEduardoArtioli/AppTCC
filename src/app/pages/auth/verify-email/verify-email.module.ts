@@ -17,4 +17,4 @@ import { VerifyEmailPage } from './verify-email.page';
   ],
   declarations: [VerifyEmailPage]
 })
-export class VerifyEmailPageModule {}
+export class VerifyEmailPageModule { }

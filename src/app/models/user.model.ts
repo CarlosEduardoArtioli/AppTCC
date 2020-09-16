@@ -10,6 +10,4 @@ export class User {
     ) { }
 }
 
-// Models são os "Modelos" de dados que vão ser enviados ao banco
-// Para mais informações assistir o curso "Frontend Developer"
-// Curso Angular 8, Ionic 4 e Firebase
+// Models são os "Modelos" de dados de um objeto

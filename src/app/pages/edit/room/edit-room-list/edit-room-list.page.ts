@@ -22,12 +22,12 @@ export class EditRoomListPage implements OnInit {
 
   // Função quando a página é iniciada
   ngOnInit() {
-    // Atribui a variávei 'deviceRes' o seguinte valor
-    // Puxa a função 'getDeviceList'
+    // Atribui a variávei 'roomRes' o seguinte valor
+    // Puxa a função 'getRoomList'
     const roomRes = this.roomService.getRoomList();
-    // Pega os valores da lista de dispositivos
+    // Pega os valores da lista de cômodos
     roomRes.snapshotChanges().subscribe(res => {
-      // "Subscreve" a variável devices com os dispostivos e seus valores
+      // "Subscreve" a variável Rooms com os cômodos e seus valores
       this.Rooms = [];
       res.forEach(item => {
         const a = item.payload.toJSON();
@@ -37,11 +37,11 @@ export class EditRoomListPage implements OnInit {
     });
   }
 
-  // Funcão para aparecer o alert com o input que irá receber o novo nome do usuário.
+  // Funcão para aparecer o alert com o input que irá receber nome do cômodo.
   async addRoom() {
     // Cria um alert
     const alert = await this.alertCtrl.create({
-      // Header com nome 'Novo Nome'.
+      // Header com nome 'Novo Cômodo'.
       header: 'Novo Cômodo',
       // Gera inputs
       inputs: [
@@ -67,11 +67,11 @@ export class EditRoomListPage implements OnInit {
           handler: data => {
             // if apenas para saber se o input não está vázio.
             if ((document.getElementById('newroom') as HTMLInputElement).value !== '') {
-              // this.nome será = ao que está valor do input com Id 'newname'.
+              // this.newRoom será igual ao que está valor do input com Id 'newroom'.
               this.newRoom = (document.getElementById('newroom') as HTMLInputElement).value;
               // Puxa a função do ion-toast.
               this.newroom();
-              // Função para mudar o nome do usuário.
+              // Função para criar o cômodo.
               this.roomService.createRoom(this.newRoom, 'Casa');
             }
           }
@@ -81,7 +81,7 @@ export class EditRoomListPage implements OnInit {
     await alert.present();
   }
 
-  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  // Função para aparecer um ion-toast após criar o novo cômodo (perfumaria).
   async newroom() {
     const toast = await this.toastController.create({
       header: 'Cômodo Adicionado!',
@@ -90,11 +90,12 @@ export class EditRoomListPage implements OnInit {
     await toast.present();
   }
 
-  // Função para deletar o dispositivo que recebe o parâmetro 'id'
+  // Chama o alert controll e passa o cômodo
   deleteRoom(room: any) {
     this.presentAlertConfirm(room);
   }
 
+  // Função para verificar se o usuário deseja mesmo excluir o cômodo
   async presentAlertConfirm(room) {
     const alert = await this.alertCtrl.create({
       header: 'EXCLUIR!',

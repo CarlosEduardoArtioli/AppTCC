@@ -17,4 +17,4 @@ import { EditTimerListPage } from './edit-timer-list.page';
   ],
   declarations: [EditTimerListPage]
 })
-export class EditTimerListPageModule {}
+export class EditTimerListPageModule { }

@@ -26,7 +26,7 @@ export class EditDevicePagePage implements OnInit {
     private alertCtrl: AlertController,
     private toastController: ToastController,
   ) {
-    // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
+    // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
     this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
       this.icone = res.icon;

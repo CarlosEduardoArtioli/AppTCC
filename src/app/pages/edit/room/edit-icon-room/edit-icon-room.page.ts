@@ -10,6 +10,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class EditIconRoomPage implements OnInit {
 
+  // Declaração de variáveis
   room: any;
 
   constructor(
@@ -18,13 +19,14 @@ export class EditIconRoomPage implements OnInit {
     private actRoute: ActivatedRoute,
     private toastController: ToastController,
   ) {
+    // Atribui a variável 'room' uma "foto" da rota, mais especificamente do 'room'
     this.room = this.actRoute.snapshot.paramMap.get('room');
     console.log(this.room);
-   }
-
-  ngOnInit() {
   }
 
+  ngOnInit() { }
+
+  // Função para atualizar o icone do cômodo
   update(icone) {
     this.roomService.updateIcon(icone, this.room)
       .then(() => {
@@ -34,7 +36,7 @@ export class EditIconRoomPage implements OnInit {
       .catch(error => console.log(error));
   }
 
-  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  // Função para aparecer um ion-toast após alterar o icone(perfumaria).
   async changeIcon() {
     const toast = await this.toastController.create({
       header: 'O icone foi alterado.',

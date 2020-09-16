@@ -17,4 +17,4 @@ import { EditIconRoomPage } from './edit-icon-room.page';
   ],
   declarations: [EditIconRoomPage]
 })
-export class EditIconRoomPageModule {}
+export class EditIconRoomPageModule { }

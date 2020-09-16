@@ -17,4 +17,4 @@ import { EditDeviceListPage } from './edit-device-list.page';
   ],
   declarations: [EditDeviceListPage]
 })
-export class EditDeviceListPageModule {}
+export class EditDeviceListPageModule { }

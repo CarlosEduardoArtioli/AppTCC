@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './edit-device-list.page.html',
   styleUrls: ['./edit-device-list.page.scss'],
 })
+
 export class EditDeviceListPage implements OnInit {
   // Declaração de variáveis
   Devices = [];
@@ -39,6 +40,7 @@ export class EditDeviceListPage implements OnInit {
     this.presentAlertConfirm(id);
   }
 
+  // Função que apresenta uma mensagem perguntado se o usuário deseja excluir o dispositivo
   async presentAlertConfirm(id) {
     const alert = await this.alertCtrl.create({
       header: 'EXCLUIR!',

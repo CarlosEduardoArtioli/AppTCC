@@ -28,7 +28,7 @@ export class EditTimerPagePage implements OnInit {
   newWeek: any;
   action = '';
 
-  public mensagens_validacao = {
+  mensagens_validacao = {
     action: [
       { tipo: 'required', mensagem: 'O campo ação é obrigatório!' },
     ],
@@ -48,9 +48,11 @@ export class EditTimerPagePage implements OnInit {
     public actionSheetController: ActionSheetController,
     private toastController: ToastController,
   ) {
-    // Atribui a variável 'id' uma "foto" da rota, mais especificamente do 'id'
+    // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
+    // Atribui a variável 'timer' uma "foto" da rota, mais especificamente do 'timer'
     this.timer = this.actRoute.snapshot.paramMap.get('timer');
+    // Subscreve as variáveis com seus valores respectivos
     this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
       this.action = res.action;
       this.dateTime = res.timer;
@@ -74,10 +76,8 @@ export class EditTimerPagePage implements OnInit {
   // Função para quando a página for iniciada
   ngOnInit() { }
 
+  // Função para verificar os dados do timer
   atualizar() {
-    console.log(this.action);
-    console.log(this.dateTime);
-    console.log(this.newWeek);
 
     const segunda = this.newWeek.indexOf('seg');
     const terca = this.newWeek.indexOf('ter');
@@ -86,14 +86,6 @@ export class EditTimerPagePage implements OnInit {
     const sexta = this.newWeek.indexOf('sex');
     const sabado = this.newWeek.indexOf('sab');
     const domingo = this.newWeek.indexOf('dom');
-
-    console.log(segunda);
-    console.log(terca);
-    console.log(quarta);
-    console.log(quinta);
-    console.log(sexta);
-    console.log(sabado);
-    console.log(domingo);
 
     if (segunda !== -1) {
       this.week1 = 'seg';
@@ -131,14 +123,6 @@ export class EditTimerPagePage implements OnInit {
       this.week7 = '';
     }
 
-    console.log(this.week1);
-    console.log(this.week2);
-    console.log(this.week3);
-    console.log(this.week4);
-    console.log(this.week5);
-    console.log(this.week6);
-    console.log(this.week7);
-
     if (this.updateTimerForm.valid) {
       this.updateForm();
     } else {
@@ -146,6 +130,7 @@ export class EditTimerPagePage implements OnInit {
     }
   }
 
+  // Função para atualizar/criar o timer
   updateForm() {
     this.timerService.updateTimer(this.action, this.dateTime, this.week1, this.week2, this.week3,
       this.week4, this.week5, this.week6, this.week7, this.timer, this.mac)
@@ -155,7 +140,7 @@ export class EditTimerPagePage implements OnInit {
       .catch(error => console.log(error));
   }
 
-  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  // Função para aparecer um ion-toast (perfumaria).
   async alert(mensage) {
     const toast = await this.toastController.create({
       header: mensage,

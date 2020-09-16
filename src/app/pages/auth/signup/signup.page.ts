@@ -11,10 +11,10 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class SignupPage implements OnInit {
 
+  // Declaração de variáveis
   validationsForm: FormGroup;
-  errorMessage = '';
-  successMessage = '';
 
+  // Mensagem de validação do formulário
   validationMessages = {
     email: [
       { type: 'required', message: 'Insira um email.' },
@@ -26,16 +26,14 @@ export class SignupPage implements OnInit {
     ]
   };
 
-
   constructor(
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     public authService: AuthenticationService,
     public router: Router,
     private formBuilder: FormBuilder
-  ) { }
-
-  ngOnInit() {
+  ) {
+    // Validações do formúlario
     this.validationsForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -48,18 +46,7 @@ export class SignupPage implements OnInit {
     });
   }
 
-  // Função para mostrar mensagem na tela que recebe o paramêtro message
-  async showMessage(message: string) {
-    // Aguarda a criação de um Toast Controller, com a mensagem passada no parâmetro, com duração de 3 segundos
-    await this.toastCtrl.create({ message: message, duration: 3000 })
-      // Quando o Toast Controller é terminado
-      .then((toastData) => {
-        // Escreve os dados no console
-        console.log(toastData);
-        // Mostra a mensagem na tela
-        toastData.present();
-      });
-  }
+  ngOnInit() { }
 
   // Função de cancelar o Signup
   async cancel() {
@@ -67,6 +54,7 @@ export class SignupPage implements OnInit {
     this.navCtrl.navigateBack('login');
   }
 
+  // Função para registrar o novo usuário
   signUp(value) {
     this.authService.registerUser(value)
       .then((res) => {
@@ -78,6 +66,19 @@ export class SignupPage implements OnInit {
         setTimeout(() => {
           this.showMessage(error.message);
         }, delay);
+      });
+  }
+
+  // Função para mostrar mensagem na tela que recebe o paramêtro message
+  async showMessage(message: string) {
+    // Aguarda a criação de um Toast Controller, com a mensagem passada no parâmetro, com duração de 3 segundos
+    await this.toastCtrl.create({ message: message, duration: 3000 })
+      // Quando o Toast Controller é terminado
+      .then((toastData) => {
+        // Escreve os dados no console
+        console.log(toastData);
+        // Mostra a mensagem na tela
+        toastData.present();
       });
   }
 }

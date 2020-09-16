@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class EditTimerListPage implements OnInit {
 
+  // Declaração de variáveis
   Devices = [];
   timer: any;
   timerShow: any;
@@ -30,7 +31,6 @@ export class EditTimerListPage implements OnInit {
     const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
     deviceRes.snapshotChanges().subscribe(res => {
-      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
         const a = item.payload.toJSON();
@@ -40,24 +40,26 @@ export class EditTimerListPage implements OnInit {
     });
   }
 
+  // Função para deletar o timer
   deleteTimer(mac: any, timer: any) {
     this.presentAlertConfirm(mac, timer);
   }
 
+  // Função para adicionar um timer
   addTimer(mac, timer1, timer2, timer3, timer4) {
 
     if (timer1 === false) {
       this.timerShow = 'timer1';
     } else
-    if (timer2 === false) {
-      this.timerShow = 'timer2';
-    } else
-    if (timer3 === false) {
-      this.timerShow = 'timer3';
-    } else
-    if (timer4 === false) {
-      this.timerShow = 'timer4';
-    }
+      if (timer2 === false) {
+        this.timerShow = 'timer2';
+      } else
+        if (timer3 === false) {
+          this.timerShow = 'timer3';
+        } else
+          if (timer4 === false) {
+            this.timerShow = 'timer4';
+          }
 
     this.timerService.addTimer(mac, this.timerShow).then(() => {
       this.router.navigate(['/edit-timer-page/', mac, this.timerShow]);
@@ -65,10 +67,11 @@ export class EditTimerListPage implements OnInit {
       .catch(error => console.log(error));
   }
 
+  // Função para verificar se o usuário deseja mesmo excluir o timer
   async presentAlertConfirm(mac, timer) {
     const alert = await this.alertCtrl.create({
-      header: 'LIMPAR!',
-      message: 'Deseja limpar o timer?',
+      header: 'EXCLUIR!',
+      message: 'Deseja excluir o timer?',
       buttons: [
         {
           text: 'Cancelar',

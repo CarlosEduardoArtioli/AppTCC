@@ -17,4 +17,4 @@ import { EditRoomListPage } from './edit-room-list.page';
   ],
   declarations: [EditRoomListPage]
 })
-export class EditRoomListPageModule {}
+export class EditRoomListPageModule { }

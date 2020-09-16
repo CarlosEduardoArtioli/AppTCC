@@ -17,4 +17,4 @@ import { EditIconsPage } from './edit-icons.page';
   ],
   declarations: [EditIconsPage]
 })
-export class EditIconsPageModule {}
+export class EditIconsPageModule { }

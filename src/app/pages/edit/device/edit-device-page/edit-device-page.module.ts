@@ -19,4 +19,4 @@ import { EditDevicePagePage } from './edit-device-page.page';
   declarations: [EditDevicePagePage],
   entryComponents: []
 })
-export class EditDevicePagePageModule {}
+export class EditDevicePagePageModule { }

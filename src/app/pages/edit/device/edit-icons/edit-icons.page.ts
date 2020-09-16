@@ -20,11 +20,11 @@ export class EditIconsPage implements OnInit {
   ) {
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
     console.log(this.mac);
-   }
-
-  ngOnInit() {
   }
 
+  ngOnInit() { }
+
+  // Função para atualizar o icone do dispositivo
   update(icone) {
     this.deviceService.updateIcon(icone, this.mac)
       .then(() => {
@@ -34,8 +34,8 @@ export class EditIconsPage implements OnInit {
       .catch(error => console.log(error));
   }
 
-   // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
-   async changeIcon() {
+  // Função para aparecer um ion-toast após salvar o novo nome (perfumaria).
+  async changeIcon() {
     const toast = await this.toastController.create({
       header: 'O icone foi alterado.',
       duration: 2000

@@ -10,7 +10,7 @@ const routes: Routes = [
   // Em certas rotas é passado o canActive para se o usuário não estiver logado o redirecionar para a página de login
   // Assim evitando que o usuário entre no em certas páginas sem o login
 
-  // Rota 'edit-device-page/:id'
+  // Rota 'edit-device-page/:mac'
   // Essa rota recebe o id passado em seu page.ts para redirecinar o usuário para a página de edição de certo dispositivo
   {
     path: 'edit-device-page/:mac',
@@ -23,6 +23,8 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
   },
+  // Rota 'verify-email'
+  // Essa rota não recebe o canActive para que mesmo sem login ela seja acessivel
   {
     path: 'verify-email',
     loadChildren: () => import('./pages/auth/verify-email/verify-email.module').then(m => m.VerifyEmailPageModule)
@@ -60,12 +62,12 @@ const routes: Routes = [
   },
   {
     path: 'edit-timer-list',
-    loadChildren: () => import('./pages/functions/timer/edit-timer-list/edit-timer-list.module').then( m => m.EditTimerListPageModule),
+    loadChildren: () => import('./pages/functions/timer/edit-timer-list/edit-timer-list.module').then(m => m.EditTimerListPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'edit-timer-page/:mac/:timer',
-    loadChildren: () => import('./pages/functions/timer/edit-timer-page/edit-timer-page.module').then( m => m.EditTimerPagePageModule),
+    loadChildren: () => import('./pages/functions/timer/edit-timer-page/edit-timer-page.module').then(m => m.EditTimerPagePageModule),
     canActivate: [AuthGuard]
   },
   // Rota "home"  em casos especiais

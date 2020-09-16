@@ -1,6 +1,6 @@
 // Services são os "serviços" que podem ser reutilizados por todo o app
 // Geralmente são funções
-// Service para funções relacionadas ao Dispositivo
+// Service para funções relacionadas ao Timer
 
 import { Injectable } from '@angular/core';
 // Importação das bibliotecas do AngularFire
@@ -30,17 +30,15 @@ export class TimerService {
     this.user.email = this.user.email.replace(/[.#$]+/g, ':');
   }
 
-  // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro
+  // Função que "Pega" os dados do timer passado
   getTimer(timer, mac) {
-    // Atribui ao deviceRef o valor do que foi encontrado no objeto com o seguinte caminho no banco:
-    // /dispositivos/id (sendo o id passado junto a função)
+    // Atribui ao timerRef o valor do que foi encontrado no objeto com o seguinte caminho no banco
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
-    // Retorna o deviceRef para a função
+    // Retorna o timerRef para a função
     return this.timerRef;
   }
 
-  // Função que atualiza os dados do objeto
-  // Recebe um parâmetro que é "convertido" para a inserção de dados no device.model
+  // Função que atualiza os dados do timer
   updateTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, timer, mac) {
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Retorna para a função a atualização dos dados
@@ -58,10 +56,9 @@ export class TimerService {
     });
   }
 
-  // Função que exclui os dados do objeto com o id passado
+  // Função que exclui os dados do timer
   deleteTimer(mac: any, timer: any) {
-    // Atribui ao deviceRef o objeto que foi encontrado no seguinte caminho:
-    // /dispositivos/id (sendo o id passado junto a função)
+
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
 
     return this.timerRef.set({
@@ -78,6 +75,7 @@ export class TimerService {
     });
   }
 
+  // Função que adiciona um novo timer
   addTimer(mac, timer) {
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
 

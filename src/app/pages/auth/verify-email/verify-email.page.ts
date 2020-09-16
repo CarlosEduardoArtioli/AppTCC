@@ -14,8 +14,7 @@ export class VerifyEmailPage implements OnInit {
     private fbAuth: AngularFireAuth,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   // Função para ir a página de Singup
   async goToLogin() {
@@ -23,6 +22,7 @@ export class VerifyEmailPage implements OnInit {
     this.navCtrl.navigateForward('login');
   }
 
+  // Função para verificar o email do usuário
   verificationMail() {
     this.fbAuth.auth.currentUser.sendEmailVerification();
   }
