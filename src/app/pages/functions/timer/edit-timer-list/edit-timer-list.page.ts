@@ -1,9 +1,11 @@
+import { Room } from 'src/app/models/room.model';
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { Dispositivos } from 'src/app/models/device.model';
 import { Router } from '@angular/router';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-edit-timer-list',
@@ -16,26 +18,52 @@ export class EditTimerListPage implements OnInit {
   Devices = [];
   timer: any;
   timerShow: any;
+  Rooms = [];
+  selectTabs = 'all';
 
   constructor(
     private deviceService: DeviceService,
     private timerService: TimerService,
     private alertCtrl: AlertController,
-    private router: Router
+    private router: Router,
+    private roomService: RoomService
   ) {
+    this.getDevices();
 
+    this.getRooms();
   }
 
   ngOnInit() {
+  }
 
+  async getDevices() {
+    // Atribui a variávei 'deviceRes' o seguinte valor
+    // Puxa a função 'getDeviceList'
     const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
-    deviceRes.snapshotChanges().subscribe(res => {
+    await deviceRes.snapshotChanges().subscribe(res => {
+      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
       this.Devices = [];
       res.forEach(item => {
         const a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Devices.push(a as Dispositivos);
+      });
+    });
+  }
+
+  async getRooms() {
+    // Atribui a variávei 'deviceRes' o seguinte valor
+    // Puxa a função 'getDeviceList'
+    const roomRes = this.roomService.getRoomList();
+    // Pega os valores da lista de dispositivos
+    await roomRes.snapshotChanges().subscribe(res => {
+      // "Puxa a variável 'Devices' não sei o motivo mas tá ai"
+      this.Rooms = [];
+      res.forEach(item => {
+        const a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.Rooms.push(a as Room);
       });
     });
   }

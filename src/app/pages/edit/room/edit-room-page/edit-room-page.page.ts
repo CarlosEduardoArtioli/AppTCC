@@ -24,16 +24,20 @@ export class EditRoomPagePage implements OnInit {
   ) {
     // Atribui a variável 'room' uma "foto" da rota, mais especificamente do 'room'
     this.room = this.actRoute.snapshot.paramMap.get('room');
-    this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
-      this.name = res.name;
-      this.icon = res.icon;
-      console.log(res);
-    });
+
+    this.getRoom();
   }
 
   // Função para quando a página for iniciada
   ngOnInit() { }
 
+  async getRoom() {
+    await this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
+      this.name = res.name;
+      this.icon = res.icon;
+      console.log(res);
+    });
+  }
   // Funcão para aparecer o alert com o input que irá receber o novo nome do cômodo.
   async updateName() {
     // Cria um alert

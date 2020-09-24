@@ -16,15 +16,20 @@ export class EditDeviceListPage implements OnInit {
   constructor(
     private deviceService: DeviceService,
     private alertCtrl: AlertController,
-  ) { }
+  ) {
+    this.getDevices();
+  }
 
   // Função quando a página é iniciada
   ngOnInit() {
+  }
+
+  async getDevices() {
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const deviceRes = this.deviceService.getDeviceList();
     // Pega os valores da lista de dispositivos
-    deviceRes.snapshotChanges().subscribe(res => {
+    await deviceRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável devices com os dispostivos e seus valores
       this.Devices = [];
       res.forEach(item => {

@@ -27,7 +27,7 @@ export class DeviceService {
   constructor(
     // AngularFireDatabase é uma classe para refernciar o banco
     // Recebeu o apelido de db
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
   ) {
     this.userEmail();
   }

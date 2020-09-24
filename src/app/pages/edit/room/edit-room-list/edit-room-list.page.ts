@@ -18,15 +18,20 @@ export class EditRoomListPage implements OnInit {
     private roomService: RoomService,
     private alertCtrl: AlertController,
     private toastController: ToastController,
-  ) { }
+  ) {
+    this.getRooms();
+  }
 
   // Função quando a página é iniciada
   ngOnInit() {
+  }
+
+  async getRooms() {
     // Atribui a variávei 'roomRes' o seguinte valor
     // Puxa a função 'getRoomList'
     const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de cômodos
-    roomRes.snapshotChanges().subscribe(res => {
+    await roomRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável Rooms com os cômodos e seus valores
       this.Rooms = [];
       res.forEach(item => {

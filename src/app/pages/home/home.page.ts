@@ -19,10 +19,8 @@ export class HomePage implements OnInit {
   constructor(
     private deviceService: DeviceService,
     private roomService: RoomService
-  ) { }
+  ) {
 
-  // Função quando a página é iniciada
-  ngOnInit() {
     // Chama a função 'fetchDevices()'
     this.fetchDevices();
 
@@ -54,6 +52,10 @@ export class HomePage implements OnInit {
         this.Rooms.push(a as Room);
       });
     });
+  }
+
+  // Função quando a página é iniciada
+  ngOnInit() {
   }
 
   // Função para mostrar no console a lista de dispositivos

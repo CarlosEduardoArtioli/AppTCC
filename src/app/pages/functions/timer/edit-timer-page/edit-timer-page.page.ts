@@ -52,8 +52,22 @@ export class EditTimerPagePage implements OnInit {
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
     // Atribui a variável 'timer' uma "foto" da rota, mais especificamente do 'timer'
     this.timer = this.actRoute.snapshot.paramMap.get('timer');
+
+    this.updateTimerForm = fb.group({
+      action: ['', Validators.compose([Validators.required])],
+      dateTime: ['', Validators.compose([Validators.required])],
+      newWeek: ['', Validators.compose([Validators.required])],
+    });
+
+    this.getTimer();
+  }
+
+  // Função para quando a página for iniciada
+  ngOnInit() { }
+
+  async getTimer() {
     // Subscreve as variáveis com seus valores respectivos
-    this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
+    await this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
       this.action = res.action;
       this.dateTime = res.timer;
       this.week1 = res.week1;
@@ -65,16 +79,7 @@ export class EditTimerPagePage implements OnInit {
       this.week7 = res.week7;
       console.log(res);
     });
-
-    this.updateTimerForm = fb.group({
-      action: ['', Validators.compose([Validators.required])],
-      dateTime: ['', Validators.compose([Validators.required])],
-      newWeek: ['', Validators.compose([Validators.required])],
-    });
   }
-
-  // Função para quando a página for iniciada
-  ngOnInit() { }
 
   // Função para verificar os dados do timer
   atualizar() {

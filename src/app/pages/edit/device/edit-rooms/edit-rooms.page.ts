@@ -25,14 +25,19 @@ export class EditRoomsPage implements OnInit {
   ) {
     // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
+
+    this.getRooms();
   }
 
   ngOnInit() {
+  }
+
+  async getRooms() {
     // Atribui a variávei 'rommRes' o seguinte valor
     // Puxa a função 'getRoomList'
     const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de dispositivos
-    roomRes.snapshotChanges().subscribe(res => {
+    await roomRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável Rooms com os cômodos e seus valores
       this.Rooms = [];
       res.forEach(item => {

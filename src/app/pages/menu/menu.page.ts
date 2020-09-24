@@ -60,10 +60,11 @@ export class MenuPage implements OnInit {
     private toastController: ToastController,
     private userService: UserService,
     private authService: AuthenticationService,
-  ) { }
+  ) {
+    this.userName();
+  }
 
   ngOnInit() {
-    this.userName();
   }
 
   userName() {
@@ -97,6 +98,7 @@ export class MenuPage implements OnInit {
     const actionSheet = await this.actionSheetCtrl.create({
       // Header com nome 'Opções'
       header: 'Opções',
+      cssClass: 'actionSheet',
       // Gera botões
       buttons: [
         {

@@ -12,7 +12,7 @@ ion-label {
 }
 
 ion-icon {
-  font-size: 45px;
+  font-size: 60px;
 
   &.ligado {
     color: #10F028;
@@ -25,7 +25,7 @@ ion-icon {
 
 span {
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
+  font-size: 16px;
 
   &.ligado {
     color: #10F028;
@@ -38,7 +38,7 @@ span {
 
 .sqare_button {
   --border-radius: 1rem;
-  height: 80px;
+  height: 100px;
   --vertical-align: middle;
   --padding-start: 10px;
   --padding-end: 10px;
@@ -58,16 +58,16 @@ span {
   ion-content {
     ion-segment-button {
       font-family: 'Open Sans', sans-serif;
-      font-size: 16px;
+      font-size: 26px;
     }
 
     ion-label {
       font-weight: bolder;
-      font-size: 16px;
+      font-size: 26px;
     }
 
     ion-icon {
-      font-size: 65px;
+      font-size: 85px;
 
       &.ligado {
         color: #10F028;
@@ -80,7 +80,7 @@ span {
 
     span {
       font-family: 'Open Sans', sans-serif;
-      font-size: 20px;
+      font-size: 30px;
 
       &.ligado {
         color: #10F028;
@@ -93,7 +93,7 @@ span {
 
     .sqare_button {
       --border-radius: 1rem;
-      height: 100px;
+      height: 140px;
       --vertical-align: middle;
       --padding-start: 10px;
       --padding-end: 10px;
