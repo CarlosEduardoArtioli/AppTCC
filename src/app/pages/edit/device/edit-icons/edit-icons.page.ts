@@ -19,14 +19,13 @@ export class EditIconsPage implements OnInit {
     private toastController: ToastController,
   ) {
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
-    console.log(this.mac);
   }
 
   ngOnInit() { }
 
   // Função para atualizar o icone do dispositivo
-  update(icone) {
-    this.deviceService.updateIcon(icone, this.mac)
+  update(icone, nomeIcone) {
+    this.deviceService.updateIcon(icone, nomeIcone, this.mac)
       .then(() => {
         this.router.navigate(['edit-device-page/', this.mac]);
         this.changeIcon();

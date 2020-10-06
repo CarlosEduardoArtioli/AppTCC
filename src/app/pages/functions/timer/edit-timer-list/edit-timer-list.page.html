@@ -28,11 +28,14 @@
   </ion-segment>
 
   <ng-container *ngFor="let device of Devices">
-    <div *ngIf="selectTabs == device.room || selectTabs == 'all'">
+    <div *ngIf="selectTabs == device.room.name || selectTabs == 'all'">
       <ion-item button (click)="device.open = !device.open" lines="full" mode="md">
         <ion-icon slot="end" name="chevron-forward-outline" *ngIf="!device.open"></ion-icon>
         <ion-icon slot="end" name="chevron-down-outline" *ngIf="device.open"></ion-icon>
-        <ion-label><ion-icon src="/assets/svg/{{ device.icon }}.svg"></ion-icon>&nbsp;&nbsp;<strong>{{device.name}}</strong></ion-label>
+        <ion-label>
+          <ion-icon src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
+          &nbsp;&nbsp;<strong>{{device.name}}</strong>
+        </ion-label>
       </ion-item>
 
       <div *ngIf="device.open">

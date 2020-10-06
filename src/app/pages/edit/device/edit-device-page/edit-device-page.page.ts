@@ -12,11 +12,20 @@ import { ActionSheetController, AlertController, ToastController } from '@ionic/
 export class EditDevicePagePage implements OnInit {
   // Declaração de variávies
   mac: any;
-  icone = '';
-  comodo = '';
-  name = '';
   novoNome = '';
-  iconeComodo = '';
+  device = {
+    ap: '',
+    icon: {
+      icon: '',
+      iconName: '',
+    },
+    mac: '',
+    name: '',
+    room: {
+      icon: '',
+      name: '',
+    }
+  };
 
   constructor(
     private deviceService: DeviceService,
@@ -34,13 +43,9 @@ export class EditDevicePagePage implements OnInit {
   // Função para quando a página for iniciada
   ngOnInit() { }
 
-  async getDevice() {
-    await this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.icone = res.icon;
-      this.comodo = res.room;
-      this.name = res.name;
-      this.iconeComodo = res.iconRoom;
-      console.log(res);
+  getDevice() {
+    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
+      this.device = res;
     });
   }
 

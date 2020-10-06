@@ -21,14 +21,13 @@ export class EditIconRoomPage implements OnInit {
   ) {
     // Atribui a variável 'room' uma "foto" da rota, mais especificamente do 'room'
     this.room = this.actRoute.snapshot.paramMap.get('room');
-    console.log(this.room);
   }
 
   ngOnInit() { }
 
   // Função para atualizar o icone do cômodo
-  update(icone) {
-    this.roomService.updateIcon(icone, this.room)
+  update(icone, iconName) {
+    this.roomService.updateIcon(icone, iconName, this.room)
       .then(() => {
         this.router.navigate(['edit-room-page/', this.room]);
         this.changeIcon();

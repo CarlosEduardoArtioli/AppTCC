@@ -63,7 +63,8 @@ export class RoomService {
   }
 
   // Função para atualizar o icone do cômodo
-  updateIcon(icone, comodo) {
+  updateIcon(icone, iconName, comodo) {
+    this.db.object(`/users/${this.email}/rooms/${comodo}/iconName`).set(iconName);
     return this.db.object(`/users/${this.email}/rooms/${comodo}/icon`).set(icone);
   }
 

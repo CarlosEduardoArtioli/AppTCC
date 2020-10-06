@@ -3,10 +3,6 @@
   display: none;
 }
 
-ion-segment-button {
-  font-family: 'Open Sans', sans-serif;
-}
-
 ion-label {
   font-weight: bolder;
 }
@@ -24,7 +20,6 @@ ion-icon {
 }
 
 span {
-  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 
   &.ligado {
@@ -54,16 +49,11 @@ span {
   line-height: 30px;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 720px) {
   ion-content {
-    ion-segment-button {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 26px;
-    }
 
     ion-label {
-      font-weight: bolder;
-      font-size: 26px;
+      font-size: 22px;
     }
 
     ion-icon {
@@ -79,7 +69,6 @@ span {
     }
 
     span {
-      font-family: 'Open Sans', sans-serif;
       font-size: 30px;
 
       &.ligado {

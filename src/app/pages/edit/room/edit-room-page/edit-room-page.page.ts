@@ -13,6 +13,7 @@ export class EditRoomPagePage implements OnInit {
   room: any;
   name: string;
   icon: string;
+  iconName: string;
   novoNome: string;
 
   constructor(
@@ -35,7 +36,7 @@ export class EditRoomPagePage implements OnInit {
     await this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
       this.name = res.name;
       this.icon = res.icon;
-      console.log(res);
+      this.iconName = res.iconName;
     });
   }
   // Funcão para aparecer o alert com o input que irá receber o novo nome do cômodo.

@@ -56,8 +56,9 @@ export class DeviceService {
   }
 
   // Função para atualizar o icone do dispositivo
-  updateIcon(icone, mac) {
-    return this.db.database.ref(`/users/${this.email}/devices/${mac}/icon`).set(icone);
+  updateIcon(icone, nomeIcone, mac) {
+    this.db.database.ref(`/users/${this.email}/devices/${mac}/icon/iconName`).set(nomeIcone);
+    return this.db.database.ref(`/users/${this.email}/devices/${mac}/icon/icon`).set(icone);
   }
 
   // Função para atualizar o nome do dispositivo
@@ -67,8 +68,8 @@ export class DeviceService {
 
   // Função para atualizar o cômodo que o dispositivo se encontra
   updateRoom(room, iconRoom, mac) {
-    this.db.database.ref(`/users/${this.email}/devices/${mac}/room`).set(room);
-    return this.db.database.ref(`/users/${this.email}/devices/${mac}/iconRoom`).set(iconRoom);
+    this.db.database.ref(`/users/${this.email}/devices/${mac}/room/name`).set(room);
+    return this.db.database.ref(`/users/${this.email}/devices/${mac}/room/icon`).set(iconRoom);
   }
 
   // Função que exclui os dados do objeto com o id passado

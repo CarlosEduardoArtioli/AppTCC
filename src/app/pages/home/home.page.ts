@@ -20,11 +20,6 @@ export class HomePage implements OnInit {
     private deviceService: DeviceService,
     private roomService: RoomService
   ) {
-
-    // Chama a função 'fetchDevices()'
-    this.fetchDevices();
-
-    this.fetchRooms();
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const deviceRes = this.deviceService.getDeviceList();
@@ -56,24 +51,6 @@ export class HomePage implements OnInit {
 
   // Função quando a página é iniciada
   ngOnInit() {
-  }
-
-  // Função para mostrar no console a lista de dispositivos
-  fetchDevices() {
-    // Pega os valores do caminho os subscreve no 'res'
-    this.deviceService.getDeviceList().valueChanges().subscribe(res => {
-      // Escreve no console a lista de dispositivos
-      console.log(res);
-    });
-  }
-
-  // Função para mostrar no console a lista de dispositivos
-  fetchRooms() {
-    // Pega os valores do caminho os subscreve no 'res'
-    this.roomService.getRoomList().valueChanges().subscribe(res => {
-      // Escreve no console a lista de dispositivos
-      console.log(res);
-    });
   }
 
   // Função para mudar o status do dispositivo
