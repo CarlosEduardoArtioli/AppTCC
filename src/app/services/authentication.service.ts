@@ -119,16 +119,16 @@ export class AuthenticationService {
 
   // Guarda o usuário no localStorage e no Banco de Dados
   SetUserEmail() {
-    const userLocal = JSON.parse(localStorage.getItem('user'));
-    const userData: User = {
-      uid: userLocal.uid,
-      email: userLocal.email,
-      displayName: userLocal.displayName,
-      emailVerified: userLocal.emailVerified,
-      photoURL: userLocal.photoURL
-    };
     const delay = 1000;
     setTimeout(() => {
+      const userLocal = JSON.parse(localStorage.getItem('user'));
+      const userData: User = {
+        uid: userLocal.uid,
+        email: userLocal.email,
+        displayName: userLocal.displayName,
+        emailVerified: userLocal.emailVerified,
+        photoURL: userLocal.photoURL
+      };
       userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
       this.db.object(`/users/${userLocal.email}/settings`).set(userData);
     }, delay);
@@ -144,6 +144,19 @@ export class AuthenticationService {
 
   getAuth() {
     return this.ngFireAuth.auth;
+  }
+
+  emailVerified() {
+    this.ngFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    });
   }
 
 }

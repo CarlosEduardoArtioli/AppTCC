@@ -18,20 +18,21 @@ export class EditRoomListPage implements OnInit {
     private roomService: RoomService,
     private alertCtrl: AlertController,
     private toastController: ToastController,
-  ) {
-    this.getRooms();
-  }
+  ) { }
 
   // Função quando a página é iniciada
-  ngOnInit() {
+  ngOnInit() { }
+
+  async ionViewWillEnter() {
+    await this.getRooms();
   }
 
-  async getRooms() {
+  getRooms() {
     // Atribui a variávei 'roomRes' o seguinte valor
     // Puxa a função 'getRoomList'
     const roomRes = this.roomService.getRoomList();
     // Pega os valores da lista de cômodos
-    await roomRes.snapshotChanges().subscribe(res => {
+    roomRes.snapshotChanges().subscribe(res => {
       // "Subscreve" a variável Rooms com os cômodos e seus valores
       this.Rooms = [];
       res.forEach(item => {
@@ -64,7 +65,6 @@ export class EditRoomListPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
           }
         },
         {
@@ -77,7 +77,7 @@ export class EditRoomListPage implements OnInit {
               // Puxa a função do ion-toast.
               this.newroom();
               // Função para criar o cômodo.
-              this.roomService.createRoom(this.newRoom, 'Casa');
+              this.roomService.createRoom(this.newRoom, 'casa');
             }
           }
         }

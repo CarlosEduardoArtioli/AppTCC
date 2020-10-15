@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
     private toastCtrl: ToastController,
-    public authService: AuthenticationService,
+    private authService: AuthenticationService,
     public router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -48,11 +48,12 @@ export class LoginPage implements OnInit {
   }
 
   // Função para quando a página for iniciada
-  ngOnInit() {
-    // Chama a função 'verificaUser()'
-    this.verificaUser();
-  }
+  ngOnInit() { }
 
+  async ionViewWillEnter() {
+    await this.verificaUser();
+    await this.authService.emailVerified();
+  }
 
   // Função para verificar se já existe um usuário logado
   private async verificaUser() {
@@ -72,6 +73,10 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async googleAuth() {
+    await this.authService.GoogleAuth();
+  }
+
   // Função para ir a página de Singup
   async goToSignup() {
     // Navega para a página 'singup'
@@ -79,23 +84,18 @@ export class LoginPage implements OnInit {
   }
 
   // Função para fazer o login do usuário
-  logIn(value) {
-    this.authService.SignIn(value)
+  async logIn(value) {
+    await this.authService.emailVerified();
+    await this.authService.SignIn(value)
       .then((res) => {
         if (this.authService.isEmailVerified) {
-          const delay = 500;
-          setTimeout(() => {
-            this.router.navigate(['menu/home']);
-          }, delay);
+          this.router.navigate(['menu/home']);
         } else {
           this.showMessage('Email não verificado');
           return false;
         }
       }).catch((error) => {
-        if (error.message === 'Cannot read property \'emailVerified\' of null') {
-          this.logIn(value);
-        }
-        console.log(error.message);
+        this.showMessage(error.message);
       });
   }
 

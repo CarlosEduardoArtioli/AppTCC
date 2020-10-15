@@ -47,7 +47,7 @@ export class MenuPage implements OnInit {
       children: [
         {
           title: 'Timer',
-          url: '/menu/edit-timer-list',
+          url: '/menu/device-list',
           icon: 'alarm-outline'
         },
       ]
@@ -60,35 +60,32 @@ export class MenuPage implements OnInit {
     private toastController: ToastController,
     private userService: UserService,
     private authService: AuthenticationService,
-  ) {
-    this.userName();
-  }
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  async ionViewWillEnter() {
+    await this.userName();
   }
 
   userName() {
-    const delay = 1000;
-    setTimeout(() => {
+    this.user = JSON.parse(localStorage.getItem('user'));
 
+    if (this.user.displayName === null && this.user.photoURL === null) {
+      // tslint:disable-next-line: max-line-length
+      localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
       this.user = JSON.parse(localStorage.getItem('user'));
-
-      if (this.user.displayName === null && this.user.photoURL === null) {
+      this.userService.updateUserName(this.user.displayName, this.user.email);
+    } else {
+      this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
+        this.user.displayName = res;
         // tslint:disable-next-line: max-line-length
-        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
-        this.user = JSON.parse(localStorage.getItem('user'));
-        this.userService.updateUserName(this.user.displayName, this.user.email);
-      } else {
-        this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
-          this.user.displayName = res;
-          // tslint:disable-next-line: max-line-length
-          localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified, this.user.photoURL)));
-        });
-      }
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.name = this.user.displayName;
-      this.photo = this.user.photoURL;
-    }, delay);
+        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified, this.user.photoURL)));
+      });
+    }
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.name = this.user.displayName;
+    this.photo = this.user.photoURL;
   }
 
 
@@ -114,7 +111,7 @@ export class MenuPage implements OnInit {
           role: 'destructive',
           // Quando o Logout é acionado ele remove o usuário do local storage e redireciona para a página de login
           handler: () => {
-            this.authService.SignOut();
+            this.presentAlertConfirm();
           }
         }, {
           // Botão para cancelar
@@ -179,6 +176,26 @@ export class MenuPage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertCtrl.create({
+      header: 'SAIR!',
+      message: 'Deseja realmente sair?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.authService.SignOut();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

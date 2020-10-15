@@ -1,189 +1,154 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button text="Voltar"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      Timer
-    </ion-title>
+    <ion-title>Timer</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content mode="md">
+<ion-content>
 
-  <ion-segment color="dark shade" scrollable [(ngModel)]="selectTabs" mode="md">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="device.timer.timer1.show === false || device.timer.timer2.show === false || device.timer.timer3.show === false || device.timer.timer4.show === false" (click)="addTimer(mac, device.timer.timer1.show, device.timer.timer2.show, device.timer.timer3.show,device.timer.timer4.show)">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <ion-item lines="none" mode="md" *ngIf="device.timer.timer1.show === true">
+
+    <ion-label *ngIf="device.timer.timer1.timer !== ''">
+      <ion-label>
+        <ion-icon name="time-outline"></ion-icon> {{device.timer.timer1.timer}}
+      </ion-label>
+
+      <ion-label>
+        <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer1.week1 === 'seg'">Seg</span>
+        <span *ngIf="device.timer.timer1.week2 === 'ter'">Ter</span> <span
+          *ngIf="device.timer.timer1.week3 === 'qua'">Qua</span>
+        <span *ngIf="device.timer.timer1.week4 === 'qui'">Qui</span> <span
+          *ngIf="device.timer.timer1.week5 === 'sex'">Sex</span>
+        <span *ngIf="device.timer.timer1.week6 === 'sab'">Sáb</span> <span
+          *ngIf="device.timer.timer1.week7 === 'dom'">Dom</span>
+      </ion-label>
+      <ion-label *ngIf="device.timer.timer1.action.length > 0">
+        <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer1.action}}
+      </ion-label>
+    </ion-label>
 
     <div>
-      <ion-segment-button value="all">
-        <ion-label>Todos</ion-label>
-      </ion-segment-button>
+
+      <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', mac, 'timer1']">
+        <ion-icon name="create" style="zoom:2.0"></ion-icon>
+      </button>
+
+      <button class="transparent" ion-button clear (click)="deleteTimer(mac, timer = 'timer1')">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
+
     </div>
 
-    <div *ngFor="let room of Rooms">
-      <ion-segment-button value="{{ room.name }}">
-        <ion-label>{{ room.name }}</ion-label>
-      </ion-segment-button>
+  </ion-item>
+
+  <ion-item lines="none" *ngIf="device.timer.timer2.show === true">
+
+    <ion-label *ngIf="device.timer.timer2.timer !== ''">
+      <ion-label>
+        <ion-icon name="time-outline"></ion-icon> {{device.timer.timer2.timer}}
+      </ion-label>
+
+      <ion-label>
+        <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer2.week1 === 'seg'">Seg</span>
+        <span *ngIf="device.timer.timer2.week2 === 'ter'">Ter</span> <span
+          *ngIf="device.timer.timer2.week3 === 'qua'">Qua</span>
+        <span *ngIf="device.timer.timer2.week4 === 'qui'">Qui</span> <span
+          *ngIf="device.timer.timer2.week5 === 'sex'">Sex</span>
+        <span *ngIf="device.timer.timer2.week6 === 'sab'">Sáb</span> <span
+          *ngIf="device.timer.timer2.week7 === 'dom'">Dom</span>
+      </ion-label>
+      <ion-label *ngIf="device.timer.timer2.action.length > 0">
+        <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer2.action}}
+      </ion-label>
+    </ion-label>
+
+    <div>
+
+      <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', mac, 'timer2']">
+        <ion-icon name="create" style="zoom:2.0"></ion-icon>
+      </button>
+
+      <button class="transparent" ion-button clear (click)="deleteTimer(mac, timer = 'timer2')">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
+
     </div>
+  </ion-item>
 
-  </ion-segment>
+  <ion-item lines="none" *ngIf="device.timer.timer3.show === true">
 
-  <ng-container *ngFor="let device of Devices">
-    <div *ngIf="selectTabs == device.room.name || selectTabs == 'all'">
-      <ion-item button (click)="device.open = !device.open" lines="full" mode="md">
-        <ion-icon slot="end" name="chevron-forward-outline" *ngIf="!device.open"></ion-icon>
-        <ion-icon slot="end" name="chevron-down-outline" *ngIf="device.open"></ion-icon>
-        <ion-label>
-          <ion-icon src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
-          &nbsp;&nbsp;<strong>{{device.name}}</strong>
-        </ion-label>
-      </ion-item>
+    <ion-label *ngIf="device.timer.timer3.timer !== ''">
+      <ion-label>
+        <ion-icon name="time-outline"></ion-icon> {{device.timer.timer3.timer}}
+      </ion-label>
 
-      <div *ngIf="device.open">
-        <ion-item
-          (click)="addTimer(device.$key, device.timer.timer1.show, device.timer.timer2.show, device.timer.timer3.show,device.timer.timer4.show)"
-          *ngIf="device.timer.timer1.show === false || device.timer.timer2.show === false || device.timer.timer3.show === false || device.timer.timer4.show === false"
-          lines="full">
-          <ion-icon slot="end" name="add-circle-outline"></ion-icon> Adicionar um novo timer
-        </ion-item>
-        <ion-item lines="none" mode="md" *ngIf="device.timer.timer1.show === true">
+      <ion-label>
+        <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer3.week1 === 'seg'">Seg</span>
+        <span *ngIf="device.timer.timer3.week2 === 'ter'">Ter</span> <span
+          *ngIf="device.timer.timer3.week3 === 'qua'">Qua</span>
+        <span *ngIf="device.timer.timer3.week4 === 'qui'">Qui</span> <span
+          *ngIf="device.timer.timer3.week5 === 'sex'">Sex</span>
+        <span *ngIf="device.timer.timer3.week6 === 'sab'">Sáb</span> <span
+          *ngIf="device.timer.timer3.week7 === 'dom'">Dom</span>
+      </ion-label>
+      <ion-label *ngIf="device.timer.timer3.action.length > 0">
+        <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer3.action}}
+      </ion-label>
+    </ion-label>
 
-          <ion-label *ngIf="device.timer.timer1.timer !== ''">
-            <ion-label>
-              <ion-icon name="time-outline"></ion-icon> {{device.timer.timer1.timer}}
-            </ion-label>
+    <div>
 
-            <ion-label>
-              <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer1.week1 === 'seg'">Seg</span>
-              <span *ngIf="device.timer.timer1.week2 === 'ter'">Ter</span> <span
-                *ngIf="device.timer.timer1.week3 === 'qua'">Qua</span>
-              <span *ngIf="device.timer.timer1.week4 === 'qui'">Qui</span> <span
-                *ngIf="device.timer.timer1.week5 === 'sex'">Sex</span>
-              <span *ngIf="device.timer.timer1.week6 === 'sab'">Sáb</span> <span
-                *ngIf="device.timer.timer1.week7 === 'dom'">Dom</span>
-            </ion-label>
-            <ion-label *ngIf="device.timer.timer1.action.length > 0">
-              <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer1.action}}
-            </ion-label>
-          </ion-label>
+      <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', mac, 'timer3']">
+        <ion-icon name="create" style="zoom:2.0"></ion-icon>
+      </button>
 
-          <div>
+      <button class="transparent" ion-button clear (click)="deleteTimer(mac, timer = 'timer3')">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
 
-            <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer1']">
-              <ion-icon name="create" style="zoom:2.0"></ion-icon>
-            </button>
-
-            <button class="transparent" ion-button clear (click)="deleteTimer(device.$key, timer = 'timer1')">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-
-          </div>
-
-        </ion-item>
-
-        <ion-item lines="none" *ngIf="device.timer.timer2.show === true">
-
-          <ion-label *ngIf="device.timer.timer2.timer !== ''">
-            <ion-label>
-              <ion-icon name="time-outline"></ion-icon> {{device.timer.timer2.timer}}
-            </ion-label>
-
-            <ion-label>
-              <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer2.week1 === 'seg'">Seg</span>
-              <span *ngIf="device.timer.timer2.week2 === 'ter'">Ter</span> <span
-                *ngIf="device.timer.timer2.week3 === 'qua'">Qua</span>
-              <span *ngIf="device.timer.timer2.week4 === 'qui'">Qui</span> <span
-                *ngIf="device.timer.timer2.week5 === 'sex'">Sex</span>
-              <span *ngIf="device.timer.timer2.week6 === 'sab'">Sáb</span> <span
-                *ngIf="device.timer.timer2.week7 === 'dom'">Dom</span>
-            </ion-label>
-            <ion-label *ngIf="device.timer.timer2.action.length > 0">
-              <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer2.action}}
-            </ion-label>
-          </ion-label>
-
-          <div>
-
-            <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer2']">
-              <ion-icon name="create" style="zoom:2.0"></ion-icon>
-            </button>
-
-            <button class="transparent" ion-button clear (click)="deleteTimer(device.$key, timer = 'timer2')">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-
-          </div>
-        </ion-item>
-
-        <ion-item lines="none" *ngIf="device.timer.timer3.show === true">
-
-          <ion-label *ngIf="device.timer.timer3.timer !== ''">
-            <ion-label>
-              <ion-icon name="time-outline"></ion-icon> {{device.timer.timer3.timer}}
-            </ion-label>
-
-            <ion-label>
-              <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer3.week1 === 'seg'">Seg</span>
-              <span *ngIf="device.timer.timer3.week2 === 'ter'">Ter</span> <span
-                *ngIf="device.timer.timer3.week3 === 'qua'">Qua</span>
-              <span *ngIf="device.timer.timer3.week4 === 'qui'">Qui</span> <span
-                *ngIf="device.timer.timer3.week5 === 'sex'">Sex</span>
-              <span *ngIf="device.timer.timer3.week6 === 'sab'">Sáb</span> <span
-                *ngIf="device.timer.timer3.week7 === 'dom'">Dom</span>
-            </ion-label>
-            <ion-label *ngIf="device.timer.timer3.action.length > 0">
-              <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer3.action}}
-            </ion-label>
-          </ion-label>
-
-          <div>
-
-            <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer3']">
-              <ion-icon name="create" style="zoom:2.0"></ion-icon>
-            </button>
-
-            <button class="transparent" ion-button clear (click)="deleteTimer(device.$key, timer = 'timer3')">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-
-          </div>
-        </ion-item>
-
-        <ion-item lines="none" *ngIf="device.timer.timer4.show === true">
-
-          <ion-label *ngIf="device.timer.timer4.timer !== ''">
-            <ion-label>
-              <ion-icon name="time-outline"></ion-icon> {{device.timer.timer4.timer}}
-            </ion-label>
-
-            <ion-label>
-              <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer4.week1 === 'seg'">Seg</span>
-              <span *ngIf="device.timer.timer4.week2 === 'ter'">Ter</span> <span
-                *ngIf="device.timer.timer4.week3 === 'qua'">Qua</span>
-              <span *ngIf="device.timer.timer4.week4 === 'qui'">Qui</span> <span
-                *ngIf="device.timer.timer4.week5 === 'sex'">Sex</span>
-              <span *ngIf="device.timer.timer4.week6 === 'sab'">Sáb</span> <span
-                *ngIf="device.timer.timer4.week7 === 'dom'">Dom</span>
-            </ion-label>
-            <ion-label *ngIf="device.timer.timer4.action.length > 0">
-              <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer4.action}}
-            </ion-label>
-          </ion-label>
-
-          <div>
-
-            <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', device.$key, 'timer4']">
-              <ion-icon name="create" style="zoom:2.0"></ion-icon>
-            </button>
-
-            <button class="transparent" ion-button clear (click)="deleteTimer(device.$key, timer = 'timer4')">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-
-          </div>
-        </ion-item>
-
-      </div>
     </div>
-  </ng-container>
+  </ion-item>
 
+  <ion-item lines="none" *ngIf="device.timer.timer4.show === true">
+
+    <ion-label *ngIf="device.timer.timer4.timer !== ''">
+      <ion-label>
+        <ion-icon name="time-outline"></ion-icon> {{device.timer.timer4.timer}}
+      </ion-label>
+
+      <ion-label>
+        <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="device.timer.timer4.week1 === 'seg'">Seg</span>
+        <span *ngIf="device.timer.timer4.week2 === 'ter'">Ter</span> <span
+          *ngIf="device.timer.timer4.week3 === 'qua'">Qua</span>
+        <span *ngIf="device.timer.timer4.week4 === 'qui'">Qui</span> <span
+          *ngIf="device.timer.timer4.week5 === 'sex'">Sex</span>
+        <span *ngIf="device.timer.timer4.week6 === 'sab'">Sáb</span> <span
+          *ngIf="device.timer.timer4.week7 === 'dom'">Dom</span>
+      </ion-label>
+      <ion-label *ngIf="device.timer.timer4.action.length > 0">
+        <ion-icon name="flash-outline"></ion-icon> {{device.timer.timer4.action}}
+      </ion-label>
+    </ion-label>
+
+    <div>
+
+      <button class="transparent" ion-button clear [routerLink]="['/edit-timer-page/', mac, 'timer4']">
+        <ion-icon name="create" style="zoom:2.0"></ion-icon>
+      </button>
+
+      <button class="transparent" ion-button clear (click)="deleteTimer(mac, timer = 'timer4')">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
+
+    </div>
+  </ion-item>
 </ion-content>

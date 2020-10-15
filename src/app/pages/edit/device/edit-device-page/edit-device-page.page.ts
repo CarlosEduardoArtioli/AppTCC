@@ -37,11 +37,14 @@ export class EditDevicePagePage implements OnInit {
   ) {
     // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
-    this.getDevice();
   }
 
   // Função para quando a página for iniciada
   ngOnInit() { }
+
+  async ionViewWillEnter() {
+    await this.getDevice();
+  }
 
   getDevice() {
     this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {

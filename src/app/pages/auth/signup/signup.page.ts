@@ -55,17 +55,14 @@ export class SignupPage implements OnInit {
   }
 
   // Função para registrar o novo usuário
-  signUp(value) {
-    this.authService.registerUser(value)
+  async signUp(value) {
+    await this.authService.registerUser(value)
       .then((res) => {
         // Do something here
         this.authService.SendVerificationMail();
         this.router.navigate(['verify-email']);
       }).catch((error) => {
-        const delay = 500;
-        setTimeout(() => {
-          this.showMessage(error.message);
-        }, delay);
+        this.showMessage(error.message);
       });
   }
 

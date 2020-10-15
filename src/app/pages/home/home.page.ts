@@ -19,7 +19,18 @@ export class HomePage implements OnInit {
   constructor(
     private deviceService: DeviceService,
     private roomService: RoomService
-  ) {
+  ) { }
+
+  // Função quando a página é iniciada
+  ngOnInit() {
+  }
+
+  async ionViewWillEnter() {
+    await this.getDevices();
+    await this.getRooms();
+  }
+
+  getDevices() {
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const deviceRes = this.deviceService.getDeviceList();
@@ -33,7 +44,9 @@ export class HomePage implements OnInit {
         this.Devices.push(a as Dispositivos);
       });
     });
+  }
 
+  getRooms() {
     // Atribui a variávei 'deviceRes' o seguinte valor
     // Puxa a função 'getDeviceList'
     const roomRes = this.roomService.getRoomList();
@@ -47,10 +60,6 @@ export class HomePage implements OnInit {
         this.Rooms.push(a as Room);
       });
     });
-  }
-
-  // Função quando a página é iniciada
-  ngOnInit() {
   }
 
   // Função para mudar o status do dispositivo

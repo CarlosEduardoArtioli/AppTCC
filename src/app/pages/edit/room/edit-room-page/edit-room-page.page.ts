@@ -25,15 +25,17 @@ export class EditRoomPagePage implements OnInit {
   ) {
     // Atribui a variável 'room' uma "foto" da rota, mais especificamente do 'room'
     this.room = this.actRoute.snapshot.paramMap.get('room');
-
-    this.getRoom();
   }
 
   // Função para quando a página for iniciada
   ngOnInit() { }
 
-  async getRoom() {
-    await this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
+  async ionViewWillEnter() {
+    await this.getRoom();
+  }
+
+  getRoom() {
+    this.roomService.getRoom(this.room).valueChanges().subscribe(res => {
       this.name = res.name;
       this.icon = res.icon;
       this.iconName = res.iconName;

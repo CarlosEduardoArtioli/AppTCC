@@ -58,16 +58,18 @@ export class EditTimerPagePage implements OnInit {
       dateTime: ['', Validators.compose([Validators.required])],
       newWeek: ['', Validators.compose([Validators.required])],
     });
+  }
 
-    this.getTimer();
+  async ionViewWillEnter() {
+    await this.getTimer();
   }
 
   // Função para quando a página for iniciada
   ngOnInit() { }
 
-  async getTimer() {
+  getTimer() {
     // Subscreve as variáveis com seus valores respectivos
-    await this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
+    this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
       this.action = res.action;
       this.dateTime = res.timer;
       this.week1 = res.week1;
