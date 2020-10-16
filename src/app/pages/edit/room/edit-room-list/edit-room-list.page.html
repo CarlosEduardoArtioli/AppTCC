@@ -20,7 +20,7 @@
   <ion-item *ngFor="let room of Rooms" lines="full">
     <ion-label>
       <h2>
-        <ion-icon src="/assets/svg/{{ room.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{room.name}}
+        <ion-icon src="{{ room.icon }}"></ion-icon>&nbsp;&nbsp;{{room.name}}
       </h2>
     </ion-label>
 

@@ -31,7 +31,7 @@
     <div *ngIf="selectTabs == device.room.name || selectTabs == 'all'">
       <ion-item button lines="full" mode="md" [routerLink]="['/edit-timer-list/', device.$key]">
         <ion-label>
-          <ion-icon src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
+          <ion-icon src="{{ device.icon.icon }}"></ion-icon>
           &nbsp;&nbsp;<strong>{{device.name}}</strong>
         </ion-label>
       </ion-item>

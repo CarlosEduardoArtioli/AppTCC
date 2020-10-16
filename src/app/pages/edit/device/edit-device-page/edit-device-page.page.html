@@ -20,7 +20,7 @@
   </ion-item>
 
   <ion-item lines="full">
-    <ion-icon src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
+    <ion-icon src="{{ device.icon.icon }}"></ion-icon>
     <ion-label>&nbsp;&nbsp;{{ device.icon.iconName }}</ion-label>
     <div class="button">
       <button class="transparent" ion-button clear [routerLink]="['/edit-icons/', mac]">
@@ -30,7 +30,7 @@
   </ion-item>
 
   <ion-item lines="full">
-    <ion-icon src="/assets/svg/{{ device.room.icon }}.svg"></ion-icon>
+    <ion-icon src="{{ device.room.icon }}"></ion-icon>
     <ion-label>&nbsp;&nbsp;{{ device.room.name }}</ion-label>
     <div class="button">
       <button class="transparent" ion-button clear [routerLink]="['/edit-rooms/', device.mac]">

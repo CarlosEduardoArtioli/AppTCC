@@ -35,12 +35,12 @@
         <ion-col size="6" *ngIf="selectTabs == device.room.name || selectTabs == 'all'">
           <div>
             <ion-button fill="solid" expand="block" size="large" class="sqare_button" color="button"
-              (click)="mudaStatus(device.$key)" style="color: #33415c !important">
+              (click)="mudaStatus(device.$key)">
               <div class="vertical">
                 <ion-icon class="desligado" *ngIf="device.status == 'desligado'" slot="start"
-                  src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
-                <ion-icon class="ligado" *ngIf="device.status == 'ligado'" slot="start"
-                  src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>
+                  src="{{ device.icon.icon }}"></ion-icon>
+                <ion-icon class="ligado" *ngIf="device.status == 'ligado'" slot="start" src="{{ device.icon.icon }}">
+                </ion-icon>
                 <span class="desligado" *ngIf="device.status == 'desligado'">{{ device.name }}</span>
                 <span class="ligado" *ngIf="device.status == 'ligado'">{{ device.name }}</span>
               </div>

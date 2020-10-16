@@ -31,10 +31,10 @@
     <ion-item *ngIf="selectTabs == device.room.name || selectTabs == 'all'" lines="full">
       <ion-label>
         <h3>
-          <ion-icon src="/assets/svg/{{ device.icon.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{device.name}}
+          <ion-icon src="{{ device.icon.icon }}"></ion-icon>&nbsp;&nbsp;{{device.name}}
         </h3>
         <h3>
-          <ion-icon src="/assets/svg/{{ device.room.icon }}.svg"></ion-icon>&nbsp;&nbsp;{{device.room.name}}
+          <ion-icon src="{{ device.room.icon }}"></ion-icon>&nbsp;&nbsp;{{device.room.name}}
         </h3>
         <h3>
           <ion-icon name="wifi-outline"></ion-icon>&nbsp;&nbsp;{{device.ap}}
