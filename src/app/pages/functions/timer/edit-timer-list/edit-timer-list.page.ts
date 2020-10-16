@@ -1,8 +1,8 @@
 import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from 'src/app/services/device.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Timer } from '../../../../models/timer.model';
 
 @Component({
   selector: 'app-edit-timer-list',
@@ -12,64 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditTimerListPage implements OnInit {
 
   // Declaração de variáveis
-  device = {
-    timer: {
-      timer1: {
-        action: '',
-        show: false,
-        timer: '',
-        week1: '',
-        week2: '',
-        week3: '',
-        week4: '',
-        week5: '',
-        week6: '',
-        week7: '',
-      },
-      timer2: {
-        action: '',
-        show: false,
-        timer: '',
-        week1: '',
-        week2: '',
-        week3: '',
-        week4: '',
-        week5: '',
-        week6: '',
-        week7: '',
-      },
-      timer3: {
-        action: '',
-        show: false,
-        timer: '',
-        week1: '',
-        week2: '',
-        week3: '',
-        week4: '',
-        week5: '',
-        week6: '',
-        week7: '',
-      },
-      timer4: {
-        action: '',
-        show: false,
-        timer: '',
-        week1: '',
-        week2: '',
-        week3: '',
-        week4: '',
-        week5: '',
-        week6: '',
-        week7: '',
-      }
-    }
-  };
-  timer: any;
-  timerShow: any;
+  Timers = [];
   mac: string;
 
   constructor(
-    private deviceService: DeviceService,
     private timerService: TimerService,
     private alertCtrl: AlertController,
     private router: Router,
@@ -81,12 +27,20 @@ export class EditTimerListPage implements OnInit {
   ngOnInit() { }
 
   async ionViewWillEnter() {
-    await this.getDevice();
+    await this.getTimers();
   }
 
-  getDevice() {
-    this.deviceService.getDevice(this.mac).valueChanges().subscribe(res => {
-      this.device = res;
+  getTimers() {
+    const timerRes = this.timerService.getTimerList(this.mac);
+    // Pega os valores da lista de dispositivos
+    timerRes.snapshotChanges().subscribe(res => {
+      // "Subscreve" a variável devices com os dispostivos e seus valores
+      this.Timers = [];
+      res.forEach(item => {
+        const a = item.payload.toJSON();
+        a['$key'] = item.key;
+        this.Timers.push(a as Timer);
+      });
     });
   }
 
@@ -96,25 +50,8 @@ export class EditTimerListPage implements OnInit {
   }
 
   // Função para adicionar um timer
-  addTimer(mac, timer1, timer2, timer3, timer4) {
-
-    if (timer1 === false) {
-      this.timerShow = 'timer1';
-    } else
-      if (timer2 === false) {
-        this.timerShow = 'timer2';
-      } else
-        if (timer3 === false) {
-          this.timerShow = 'timer3';
-        } else
-          if (timer4 === false) {
-            this.timerShow = 'timer4';
-          }
-
-    this.timerService.addTimer(mac, this.timerShow).then(() => {
-      this.router.navigate(['/edit-timer-page/', mac, this.timerShow]);
-    })
-      .catch(error => console.log(error));
+  addTimer() {
+    this.router.navigate(['/add-timer-page/', this.mac]);
   }
 
   // Função para verificar se o usuário deseja mesmo excluir o timer
@@ -137,4 +74,6 @@ export class EditTimerListPage implements OnInit {
 
     await alert.present();
   }
+
+  
 }

@@ -30,6 +30,14 @@ export class TimerService {
     this.user.email = this.user.email.replace(/[.#$]+/g, ':');
   }
 
+  // Função que "Pega" a lista de todos objetos com seus respectivos valores
+  getTimerList(mac) {
+    // Atribui ao deviceListRef a lista dos objetos encontrados no caminho
+    this.timerListRef = this.db.list(`/users/${this.user.email}/devices/${mac}/timer`);
+    // Retorna o deviceListRef para a função
+    return this.timerListRef;
+  }
+
   // Função que "Pega" os dados do timer passado
   getTimer(timer, mac) {
     // Atribui ao timerRef o valor do que foi encontrado no objeto com o seguinte caminho no banco
@@ -38,14 +46,23 @@ export class TimerService {
     return this.timerRef;
   }
 
+  getTimerNumber(mac) {
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timernumber`);
+    // Retorna o timerRef para a função
+    return this.timerRef;
+  }
+
+  addTimerNumber(mac, timernumber: number) {
+    this.db.object(`/users/${this.user.email}/devices/${mac}/timernumber`).set(timernumber);
+  }
+
   // Função que atualiza os dados do timer
-  updateTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, timer, mac) {
+  addTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, mac, timer) {
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
     // Retorna para a função a atualização dos dados
-    return this.timerRef.update({
+    return this.timerRef.set({
       action: action,
       timer: dateTime,
-      show: true,
       week1: week1,
       week2: week2,
       week3: week3,
@@ -61,35 +78,6 @@ export class TimerService {
 
     this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
 
-    return this.timerRef.set({
-      action: '',
-      show: false,
-      timer: '',
-      week1: '',
-      week2: '',
-      week3: '',
-      week4: '',
-      week5: '',
-      week6: '',
-      week7: ''
-    });
-  }
-
-  // Função que adiciona um novo timer
-  addTimer(mac, timer) {
-    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
-
-    return this.timerRef.set({
-      action: '',
-      show: true,
-      timer: '',
-      week1: '',
-      week2: '',
-      week3: '',
-      week4: '',
-      week5: '',
-      week6: '',
-      week7: ''
-    });
+    this.timerRef.remove();
   }
 }

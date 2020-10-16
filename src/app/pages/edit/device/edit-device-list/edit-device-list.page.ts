@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Dispositivos } from '../../../../models/device.model';
+import { Dispositivo } from '../../../../models/device.model';
 import { DeviceService } from '../../../../services/device.service';
 import { AlertController } from '@ionic/angular';
 import { Room } from 'src/app/models/room.model';
@@ -42,7 +42,7 @@ export class EditDeviceListPage implements OnInit {
       res.forEach(item => {
         const a = item.payload.toJSON();
         a['$key'] = item.key;
-        this.Devices.push(a as Dispositivos);
+        this.Devices.push(a as Dispositivo);
       });
     });
   }

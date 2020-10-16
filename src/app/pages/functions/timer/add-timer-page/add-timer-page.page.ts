@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TimerService } from 'src/app/services/timer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionSheetController, ToastController } from '@ionic/angular';
+import { TimerService } from 'src/app/services/timer.service';
 
 @Component({
-  selector: 'app-edit-timer-page',
-  templateUrl: './edit-timer-page.page.html',
-  styleUrls: ['./edit-timer-page.page.scss'],
+  selector: 'app-add-timer-page',
+  templateUrl: './add-timer-page.page.html',
+  styleUrls: ['./add-timer-page.page.scss'],
 })
-export class EditTimerPagePage implements OnInit {
+export class AddTimerPagePage implements OnInit {
 
   // Declaração de variávies
-  updateTimerForm: FormGroup;
+  timerForm: FormGroup;
   mac: any;
-  timer: any;
   dateTime = '';
   week1: any;
   week2: any;
@@ -25,6 +24,7 @@ export class EditTimerPagePage implements OnInit {
   week7: any;
   newWeek: any;
   action = '';
+  timernumber: number;
 
   mensagens_validacao = {
     action: [
@@ -48,10 +48,8 @@ export class EditTimerPagePage implements OnInit {
   ) {
     // Atribui a variável 'mac' uma "foto" da rota, mais especificamente do 'mac'
     this.mac = this.actRoute.snapshot.paramMap.get('mac');
-    // Atribui a variável 'timer' uma "foto" da rota, mais especificamente do 'timer'
-    this.timer = this.actRoute.snapshot.paramMap.get('timer');
 
-    this.updateTimerForm = fb.group({
+    this.timerForm = fb.group({
       action: ['', Validators.compose([Validators.required])],
       dateTime: ['', Validators.compose([Validators.required])],
       newWeek: ['', Validators.compose([Validators.required])],
@@ -59,30 +57,21 @@ export class EditTimerPagePage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    await this.getTimer();
+    await this.getTimerNumber();
   }
 
   // Função para quando a página for iniciada
   ngOnInit() { }
 
-  getTimer() {
-    // Subscreve as variáveis com seus valores respectivos
-    this.timerService.getTimer(this.timer, this.mac).valueChanges().subscribe(res => {
-      this.action = res.action;
-      this.dateTime = res.timer;
-      this.week1 = res.week1;
-      this.week2 = res.week2;
-      this.week3 = res.week3;
-      this.week4 = res.week4;
-      this.week5 = res.week5;
-      this.week6 = res.week6;
-      this.week7 = res.week7;
+  getTimerNumber() {
+    this.timerService.getTimerNumber(this.mac).valueChanges().subscribe(res => {
       console.log(res);
+      this.timernumber = res;
     });
   }
 
   // Função para verificar os dados do timer
-  atualizar() {
+  criar() {
 
     const segunda = this.newWeek.indexOf('seg');
     const terca = this.newWeek.indexOf('ter');
@@ -128,18 +117,20 @@ export class EditTimerPagePage implements OnInit {
       this.week7 = '';
     }
 
-    if (this.updateTimerForm.valid) {
-      this.updateForm();
+    if (this.timerForm.valid) {
+      this.addForm();
     } else {
       this.alert('Formulário Inválido');
     }
   }
 
   // Função para atualizar/criar o timer
-  updateForm() {
+  addForm() {
     this.timerService.addTimer(this.action, this.dateTime, this.week1, this.week2, this.week3,
-      this.week4, this.week5, this.week6, this.week7, this.mac, this.timer)
+      this.week4, this.week5, this.week6, this.week7, this.mac, this.timernumber)
       .then(() => {
+        this.timernumber = this.timernumber + 1;
+        this.timerService.addTimerNumber(this.mac, this.timernumber);
         this.router.navigate(['/edit-timer-list', this.mac]);
       })
       .catch(error => console.log(error));
