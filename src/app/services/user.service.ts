@@ -24,14 +24,14 @@ export class UserService {
 
     // Função que pega o nome do usuário
     getUserName(email) {
-        email = email.replace(/[.#$]+/g, ':');
+        email = email.replace(/[.#$@]+/g, '');
         this.name = this.db.object(`/users/${email}/settings/displayName`);
         return this.name;
     }
 
     // Função para mudar o nome do usuário, com a função é passado o parametro name, fornecido pela função
     updateUserName(name, email) {
-        email = email.replace(/[.#$]+/g, ':');
+        email = email.replace(/[.#$@]+/g, '');
         this.db.database.ref(`/users/${email}/settings/displayName`).set(name);
     }
 }

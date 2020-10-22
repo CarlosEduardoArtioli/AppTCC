@@ -29,7 +29,7 @@ export class RoomService {
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.email = this.user.email;
-    this.email = this.email.replace(/[.#$]+/g, ':');
+    this.email = this.email.replace(/[.#$@]+/g, '');
   }
 
   // Função que cria os dados do cômodo

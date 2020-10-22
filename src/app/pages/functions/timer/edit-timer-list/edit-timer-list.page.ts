@@ -74,6 +74,4 @@ export class EditTimerListPage implements OnInit {
 
     await alert.present();
   }
-
-  
 }

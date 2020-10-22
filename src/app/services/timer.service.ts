@@ -27,7 +27,7 @@ export class TimerService {
     private db: AngularFireDatabase
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.user.email = this.user.email.replace(/[.#$]+/g, ':');
+    this.user.email = this.user.email.replace(/[.#$@]+/g, '');
   }
 
   // Função que "Pega" a lista de todos objetos com seus respectivos valores
@@ -57,10 +57,27 @@ export class TimerService {
   }
 
   // Função que atualiza os dados do timer
-  addTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, mac, timer) {
-    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
+  addTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, mac, timernumber) {
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/timer${timernumber}`);
     // Retorna para a função a atualização dos dados
     return this.timerRef.set({
+      action: action,
+      timer: dateTime,
+      week1: week1,
+      week2: week2,
+      week3: week3,
+      week4: week4,
+      week5: week5,
+      week6: week6,
+      week7: week7
+    });
+  }
+
+  // Função que atualiza os dados do timer
+  updateTimer(action, dateTime, week1, week2, week3, week4, week5, week6, week7, mac, timer) {
+    this.timerRef = this.db.object(`/users/${this.user.email}/devices/${mac}/timer/${timer}`);
+    // Retorna para a função a atualização dos dados
+    return this.timerRef.update({
       action: action,
       timer: dateTime,
       week1: week1,

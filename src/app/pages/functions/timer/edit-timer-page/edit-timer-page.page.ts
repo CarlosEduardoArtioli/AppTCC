@@ -137,7 +137,7 @@ export class EditTimerPagePage implements OnInit {
 
   // Função para atualizar/criar o timer
   updateForm() {
-    this.timerService.addTimer(this.action, this.dateTime, this.week1, this.week2, this.week3,
+    this.timerService.updateTimer(this.action, this.dateTime, this.week1, this.week2, this.week3,
       this.week4, this.week5, this.week6, this.week7, this.mac, this.timer)
       .then(() => {
         this.router.navigate(['/edit-timer-list', this.mac]);

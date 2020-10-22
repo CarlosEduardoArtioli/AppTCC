@@ -35,7 +35,7 @@ export class DeviceService {
   userEmail() {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.email = this.user.email;
-    this.email = this.email.replace(/[.#$]+/g, ':');
+    this.email = this.email.replace(/[.#$@]+/g, '');
   }
 
   // Função que "Pega" os dados do objeto com o id que foi passado no parâmetro

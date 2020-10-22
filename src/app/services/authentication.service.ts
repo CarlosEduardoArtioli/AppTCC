@@ -112,7 +112,7 @@ export class AuthenticationService {
     const delay = 1000;
     setTimeout(() => {
       const userLocal = JSON.parse(localStorage.getItem('user'));
-      userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
+      userLocal.email = userLocal.email.replace(/[.#$@]+/g, '');
       this.db.object(`/users/${userLocal.email}/settings`).set(userData);
     }, delay);
   }
@@ -129,7 +129,7 @@ export class AuthenticationService {
         emailVerified: userLocal.emailVerified,
         photoURL: userLocal.photoURL
       };
-      userLocal.email = userLocal.email.replace(/[.#$]+/g, ':');
+      userLocal.email = userLocal.email.replace(/[.#$@]+/g, '');
       this.db.object(`/users/${userLocal.email}/settings`).set(userData);
     }, delay);
   }
