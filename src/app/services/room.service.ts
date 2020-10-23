@@ -33,11 +33,12 @@ export class RoomService {
   }
 
   // Função que cria os dados do cômodo
-  createRoom(room: any, icone) {
+  createRoom(room: any, icone, iconName) {
     this.db.object(`/users/${this.email}/rooms/${room}`).set({
       // Cada variavel recebe o dado que foi passado junto ao parâmetro
       name: room,
-      icon: icone
+      icon: icone,
+      iconName: iconName
     });
   }
 

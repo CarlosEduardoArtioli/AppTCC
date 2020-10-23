@@ -15,19 +15,19 @@
     </ion-fab-button>
   </ion-fab>
   <ng-container *ngFor="let timer of Timers">
-    <ion-item lines="none" mode="md">
+    <ion-item lines="full" mode="md">
       <ion-label>
         <ion-label>
-          <ion-icon name="time-outline"></ion-icon> {{timer.timer}}
+          <ion-icon name="time-outline"></ion-icon>&nbsp; {{timer.timer}}
         </ion-label>
         <ion-label>
-          <ion-icon name="calendar-outline"></ion-icon> <span *ngIf="timer.week1 === 'seg'">Seg</span>
+          <ion-icon name="calendar-outline"></ion-icon>&nbsp; <span *ngIf="timer.week1 === 'seg'">Seg</span>
           <span *ngIf="timer.week2 === 'ter'">Ter</span> <span *ngIf="timer.week3 === 'qua'">Qua</span>
           <span *ngIf="timer.week4 === 'qui'">Qui</span> <span *ngIf="timer.week5 === 'sex'">Sex</span>
           <span *ngIf="timer.week6 === 'sab'">Sáb</span> <span *ngIf="timer.week7 === 'dom'">Dom</span>
         </ion-label>
         <ion-label>
-          <ion-icon name="flash-outline"></ion-icon> {{timer.action}}
+          <ion-icon name="flash-outline"></ion-icon>&nbsp; {{timer.action}}
         </ion-label>
       </ion-label>
 

@@ -2,10 +2,8 @@
 
 export class User {
     constructor(
-        public uid: string,
         public email: string,
         public displayName: string,
-        public emailVerified: boolean,
         public photoURL: string
     ) { }
 }

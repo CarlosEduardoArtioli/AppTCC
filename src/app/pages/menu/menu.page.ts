@@ -73,14 +73,14 @@ export class MenuPage implements OnInit {
 
     if (this.user.displayName === null && this.user.photoURL === null) {
       // tslint:disable-next-line: max-line-length
-      localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.email, this.user.emailVerified, 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')));
+      localStorage.setItem('user', JSON.stringify(new User(this.user.email, this.user.email, 'assets/img/placeholder.png')));
       this.user = JSON.parse(localStorage.getItem('user'));
       this.userService.updateUserName(this.user.displayName, this.user.email);
     } else {
       this.userService.getUserName(this.user.email).valueChanges().subscribe(res => {
         this.user.displayName = res;
         // tslint:disable-next-line: max-line-length
-        localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.user.displayName, this.user.emailVerified, this.user.photoURL)));
+        localStorage.setItem('user', JSON.stringify(new User(this.user.email, this.user.displayName, this.user.photoURL)));
       });
     }
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -158,7 +158,7 @@ export class MenuPage implements OnInit {
               // Função para mudar o nome do usuário.
               this.userService.updateUserName(this.novoNome, this.user.email);
               // tslint:disable-next-line: max-line-length
-              localStorage.setItem('user', JSON.stringify(new User(this.user.uid, this.user.email, this.novoNome, this.user.emailVerified, this.user.photoURL)));
+              localStorage.setItem('user', JSON.stringify(new User(this.user.email, this.novoNome, this.user.photoURL)));
               this.user = JSON.parse(localStorage.getItem('user'));
               this.name = this.user.displayName;
             }

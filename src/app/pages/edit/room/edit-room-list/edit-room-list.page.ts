@@ -77,7 +77,7 @@ export class EditRoomListPage implements OnInit {
               // Puxa a função do ion-toast.
               this.newroom();
               // Função para criar o cômodo.
-              this.roomService.createRoom(this.newRoom, 'casa');
+              this.roomService.createRoom(this.newRoom, '/assets/svg/casa.svg', 'Casa');
             }
           }
         }

@@ -103,10 +103,8 @@ export class AuthenticationService {
   // Guarda o usuário no localStorage e no Banco de Dados
   SetUserData(user) {
     const userData: User = {
-      uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      emailVerified: user.emailVerified,
       photoURL: user.photoURL
     };
     const delay = 1000;
@@ -119,14 +117,12 @@ export class AuthenticationService {
 
   // Guarda o usuário no localStorage e no Banco de Dados
   SetUserEmail() {
-    const delay = 1000;
+    const delay = 2000;
     setTimeout(() => {
       const userLocal = JSON.parse(localStorage.getItem('user'));
       const userData: User = {
-        uid: userLocal.uid,
         email: userLocal.email,
         displayName: userLocal.displayName,
-        emailVerified: userLocal.emailVerified,
         photoURL: userLocal.photoURL
       };
       userLocal.email = userLocal.email.replace(/[.#$@]+/g, '');
